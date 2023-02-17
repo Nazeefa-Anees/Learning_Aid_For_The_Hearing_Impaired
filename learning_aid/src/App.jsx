@@ -1,13 +1,13 @@
 import React from 'react'
+import Questionnaire from './pages/Questionnaire'
 
-import Splashscreen from './pages/Splashscreen'
 
 
 export default function 
 () {
   return (
     <div>
-      <Splashscreen/>
+      <Questionnaire/>
     </div>
   )
 }
