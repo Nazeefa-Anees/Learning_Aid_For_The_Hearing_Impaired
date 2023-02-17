@@ -1,5 +1,6 @@
 import React from 'react'
 import './splash.css'
+import '../App.css'
 
 
 export default function Splashscreen() {

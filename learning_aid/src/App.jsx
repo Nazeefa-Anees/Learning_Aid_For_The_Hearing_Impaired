@@ -1,5 +1,6 @@
 import React from 'react'
-import Questionnaire from './pages/Questionnaire'
+import HomeSelection from './pages/HomeSelection'
+
 
 
 
@@ -7,7 +8,7 @@ export default function
 () {
   return (
     <div>
-      <Questionnaire/>
+      <HomeSelection/>
     </div>
   )
 }

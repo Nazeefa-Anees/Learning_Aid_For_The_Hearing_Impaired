@@ -1,6 +1,43 @@
-body{
-    background-image: url(../assets/rainbow.jpg);
-    justify-content: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.box{
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        opacity:0.75;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.4;
+        color: #333;
+        position: relative;
+        width: 20%;
+        height: 50%;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, 100%);
+        
 }
+
+button {
+    box-sizing: border-box;
+  
+    width: 7rem;
+    height: 3rem;
+  
+    /* backColor */
+  
+    background: linear-gradient(
+      116.02deg,
+      rgba(32, 56, 39, 0.828) 10.89%,
+      rgba(18, 39, 48, 0.9) 91.82%
+    );
+    /* strike */
+  
+    border: 1px solid #c9b1b1;
+    /* newShadow */
+  
+    box-shadow: 10px 11px 11px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 40px;
+    padding: 2rem;
+  }
+  
+      
