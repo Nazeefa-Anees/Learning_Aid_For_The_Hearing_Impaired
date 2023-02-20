@@ -1,7 +1,7 @@
 import React from 'react'
 import backArrow from '../assets/backarrow.png'
 import homeIcon from '../assets/homeicon.png'
-import '../learning.css'
+import './learning.css'
 
 export default function Learning() {
     return (
@@ -13,14 +13,14 @@ export default function Learning() {
   
         {/* Alphabet Box */}
         <div className="alphabet-box">
-          <h1 className='alphabet-text font-sinhala text-8xl text-center mt-8 whitespace-pre-wrap'>
+          <h1 className='alphabet-text font-custom text-8xl text-center mt-8 whitespace-pre-wrap'>
             isxy,<br/>fydavsh
           </h1>
         </div>
   
         {/* Number Box */}
         <div className="number-box">
-          <h1 className='number-text font-sinhala text-8xl text-center mt-8 whitespace-pre-wrap'>
+          <h1 className='number-text font-custom text-8xl text-center mt-8 whitespace-pre-wrap'>
             wxl
           </h1>
         </div>
