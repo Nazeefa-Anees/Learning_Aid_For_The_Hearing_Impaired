@@ -9,7 +9,7 @@ export default function QuestionBox1() {
       <p className="font-custom text-black text-3xl">m%Yakh</p>
       <div className="flex justify-around flex-col ">
         
-        <button>Login</button>
+        <button></button>
       
         </div>
       
