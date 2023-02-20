@@ -1,12 +1,58 @@
-.box {
-  position: absolute;
-  box-sizing: border-box;
-  width: 378px;
-  height: 383px;
-  left: 832px;
-  top: 186px;
-  background: rgba(231, 192, 69, 0.75);
-  border: 1px solid #000000;
-  border-radius: 30px;
-}
-
+.alphabet-box {
+    box-sizing: border-box;
+    position: absolute;
+    width: 378px;
+    height: 383px;
+    left: 273px;
+    top: 186px;
+    background: rgba(231, 192, 69, 0.75);
+    border: 1px solid #000000;
+    border-radius: 30px;
+  }
+  
+  .number-box {
+    box-sizing: border-box;
+    position: absolute;
+    width: 378px;
+    height: 383px;
+    left: 832px;
+    top: 186px;
+    background: rgba(231, 192, 69, 0.75);
+    border: 1px solid #000000;
+    border-radius: 30px;
+  }
+  
+  .alphabet-text {
+    position: absolute;
+    width: 265px;
+    height: 310px;
+    left: 329px;
+    top: 222px;
+  
+    font-family: 'Sinhala';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 155px;
+    text-align: center;
+  
+    color: #000000;
+  }
+  
+  .number-text {
+    position: absolute;
+    width: 128px;
+    height: 155px;
+    left: 957px;
+    top: 300px;
+  
+    font-family: 'Sinhala';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 155px;
+    text-align: center;
+  
+    color: #000000;
+  }
+  
