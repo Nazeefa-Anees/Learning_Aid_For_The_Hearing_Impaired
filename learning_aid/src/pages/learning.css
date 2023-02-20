@@ -1,0 +1,12 @@
+.box {
+  position: absolute;
+  box-sizing: border-box;
+  width: 378px;
+  height: 383px;
+  left: 832px;
+  top: 186px;
+  background: rgba(231, 192, 69, 0.75);
+  border: 1px solid #000000;
+  border-radius: 30px;
+}
+
