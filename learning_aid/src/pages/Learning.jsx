@@ -1,26 +1,27 @@
 import React from 'react'
 import backArrow from '../assets/backarrow.png'
 import homeIcon from '../assets/homeicon.png'
+
 import './learning.css'
 
 export default function Learning() {
     return (
-      <div className="relative w-full h-full">
+      <div>
         {/* Background Image */}
-        <div className="absolute w-full h-full left-0 top-0 bg-cover bg-center" style={{ backgroundImage: `url('./assets/learning.jpg')` }}>
+        <div className="bg-[url('./assets/learning.jpg')]  bg-cover bg-center min-h-screen">
   
         </div>
   
         {/* Alphabet Box */}
         <div className="alphabet-box">
-          <h1 className='alphabet-text font-custom text-8xl text-center mt-8 whitespace-pre-wrap'>
+          <h1 className='alphabet-text font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-10 top-10'>
             isxy,<br/>fydavsh
           </h1>
         </div>
   
         {/* Number Box */}
         <div className="number-box">
-          <h1 className='number-text font-custom text-8xl text-center mt-8 whitespace-pre-wrap'>
+          <h1 className='number-text font-custom text-8xl text-center mt-8 whitespace-pre-wrap absolute left-32 top-16'>
             wxl
           </h1>
         </div>
