@@ -1,14 +1,14 @@
 import React from 'react'
 import backArrow from '../assets/backarrow.png'
 import homeIcon from '../assets/homeicon.png'
-import Box from './components/Box'
+import Box from '../components/Box'
 import './learningSelection.css'
 
 export default function Learning() {
     return (
       <div className="relative w-full h-full">
         {/* Background Image */}
-        <div className="absolute w-full h-full left-0 top-0 bg-cover bg-center" style={{ backgroundImage: `url('./assets/learning.jpg')` }}>
+        <div className="bg-[url('./assets/learning.jpg')] bg-cover bg-fixed bg-center h-screen ">
   
         </div>
 

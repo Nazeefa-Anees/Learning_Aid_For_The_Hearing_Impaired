@@ -1,5 +1,6 @@
 import React from 'react'
-import Learning from './pages/Learning'
+
+import LearningSelection from './pages/LearningSelection'
 
 
 
@@ -9,7 +10,7 @@ export default function
 () {
   return (
     <div>
-     <Learning/>
+      <LearningSelection/>
     </div>
   )
 }
