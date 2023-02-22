@@ -27,6 +27,16 @@ export default function HomeSelection() {
           m%Yak
         </button>
         </div>
+
+        {/* Back Arrow */}
+      <div
+        className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${backArrow})`,
+          width: "300px",
+          height: "300px",
+        }}
+      ></div>
     </div>
   )
 }
