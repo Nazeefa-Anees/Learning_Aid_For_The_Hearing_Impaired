@@ -1,9 +1,9 @@
 .box {
     box-sizing: border-box;
     position: absolute;
-    width: 2%;
-    height: 5%;
-    background-color: rgba(255, 255, 255, 0.6);
+    width: 7%;
+    height: 15%;
+    background-color: rgba(231, 192, 69, 0.75);
     border: 1px solid #000000;
   }
   

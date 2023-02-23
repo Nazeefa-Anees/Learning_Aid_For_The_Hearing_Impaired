@@ -14,15 +14,15 @@ export default function Learning() {
 
         <div className="container mx-auto">
             <div className="flex flex-wrap">
-                <Box left={2500} top={300} />
-                <Box left={3000} top={300} />
-                <Box left={1435} top={300} />
-                <Box left={629} top={618} />
-                <Box left={1032} top={618} />
-                <Box left={1435} top={618} />
-                <Box left={629} top={936} />
-                <Box left={1032} top={936} />
-                <Box left={1435} top={936} />
+                <Box left={1500} top={618} />
+                <Box left={2700} top={618} />
+                <Box left={3890} top={618} />
+                <Box left={1500} top={1320} />
+                <Box left={2700} top={1320} />
+                <Box left={3890} top={1320} />
+                <Box left={1500} top={2000} />
+                <Box left={2700} top={2000} />
+                <Box left={3890} top={2000} />
             </div>
         </div>
   
