@@ -1,10 +1,11 @@
 .alphabet-box {
     box-sizing: border-box;
     position: absolute;
-    width: 378px;
-    height: 383px;
-    left: 273px;
-    top: 186px;
+    width: 25%;
+    height: 45%;
+    left: 28%;
+    top: 49%;
+    transform: translate(-50%, -50%);
     background: rgba(231, 192, 69, 0.75);
     border: 1px solid #000000;
     border-radius: 30px;
@@ -13,10 +14,10 @@
   .number-box {
     box-sizing: border-box;
     position: absolute;
-    width: 378px;
-    height: 383px;
-    left: 832px;
-    top: 186px;
+    width: 25%;
+    height: 45%;
+    right: 19%;
+    top: 25.5%;
     background: rgba(231, 192, 69, 0.75);
     border: 1px solid #000000;
     border-radius: 30px;
