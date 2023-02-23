@@ -32,6 +32,19 @@ export default function Number1() {
           height: "300px",
         }}
       ></div>
+
+      {/* Next */}
+      <div
+        className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${next})`,
+          width: "300px",
+          height: "300px",
+          right: 0,
+          top: "50%",
+          transform: "translateY(-50%)",
+        }}
+      ></div>
     </div>
   );
 }

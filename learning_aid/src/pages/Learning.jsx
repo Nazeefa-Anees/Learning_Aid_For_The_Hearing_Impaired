@@ -36,7 +36,13 @@ export default function Learning() {
       ></div>
   
         {/* Home Icon */}
-        <div className="absolute w-157 h-162 right-0 top-0 bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url(${homeIcon})`, width: '48px', height: '48px' }}></div>
+        <div className="absolute w-157 h-162 right-0 top-0 bg-no-repeat bg-cover bg-center" 
+        style={{ 
+          backgroundImage: `url(${homeIcon})`, 
+          width: "300px",
+          height: "300px", 
+          }}
+          ></div>
       </div>
     );
   

@@ -14,8 +14,8 @@ export default function Learning() {
 
         <div className="container mx-auto">
             <div className="flex flex-wrap">
-                <Box left={629} top={300} />
-                <Box left={1032} top={300} />
+                <Box left={2500} top={300} />
+                <Box left={3000} top={300} />
                 <Box left={1435} top={300} />
                 <Box left={629} top={618} />
                 <Box left={1032} top={618} />
@@ -27,10 +27,22 @@ export default function Learning() {
         </div>
   
         {/* Back Arrow */}
-        <div className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url(${backArrow})`, width: '48px', height: '48px' }}></div>
+        <div className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${backArrow})`,
+          width: "300px",
+          height: "300px",
+        }}
+      ></div>
   
         {/* Home Icon */}
-        <div className="absolute w-157 h-162 left-1259 top-24 bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url(${homeIcon})`, backgroundSize: 'cover' }}></div>
+        <div className="absolute w-157 h-162 right-0 top-0 bg-no-repeat bg-cover bg-center" 
+        style={{ 
+          backgroundImage: `url(${homeIcon})`, 
+          width: "300px",
+          height: "300px", 
+          }}
+          ></div>
       </div>
     );
   

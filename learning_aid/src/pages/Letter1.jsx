@@ -1,5 +1,7 @@
 import React from "react";
 import backArrow from '../assets/backarrow.png';
+import next from '../assets/next.png';
+import back from '../assets/back.png';
 import "./Letter.css";
 
 
@@ -30,6 +32,19 @@ export default function Letter1() {
           backgroundImage: `url(${backArrow})`,
           width: "300px",
           height: "300px",
+        }}
+      ></div>
+
+      {/* Next */}
+      <div
+        className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${next})`,
+          width: "300px",
+          height: "300px",
+          right: 50,
+          top: "50%",
+          transform: "translateY(-50%)",
         }}
       ></div>
     </div>

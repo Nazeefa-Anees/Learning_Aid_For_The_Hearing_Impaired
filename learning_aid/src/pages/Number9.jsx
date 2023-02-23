@@ -32,6 +32,19 @@ export default function Number9() {
           height: "300px",
         }}
       ></div>
+
+      {/* Back */}
+      <div
+        className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${back})`,
+          width: "300px",
+          height: "300px",
+          left: 50,
+          top: "50%",
+          transform: "translateY(-50%)",
+        }}
+      ></div>
     </div>
   );
 }
