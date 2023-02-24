@@ -14,7 +14,7 @@ export default function Learning() {
   
         {/* Alphabet Box */}
         <div className="alphabet-box">
-          <h1 className=' font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-10 top-0'>
+          <h1 className=' font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-14 top-10'>
             isxy,<br/>fydavsh
           </h1>
         </div>
