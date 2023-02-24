@@ -14,14 +14,14 @@ export default function Learning() {
   
         {/* Alphabet Box */}
         <div className="alphabet-box">
-          <h1 className='alphabet-text font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-10 top-0'>
+          <h1 className=' font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-10 top-0'>
             isxy,<br/>fydavsh
           </h1>
         </div>
   
         {/* Number Box */}
         <div className="number-box">
-          <h1 className='number-text font-custom text-8xl text-center mt-8 whitespace-pre-wrap absolute left-32 top-16'>
+          <h1 className=' font-custom text-8xl text-center mt-8 whitespace-pre-wrap absolute left-32 top-16'>
             wxl
           </h1>
         </div>
