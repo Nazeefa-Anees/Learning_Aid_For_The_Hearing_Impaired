@@ -4,6 +4,7 @@ module.exports = {
     "./index.html","./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    
     fontFamily: {
       custom: ['Astro11', 'sans-serif'],
     },

@@ -1,16 +1,11 @@
 import React from 'react'
-
-import LearningSelection from './pages/LearningSelection'
-
-
-
-
+import HomeSelection from './pages/HomeSelection'
 
 export default function 
 () {
   return (
     <div>
-      <LearningSelection/>
+      <HomeSelection/>
     </div>
   )
 }
