@@ -1,0 +1,59 @@
+.page-container {
+    position: relative;
+    height: 100vh;
+  }
+
+  .box1 {
+    position: absolute;
+    height: 25%;
+    width: 14%;
+    left: 28%;
+    top: 23%;
+    transform: translate(-50%, -50%);
+    border-radius: 0px;
+    background-color: rgba(231, 192, 69, 0.75);
+  }
+
+  .box2 {
+    position: absolute;
+    height: 50%;
+    width: 30%;
+    left: 28%;
+    top: 65.4%;
+    transform: translate(-50%, -50%);
+    border-radius: 0px;
+    background-color: white;
+  }
+
+  .box3 {
+    position: absolute;
+    height: 50%;
+    width: 30%;
+    left: 28%;
+    top: 65.4%;
+    transform: translate(-50%, -50%);
+    border-radius: 0px;
+    background-color: white;
+  }
+
+  .box4 {
+    position: absolute;
+    height: 50%;
+    width: 30%;
+    left: 28%;
+    top: 65.4%;
+    transform: translate(-50%, -50%);
+    border-radius: 0px;
+    background-color: white;
+  }
+
+  .box5 {
+    position: absolute;
+    height: 50%;
+    width: 30%;
+    left: 28%;
+    top: 65.4%;
+    transform: translate(-50%, -50%);
+    border-radius: 0px;
+    background-color: white;
+  }
