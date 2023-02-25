@@ -3,6 +3,7 @@ import backArrow from '../assets/backarrow.png';
 import number1 from '../assets/dataset_icons/numbers/1.jpg';
 import homeIcon from'../assets/homeicon.png';
 import next from '../assets/next.png';
+import back from '../assets/back.png';
 import "./Letter.css";
 
 
@@ -54,6 +55,19 @@ export default function Number1() {
           width: "5.5%",
           height: "10%",
           right: 20,
+          top: "50%",
+          transform: "translateY(-50%)",
+        }}
+      ></div>
+
+      {/* Back */}
+      <div
+        className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${back})`,
+          width: "5.5%",
+          height: "10%",
+          left: 20,
           top: "50%",
           transform: "translateY(-50%)",
         }}

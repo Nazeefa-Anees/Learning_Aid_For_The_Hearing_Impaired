@@ -12,18 +12,18 @@ export default function Learning() {
       <div className="bg-[url('./assets/learning.jpg')]  bg-cover bg-center min-h-screen"></div>
 
       {/* Alphabet Box */}
-      <Link to="/learningSelection1" className="alphabet-box">
+      <div className="alphabet-box">
         <h1 className='font-custom text-8xl text-center mt-8 whitespace-pre-wrap absolute left-14 top-10 tracking-wide'>
           isxy,<br/>fydavsh
         </h1>
-      </Link>
+      </div>
 
       {/* Number Box */}
-      <Link to="/learningSelection2" className="number-box">
+      <div className="number-box">
         <h1 className='font-custom text-8xl text-center mt-8 whitespace-pre-wrap absolute left-32 top-16 tracking-wide'>
           wxl
         </h1>
-      </Link>
+      </div>
 
       {/* Back Arrow */}
       <div

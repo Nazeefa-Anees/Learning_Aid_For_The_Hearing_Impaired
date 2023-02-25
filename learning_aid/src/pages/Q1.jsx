@@ -1,5 +1,7 @@
 import React from "react";
 import backArrow from '../assets/backarrow.png';
+import homeIcon from'../assets/homeicon.png';
+import next from '../assets/next.png';
 import "./Question.css";
 
 
@@ -7,39 +9,34 @@ export default function Q1() {
   return (
     <div className="page-container">
       {/* Background Image */}
-      <div className="bg-[url(./assets/learning.jpg)] bg-cover bg-center min-h-screen"></div>
+      <div className="bg-[url(./assets/quiz.jpg)] bg-cover bg-center min-h-screen"></div>
 
-      {/*Image*/}
+      {/*Text*/}
       <div className="box1">
+        <h1 className='font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-35 top-40'>2 </h1>
       </div>
 
-      {/*Answer 1*/}
+      {/* Camera */}
       <div className="box2">
-        <h1 className='alphabet-text font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-10 top-10'>w </h1>
-      </div>
 
-      {/*Answer 2*/}
-      <div className="box3">
-        <h1 className='alphabet-text font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-10 top-10'>w </h1>
-      </div>
-
-      {/*Answer 3*/}
-      <div className="box4">
-        <h1 className='alphabet-text font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-10 top-10'>w </h1>
-      </div>
-
-      {/*Answer 4*/}
-      <div className="box5">
-        <h1 className='alphabet-text font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-10 top-10'>w </h1>
       </div>
 
       {/* Back Arrow */}
-      <div
-        className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
+      <div className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${backArrow})`,
-          width: "300px",
-          height: "300px",
+          width: "5.5%",
+          height: "10%",
+        }}
+      ></div>
+
+      {/* Home Icon */}
+      <div
+        className="absolute w-12 h-12 right-0 top-0 bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${homeIcon})`,
+          width: '5.5%',
+          height: '10%'
         }}
       ></div>
 
@@ -48,14 +45,13 @@ export default function Q1() {
         className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${next})`,
-          width: "300px",
-          height: "300px",
-          right: 0,
+          width: "5.5%",
+          height: "10%",
+          right: 20,
           top: "50%",
           transform: "translateY(-50%)",
         }}
       ></div>
-
     </div>
   );
 }

@@ -2,13 +2,13 @@
 import * as React from 'react';
 
 import Learning from './pages/Learning';
-import Number0 from './pages/Number0';
+import Quiz from './pages/Quiz';
 
 export default function 
 () {
   return (
     <div>
-      <Number0/>
+      <Quiz/>
     </div>
   )
 }
