@@ -23,35 +23,7 @@
     border-radius: 30px;
   }
   
-  .alphabet-text {
-    position: absolute;
-    width: 265px;
-    height: 310px;
-    
   
-    font-family: 'Sinhala';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 96px;
-    line-height: 155px;
-    text-align: center;
   
-    color: #000000;
-  }
   
-  .number-text {
-    position: absolute;
-    width: 128px;
-    height: 155px;
-
-  
-    font-family: 'Sinhala';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 96px;
-    line-height: 155px;
-    text-align: center;
-  
-    color: #000000;
-  }
   

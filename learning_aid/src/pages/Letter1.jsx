@@ -1,7 +1,8 @@
 import React from "react";
 import backArrow from '../assets/backarrow.png';
 import next from '../assets/next.png';
-import back from '../assets/back.png';
+import one from '../assets/one.jpg';
+import homeIcon from'../assets/homeicon.png';
 import "./Letter.css";
 
 
@@ -13,7 +14,7 @@ export default function Letter1() {
 
       {/*Text*/}
       <div className="box1">
-        <h1 className='alphabet-text font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-10 top-10'>w </h1>
+        <h1 className='font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-20 top-0'>w </h1>
       </div>
 
       {/* Camera */}
@@ -23,15 +24,25 @@ export default function Letter1() {
 
       {/*Image*/}
       <div className="box3">
+        <img src={one} alt="Letter1" className="image" />
       </div>
 
-      {/* Back Arrow */}
-      <div
-        className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
+       {/* Back Arrow */}
+       <div className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${backArrow})`,
-          width: "300px",
-          height: "300px",
+          width: "5.5%",
+          height: "10%",
+        }}
+      ></div>
+
+      {/* Home Icon */}
+      <div
+        className="absolute w-12 h-12 right-0 top-0 bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${homeIcon})`,
+          width: '5.5%',
+          height: '10%'
         }}
       ></div>
 
@@ -40,13 +51,14 @@ export default function Letter1() {
         className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${next})`,
-          width: "300px",
-          height: "300px",
-          right: 50,
+          width: "5.5%",
+          height: "10%",
+          right: 20,
           top: "50%",
           transform: "translateY(-50%)",
         }}
       ></div>
+
     </div>
   );
 }
