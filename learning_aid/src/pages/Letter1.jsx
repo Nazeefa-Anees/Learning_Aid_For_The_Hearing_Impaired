@@ -1,7 +1,7 @@
 import React from "react";
 import backArrow from '../assets/backarrow.png';
 import next from '../assets/next.png';
-import one from '../assets/one.jpg';
+import one from '../assets//dataset_icons/letters/1.jpg';
 import homeIcon from'../assets/homeicon.png';
 import "./Letter.css";
 
@@ -14,7 +14,7 @@ export default function Letter1() {
 
       {/*Text*/}
       <div className="box1">
-        <h1 className='font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-20 top-0'>w </h1>
+        <h1 className='font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-16 top-0'>w </h1>
       </div>
 
       {/* Camera */}

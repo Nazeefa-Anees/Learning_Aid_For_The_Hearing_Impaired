@@ -1,6 +1,6 @@
 import React from "react";
 import backArrow from '../assets/backarrow.png';
-import four from '../assets/four.jpg';
+import four from '../assets//dataset_icons/letters/4.jpg';
 import next from '../assets/next.png';
 import back from '../assets/back.png';
 import homeIcon from  '../assets/homeicon.png';
@@ -15,7 +15,7 @@ export default function Letter4() {
 
       {/*Text*/}
       <div className="box1">
-        <h1 className='font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-20 top-5'>b </h1>
+        <h1 className='font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-16 top-5'>b </h1>
       </div>
 
       {/* Camera */}
@@ -25,7 +25,7 @@ export default function Letter4() {
 
       {/*Image*/}
       <div className="box3">
-        <img src={four} alt="Letter1" className="image" />
+        <img src={four} alt="Letter4" className="image" />
       </div>
 
       {/* Back Arrow */}
