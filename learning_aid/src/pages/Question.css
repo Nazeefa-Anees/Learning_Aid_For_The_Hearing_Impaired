@@ -5,7 +5,7 @@
 
   .box1 {
     position: absolute;
-    height: 70%;
+    height: 50%;
     width: 30%;
     left: 28%;
     top: 50%;
@@ -16,13 +16,12 @@
 
   .box2 {
     position: absolute;
-    height: 70%;
-    width: 30%;
-    left: 78;
+    right: 0;
     top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 0px;
-    background-color: white;
+    transform: translateY(-50%);
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-
   
