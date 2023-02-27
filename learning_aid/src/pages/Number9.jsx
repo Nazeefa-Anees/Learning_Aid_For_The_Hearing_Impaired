@@ -2,7 +2,7 @@ import React from "react";
 import backArrow from '../assets/backarrow.png';
 import number9 from '../assets/dataset_icons/numbers/9.jpg';
 import homeIcon from'../assets/homeicon.png';
-import next from '../assets/next.png';
+
 import back from '../assets/back.png';
 import "./Letter.css";
 import { Link } from 'react-router-dom';
