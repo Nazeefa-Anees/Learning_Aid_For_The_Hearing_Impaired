@@ -28,7 +28,7 @@ export default function Number0() {
       </div>
 
       {/* Back Arrow */}
-      <Link to='/learningCategory'>
+      <Link to='/numbers'>
       <button>
       <div
         className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
@@ -56,7 +56,9 @@ export default function Number0() {
       </Link>
 
       {/* Next */}
-      <div
+      <Link to='/number1'>
+        <button>
+        <div
         className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${next})`,
@@ -67,6 +69,9 @@ export default function Number0() {
           transform: "translateY(-50%)",
         }}
       ></div>
+        </button>
+      </Link>
+      
     </div>
   );
 }

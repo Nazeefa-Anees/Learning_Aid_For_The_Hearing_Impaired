@@ -29,7 +29,7 @@ export default function Number9() {
       </div>
 
       {/* Back Arrow */}
-      <Link to='/learningCategory'>
+      <Link to='/numbers'>
       <button>
       <div
         className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
@@ -56,21 +56,12 @@ export default function Number9() {
       </button>
       </Link>
 
-      {/* Next */}
-      <div
-        className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${next})`,
-          width: "5.5%",
-          height: "10%",
-          right: 20,
-          top: "50%",
-          transform: "translateY(-50%)",
-        }}
-      ></div>
+      
 
       {/* Back */}
-      <div
+      <Link to='/number8'>
+        <button>
+        <div
         className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${back})`,
@@ -81,6 +72,9 @@ export default function Number9() {
           transform: "translateY(-50%)",
         }}
       ></div>
+        </button>
+      </Link>
+      
     </div>
   );
 }
