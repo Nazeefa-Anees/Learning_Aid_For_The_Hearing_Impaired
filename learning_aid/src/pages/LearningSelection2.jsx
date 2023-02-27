@@ -9,10 +9,9 @@ export default function Learning() {
     return (
       <div className="relative w-full h-full">
         {/* Background Image */}
-        <div className="bg-[url('./assets/quiz.jpg')] bg-cover bg-fixed bg-center h-screen ">
+        <div className="bg-[url('./assets/learning.svg')] bg-cover bg-fixed bg-center h-screen ">
   
         </div>
-
         <div className="container mx-auto">
             <div className="flex flex-wrap">
             <Link to='/number0'>
@@ -81,8 +80,6 @@ export default function Learning() {
       ></div>
       </button>
       </Link>
-      
-      
 
       {/* Home Icon */}
       <Link to='/home'>

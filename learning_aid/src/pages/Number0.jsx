@@ -4,13 +4,13 @@ import number0 from '../assets/dataset_icons/numbers/0.jpg';
 import homeIcon from'../assets/homeicon.png';
 import next from '../assets/next.png';
 import "./Letter.css";
-
+import { Link } from 'react-router-dom';
 
 export default function Number0() {
   return (
     <div className="page-container">
       {/* Background Image */}
-      <div className="bg-[url(./assets/learning.jpg)] bg-cover bg-center min-h-screen"></div>
+      <div className="bg-[url(./assets/learning.svg)] bg-cover bg-center min-h-screen"></div>
 
       {/*Text*/}
       <div className="box1">
@@ -28,15 +28,22 @@ export default function Number0() {
       </div>
 
       {/* Back Arrow */}
-      <div className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
+      <Link to='/learningCategory'>
+      <button>
+      <div
+        className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${backArrow})`,
-          width: "5.5%",
-          height: "10%",
+          width: '5.5%',
+          height: '10%'
         }}
       ></div>
+      </button>
+      </Link>
 
       {/* Home Icon */}
+      <Link to='/home'>
+      <button>
       <div
         className="absolute w-12 h-12 right-0 top-0 bg-no-repeat bg-cover bg-center"
         style={{
@@ -45,6 +52,8 @@ export default function Number0() {
           height: '10%'
         }}
       ></div>
+      </button>
+      </Link>
 
       {/* Next */}
       <div
