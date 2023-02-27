@@ -93,37 +93,9 @@ export default function Learning() {
               <Link to='/letter25'>
                 <button><Box left={1250} top={540} text="!"/></button>
               </Link>
-              
               <Link to='/letter27'>
                 <button><Box left={1410} top={540} text="x"/></button>
               </Link>
-        
-              
-              
-              
-              
-              
-              
-              
-              
-             
-              
-              
-
-              
-                
-                
-                
-                
-                
-                
-              
-                
-                
-                
-                
-                
-                
             </div>
         </div>
   
@@ -136,14 +108,12 @@ export default function Learning() {
           backgroundImage: `url(${backArrow})`,
           width: '5.5%',
           height: '10%'
-        }}>hi
+        }}>
 
        </button>
 
       </Link>
       </div>
-      
-      
 
       {/* Home Icon */}
       <Link to='/home'>
@@ -159,10 +129,5 @@ export default function Learning() {
       </button>
       </Link>
       </div>
-
-
-
-
     );
-  
 }

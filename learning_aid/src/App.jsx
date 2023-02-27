@@ -37,6 +37,16 @@ import Letter24 from './pages/Letter24';
 import Letter25 from './pages/Letter25';
 import Letter26 from './pages/Letter26';
 import Letter27 from './pages/Letter27';
+import Number0 from './pages/Number0';
+import Number1 from './pages/Number1';
+import Number2 from './pages/Number2';
+import Number3 from './pages/Number3';
+import Number4 from './pages/Number4';
+import Number5 from './pages/Number5';
+import Number6 from './pages/Number6';
+import Number7 from './pages/Number7';
+import Number8 from './pages/Number8';
+import Number9 from './pages/Number9';
 
 
 
@@ -66,7 +76,6 @@ export default function
         <Route path='letter8' element={<Letter8/>}/>
         <Route path='letter9' element={<Letter9/>}/>
         <Route path='letter10' element={<Letter10/>}/>
-
         <Route path='letter11' element={<Letter11/>}/>
         <Route path='letter12' element={<Letter12/>}/>
         <Route path='letter13' element={<Letter13/>}/>
@@ -77,7 +86,6 @@ export default function
         <Route path='letter18' element={<Letter18/>}/>
         <Route path='letter19' element={<Letter19/>}/>
         <Route path='letter20' element={<Letter20/>}/>
-
         <Route path='letter21' element={<Letter21/>}/>
         <Route path='letter22' element={<Letter22/>}/>
         <Route path='letter23' element={<Letter23/>}/>
@@ -86,6 +94,16 @@ export default function
         <Route path='letter26' element={<Letter26/>}/>
         <Route path='letter27' element={<Letter27/>}/>
 
+        <Route path='number0' element={<Number0/>}/>
+        <Route path='number1' element={<Number1/>}/>
+        <Route path='number2' element={<Number2/>}/>
+        <Route path='number3' element={<Number3/>}/>
+        <Route path='number4' element={<Number4/>}/>
+        <Route path='number5' element={<Number5/>}/>
+        <Route path='number6' element={<Number6/>}/>
+        <Route path='number7' element={<Number7/>}/>
+        <Route path='number8' element={<Number8/>}/>
+        <Route path='number9' element={<Number9/>}/>
 
       </Routes>
       

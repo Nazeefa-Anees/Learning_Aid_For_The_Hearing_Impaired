@@ -15,16 +15,56 @@ export default function Learning() {
 
         <div className="container mx-auto">
             <div className="flex flex-wrap">
-                <Box left={360} top={140} text="0"/>
-                <Box left={560} top={140} text="1"/>
-                <Box left={760} top={140} text="2"/>
-                <Box left={960} top={140} text="3"/>
-                <Box left={1160} top={140} text="4"/>
-                <Box left={360} top={500} text="5"/>
-                <Box left={560} top={500} text="6"/>
-                <Box left={760} top={500} text="7"/>
-                <Box left={960} top={500} text="8"/>
-                <Box left={1160} top={500} text="9"/>
+            <Link to='/number0'>
+              <button>
+              <Box left={360} top={140} text="0"/>
+              </button>
+            </Link>
+            <Link to='/number1'>
+              <button>
+              <Box left={560} top={140} text="1"/>
+              </button>
+            </Link>
+            <Link to='/number2'>
+              <button>
+              <Box left={760} top={140} text="2"/>
+              </button>
+            </Link>
+            <Link to='/number3'>
+              <button>
+              <Box left={960} top={140} text="3"/>
+              </button>
+            </Link>
+            <Link to='/number4'>
+              <button>
+              <Box left={1160} top={140} text="4"/>
+              </button>
+            </Link>
+            <Link to='/number5'>
+              <button>
+              <Box left={360} top={500} text="5"/>
+              </button>
+            </Link>
+            <Link to='/number6'>
+              <button>
+              <Box left={560} top={500} text="6"/>
+              </button>
+            </Link>
+            <Link to='/number7'>
+              <button>
+              <Box left={760} top={500} text="7"/>
+              </button>
+            </Link>
+            <Link to='/number8'>
+              <button>
+              <Box left={960} top={500} text="8"/>
+              </button>
+            </Link>
+            <Link to='/number9'>
+              <button>
+              <Box left={1160} top={500} text="9"/>
+              </button>
+            </Link>
             </div>
         </div>
   
