@@ -29,7 +29,7 @@ export default function Letter21() {
       </div>
 
       {/* Back Arrow */}
-      <Link to='/learningCategory'>
+      <Link to='/letters'>
       <button>
       <div
         className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
@@ -56,7 +56,9 @@ export default function Letter21() {
       </button>
       </Link>
       {/* Next */}
-      <div
+      <Link to='/letter22'>
+        <button>
+        <div
         className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${next})`,
@@ -67,9 +69,14 @@ export default function Letter21() {
           transform: "translateY(-50%)",
         }}
       ></div>
+        </button>
+      </Link>
+      
 
       {/* Back */}
-      <div
+      <Link to='/letter20'>
+        <button>
+        <div
         className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${back})`,
@@ -80,6 +87,9 @@ export default function Letter21() {
           transform: "translateY(-50%)",
         }}
       ></div>
+        </button>
+      </Link>
+      
     </div>
   );
 }

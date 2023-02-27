@@ -29,7 +29,7 @@ export default function Letter13() {
       </div>
 
       {/* Back Arrow */}
-      <Link to='/learningCategory'>
+      <Link to='/letters'>
       <button>
       <div
         className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
@@ -69,7 +69,7 @@ export default function Letter13() {
           top: "50%",
           transform: "translateY(-50%)",
         }}
-      ></div>
+        ></div>
         </button>
       </Link>
       

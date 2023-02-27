@@ -30,7 +30,7 @@ export default function Letter7() {
       </div>
 
       {/* Back Arrow */}
-      <Link to='/learningCategory'>
+      <Link to='/letters'>
       <button>
       <div
         className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
@@ -77,7 +77,7 @@ export default function Letter7() {
 
       {/* Back */}
 
-      <Link to='/letter7'>
+      <Link to='/letter6'>
         <button>
         <div
         className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"

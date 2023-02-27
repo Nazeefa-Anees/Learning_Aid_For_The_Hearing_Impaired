@@ -29,7 +29,7 @@ export default function Letter19() {
       </div>
 
       {/* Back Arrow */}
-      <Link to='/learningCategory'>
+      <Link to='/letters'>
       <button>
       <div
         className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
@@ -57,7 +57,7 @@ export default function Letter19() {
       </Link>
 
       {/* Next */}
-      <Link to='/letter 20'>
+      <Link to='/letter20'>
         <button>
         <div
         className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
