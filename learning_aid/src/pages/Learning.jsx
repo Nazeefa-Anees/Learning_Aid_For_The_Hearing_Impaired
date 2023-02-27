@@ -9,7 +9,7 @@ export default function Learning() {
   return (
     <div>
       {/* Background Image */}
-      <div className="bg-[url('./assets/learning.jpg')]  bg-cover bg-center min-h-screen"></div>
+      <div className="bg-[url('./assets/learning.svg')]  bg-cover bg-center min-h-screen bg-fixed"></div>
 
       {/* Alphabet Box */}
       <Link to='/letters'>
@@ -25,13 +25,21 @@ export default function Learning() {
       
 
       {/* Number Box */}
-      <div className="number-box">
-        <h1 className='font-custom text-8xl text-center mt-8 whitespace-pre-wrap absolute left-32 top-16 tracking-wide'>
-          wxl
-        </h1>
-      </div>
+      <Link to = '/numbers'>
+        <button>
+          <div className="number-box">
+            <h1 className='font-custom text-8xl text-center mt-8 whitespace-pre-wrap absolute left-32 top-16 tracking-wide'>
+              wxl
+            </h1>
+          </div>
+        </button>
+      </Link>
+      
+      
 
       {/* Back Arrow */}
+      <Link to='/home'>
+      <button>
       <div
         className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
         style={{
@@ -40,8 +48,14 @@ export default function Learning() {
           height: '10%'
         }}
       ></div>
+      </button>
+      </Link>
+      
+      
 
       {/* Home Icon */}
+      <Link to='/home'>
+      <button>
       <div
         className="absolute w-12 h-12 right-0 top-0 bg-no-repeat bg-cover bg-center"
         style={{
@@ -50,6 +64,10 @@ export default function Learning() {
           height: '10%'
         }}
       ></div>
+      </button>
+      </Link>
+      
+      
     </div>
   );
 }

@@ -3,6 +3,7 @@ import backArrow from '../assets/backarrow.png'
 import homeIcon from '../assets/homeicon.png'
 import Box from '../components/Box'
 import './learningSelection.css'
+import { Link } from 'react-router-dom';
 
 export default function Learning() {
     return (
@@ -28,6 +29,8 @@ export default function Learning() {
         </div>
   
         {/* Back Arrow */}
+      <Link to='/learningCategory'>
+      <button>
       <div
         className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
         style={{
@@ -36,8 +39,14 @@ export default function Learning() {
           height: '10%'
         }}
       ></div>
+      </button>
+      </Link>
+      
+      
 
       {/* Home Icon */}
+      <Link to='/home'>
+      <button>
       <div
         className="absolute w-12 h-12 right-0 top-0 bg-no-repeat bg-cover bg-center"
         style={{
@@ -46,6 +55,8 @@ export default function Learning() {
           height: '10%'
         }}
       ></div>
+      </button>
+      </Link>
       </div>
     );
   

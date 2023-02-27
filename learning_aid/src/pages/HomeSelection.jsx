@@ -25,10 +25,11 @@ export default function HomeSelection() {
         </div>
 
         <div className='flex justify-center'>
-        <button className="font-custom text-8xl text-[#203153] bg-cover bg-center w-96 h-96 absolute right-64 bottom-0" 
+        <Link to='/quizCategory'> <button className="font-custom text-8xl text-[#203153] bg-cover bg-center w-96 h-96 absolute right-64 bottom-0" 
                 style={{backgroundImage: `url(${cloudImage})`,backgroundSize: "contain",backgroundPosition: "center",backgroundRepeat: "no-repeat",}}>
           m%Yak
         </button>
+        </Link>
         </div>
     </div>
   )
