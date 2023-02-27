@@ -1,7 +1,5 @@
 import './questionnaire.css'
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
-
 import one from '../assets/dataset_icons/letters/1.jpg' 
 import two from '../assets/dataset_icons/letters/5.jpg'
 import three from '../assets/dataset_icons/letters/9.jpg'
@@ -156,6 +154,17 @@ export default function Questionnaire() {
   const [userAnswers, setUserAnswers] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
+  const handleNextQuestion = () => {
+    // Check if the selected option is correct
+    const isCorrect = questions[questionIndex].options[selectedOptionId].id === questions[questionIndex].answer;
+
+    // Move to the next question
+    setQuestionIndex(questionIndex + 1);
+
+    // Reset the selected option
+    setSelectedOptionId(null);
+  };
+
   const handleAnswerSelect = (answerIndex) => {
     setSelectedAnswer(answerIndex);
   };
@@ -163,20 +172,11 @@ export default function Questionnaire() {
   const handleDoneClick = () => {
     setUserAnswers([...userAnswers, selectedAnswer]);
     setSelectedAnswer(null);
-    if (isLastQuestion) {
-      // navigate to the results page when the last question is answered
-      // replace "/results" with the URL of your results page
-      return <Link to="/pred">Se</Link>;
-    }
-
-    // otherwise, move to the next question
     setCurrentQuestion(currentQuestion + 1);
   };
 
-
-
   const currentQuestionData = questions[currentQuestion];
-  const isLastQuestion = currentQuestion === questions.length - 1;
+  
 
   return (
     <div className="bg-[url('./assets/rainbow.png')] bg-cover bg-center min-h-screen ">
@@ -200,7 +200,7 @@ export default function Questionnaire() {
           
           
           
-          <button className='font-custom  bg-yellow-500 rounded-full w-32' onClick={handleDoneClick}>{isLastQuestion ? 'yrs' : 'yrs'}</button>
+          <button className='font-custom  bg-yellow-500 rounded-full w-32' onClick={handleDoneClick} disabled={selectedAnswer === null}>yrs</button>
         </div>
       </div>
     </div>

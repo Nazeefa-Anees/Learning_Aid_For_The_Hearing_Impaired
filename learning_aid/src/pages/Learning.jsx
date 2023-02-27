@@ -12,11 +12,17 @@ export default function Learning() {
       <div className="bg-[url('./assets/learning.jpg')]  bg-cover bg-center min-h-screen"></div>
 
       {/* Alphabet Box */}
+      <Link to='/letters'>
+      <button>
       <div className="alphabet-box">
         <h1 className='font-custom text-8xl text-center mt-8 whitespace-pre-wrap absolute left-14 top-10 tracking-wide'>
-          isxy,<br/>fydavsh
+          isxy,<br/>fydAvsh
         </h1>
       </div>
+      </button>
+      
+      </Link>
+      
 
       {/* Number Box */}
       <div className="number-box">

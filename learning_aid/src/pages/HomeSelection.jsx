@@ -1,5 +1,6 @@
 import React from 'react'
 import cloudImage from '../assets/cloud.png';
+import { Link } from 'react-router-dom';
 
 export default function HomeSelection() {
   return (
@@ -16,10 +17,11 @@ export default function HomeSelection() {
 
 
         <div className='flex justify-center'>
-        <button className="font-custom text-8xl text-[#203153] bg-cover bg-center w-96 h-96 absolute left-80 mt-48" 
+        <Link to="/learningCategory"><button className="font-custom text-8xl text-[#203153] bg-cover bg-center w-96 h-96 absolute left-80 mt-48" 
                 style={{backgroundImage: `url(${cloudImage})`,backgroundSize: "contain",backgroundPosition: "center",backgroundRepeat: "no-repeat",}}>
           mdvus
         </button>
+        </Link>
         </div>
 
         <div className='flex justify-center'>
