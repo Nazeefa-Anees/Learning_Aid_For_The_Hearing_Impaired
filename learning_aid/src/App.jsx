@@ -48,6 +48,7 @@ import Number7 from './pages/Number7';
 import Number8 from './pages/Number8';
 import Number9 from './pages/Number9';
 
+import Q1 from './pages/Q1';
 
 
 
@@ -55,8 +56,10 @@ export default function
 () {
   return (
     <div>
+
+
       
-      <Routes>
+     <Routes>
         <Route path="/" element={<Splashscreen />} />
         <Route path="questionnaire" element={<Questionnaire />} />
         <Route path='result' element={<QuestionnairePred/>} />
@@ -105,8 +108,9 @@ export default function
         <Route path='number7' element={<Number7/>}/>
         <Route path='number8' element={<Number8/>}/>
         <Route path='number9' element={<Number9/>}/>
-
+        
       </Routes>
+  
       
     </div>
   )
