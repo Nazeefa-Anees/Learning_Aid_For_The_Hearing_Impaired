@@ -1,31 +1,58 @@
+import React, { useRef, useEffect } from "react";
 import React from "react";
 import backArrow from '../assets/backarrow.png';
-import number7 from '../assets/dataset_icons/numbers/7.jpg';
-import homeIcon from'../assets/homeicon.png';
+import number7 from '../assets//dataset_icons/numbers/7.jpg';
 import next from '../assets/next.png';
 import back from '../assets/back.png';
+import homeIcon from  '../assets/homeicon.png';
 import "./Letter.css";
 import { Link } from 'react-router-dom';
 
+
 export default function Number7() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const enableCamera = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    enableCamera();
+  }, []);
+
   return (
     <div className="page-container">
       {/* Background Image */}
       <div className="bg-[url(./assets/learning.svg)] bg-cover bg-center min-h-screen"></div>
 
-      {/*Text*/}
-      <div className="box1">
-        <h1 className='font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-20 top-3'>7 </h1>
+     {/*Text*/}
+     <div className="box1">
+        <h1 className="font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-16 top-0">
+          7{" "}
+        </h1>
       </div>
 
       {/* Camera */}
       <div className="box2">
-
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          className="h-full w-full object-cover"
+        />
       </div>
 
       {/*Image*/}
       <div className="box3">
-        <img src={number7} alt="number7" className="image" />
+        <img src={number7} alt="Number7" className="image" />
       </div>
 
       {/* Back Arrow */}
@@ -90,6 +117,7 @@ export default function Number7() {
       ></div>
         </button>
       </Link>
+
       
     </div>
   );

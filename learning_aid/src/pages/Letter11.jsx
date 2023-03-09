@@ -1,31 +1,58 @@
+import React, { useRef, useEffect } from "react";
 import React from "react";
 import backArrow from '../assets/backarrow.png';
-import nine from '../assets//dataset_icons/letters/9.jpg';
+import eleven from '../assets//dataset_icons/letters/11.jpg';
 import next from '../assets/next.png';
 import back from '../assets/back.png';
 import homeIcon from  '../assets/homeicon.png';
 import "./Letter.css";
 import { Link } from 'react-router-dom';
 
+
 export default function Letter11() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const enableCamera = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    enableCamera();
+  }, []);
+
   return (
     <div className="page-container">
       {/* Background Image */}
       <div className="bg-[url(./assets/learning.svg)] bg-cover bg-center min-h-screen"></div>
 
-      {/*Text*/}
-      <div className="box1">
-        <h1 className='font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-16 top-5'>oA </h1>
+     {/*Text*/}
+     <div className="box1">
+        <h1 className="font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-16 top-0">
+          oA{" "}
+        </h1>
       </div>
 
       {/* Camera */}
       <div className="box2">
-
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          className="h-full w-full object-cover"
+        />
       </div>
 
       {/*Image*/}
       <div className="box3">
-        <img src={nine} alt="Letter11" className="image" />
+        <img src={eleven} alt="Letter11" className="image" />
       </div>
 
       {/* Back Arrow */}
@@ -57,7 +84,6 @@ export default function Letter11() {
       </Link>
 
       {/* Next */}
-
       <Link to='/letter12'>
         <button>
         <div
@@ -91,6 +117,7 @@ export default function Letter11() {
       ></div>
         </button>
       </Link>
+
       
     </div>
   );
