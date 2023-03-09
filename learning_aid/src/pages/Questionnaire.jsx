@@ -1,4 +1,4 @@
-import './questionnaire.css'
+ import './questionnaire.css'
 import React, {useState} from 'react';
 import one from '../assets/dataset_icons/letters/1.jpg' 
 import two from '../assets/dataset_icons/letters/5.jpg'
@@ -193,13 +193,10 @@ export default function Questionnaire() {
                 checked={selectedAnswer === option.id}
                 onChange={() => handleAnswerSelect(option.id )} // subtract 1 to get index of selected answer
               />
-              <label>{option.text}</label>
+              <label>{option.text}</label>S
             </div>
           ))}
           <br/>
-          
-          
-          
           <button className='font-custom  bg-yellow-500 rounded-full w-32' onClick={handleDoneClick} disabled={selectedAnswer === null}>yrs</button>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Splashscreen from './pages/Splashscreen';
 import Questionnaire from './pages/Questionnaire';
+{/*
 import QuestionnairePred from './pages/QuestionnairePred';
 import HomeSelection from './pages/HomeSelection';
 import Learning from './pages/Learning';
@@ -49,6 +50,7 @@ import Number8 from './pages/Number8';
 import Number9 from './pages/Number9';
 
 import Q1 from './pages/Q1';
+*/}
 
 
 
@@ -57,7 +59,7 @@ export default function
   return (
     <div>
 
-
+      {/*
       
      <Routes>
         <Route path="/" element={<Splashscreen />} />
@@ -110,8 +112,9 @@ export default function
         <Route path='number9' element={<Number9/>}/>
         
       </Routes>
+      */}
   
-      
+      <Questionnaire/>
     </div>
   )
 }
