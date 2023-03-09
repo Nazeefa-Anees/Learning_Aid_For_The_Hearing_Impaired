@@ -10,6 +10,7 @@
   left: 28%;
   top: 23%;
   transform: translate(-50%, -50%);
+  border: 2px solid #000000;
   border-radius: 0px;
   background-color: rgba(231, 192, 69, 0.75);
   display: flex;
@@ -28,6 +29,7 @@
   left: 72%;
   top: 50%;
   transform: translate(-50%, -50%);
+  border: 1px solid #000000;
   border-radius: 0px;
   background-color: white;
 }
@@ -39,6 +41,7 @@
   left: 28%;
   top: 65.4%;
   transform: translate(-50%, -50%);
+  border: 2px solid #000000;
   border-radius: 0px;
   background-color: white;
   display: flex;
