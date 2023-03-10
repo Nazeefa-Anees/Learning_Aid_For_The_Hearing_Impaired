@@ -14,17 +14,17 @@ const model = await loadModel();
 // Define a function to preprocess the data for the model
 const preprocessData = (data) => {
   // Preprocess the data as needed (e.g. resize images, normalize data)
-  return preprocessData;
+  return preprocessedData; 
 };
 
 // Define a function to make predictions using the model
 const predict = async (data) => {
   // Preprocess the data
   const preprocessedData = preprocessData(data);
-  
+
   // Make predictions using the model
   const predictions = model.predict(preprocessedData);
-  
+
   // Return the predictions
   return predictions;
 };
