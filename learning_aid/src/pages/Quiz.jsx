@@ -40,18 +40,3 @@ export default function Quiz() {
     </div>
   );
 }
-@app.route('/feedback', methods=['POST'])
-def feedback():
-    # Parse the feedback data from the frontend
-    feedback_data = request.json['feedbackData']
-
-    # Update the TensorFlow model with the feedback
-    model.fit(feedback_data['inputData'], feedback_data['targetData'], epochs=1, verbose=0)
-
-    # Save the updated model
-    model.save('model.h5')
-
-    # Return a success response to the frontend
-    return jsonify({
-        'status': 'success'
-    })
