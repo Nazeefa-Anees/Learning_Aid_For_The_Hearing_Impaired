@@ -30,7 +30,7 @@ const predict = async (data) => {
 };
 
 // Call the predict function to make predictions on new data
-const data = /* data to be predicted */'';
+const data = data ;
 const predictions = await predict(data);
 
 // Display the predictions
