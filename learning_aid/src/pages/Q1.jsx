@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import backArrow from '../assets/backarrow.png';
 import homeIcon from'../assets/homeicon.png';
 import next from '../assets/next.png';
@@ -40,16 +41,23 @@ export default function Q1() {
       </div>
 
       {/* Back Arrow */}
-      <div className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
+      <Link to='/Quiz'>
+        <button>
+        <div className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${backArrow})`,
           width: "5.5%",
           height: "10%",
         }}
       ></div>
+        </button>
+      </Link>
+      
 
       {/* Home Icon */}
-      <div
+      <Link to='/HomeSelection'>
+        <button>
+        <div
         className="absolute w-12 h-12 right-0 top-0 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${homeIcon})`,
@@ -57,9 +65,14 @@ export default function Q1() {
           height: '10%'
         }}
       ></div>
+        </button>
+      </Link>
+      
 
       {/* Next */}
-      <div
+      <Link to='/Q2'>
+        <button>
+        <div
         className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${next})`,
@@ -70,6 +83,9 @@ export default function Q1() {
           transform: "translateY(-50%)",
         }}
       ></div>
+        </button>
+      </Link>
+      
     </div>
   );
 }

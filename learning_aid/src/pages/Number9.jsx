@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from "react";
-import React from "react";
 import backArrow from '../assets/backarrow.png';
 import number9 from '../assets//dataset_icons/numbers/9.jpg';
 import back from '../assets/back.png';
@@ -84,7 +83,7 @@ export default function Number9() {
       
 
       {/* Back */}
-      <Link to='/number0'>
+      <Link to='/number8'>
         <button>
         <div
         className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"

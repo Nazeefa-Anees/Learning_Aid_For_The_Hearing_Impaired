@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import backArrow from '../assets/backarrow.png'
 import homeIcon from '../assets/homeicon.png'
 
@@ -12,7 +13,7 @@ export default function Quiz() {
         className="bg-[url('./assets/quiz.jpg')] bg-cover bg-center min-h-screen"
       ></div>
 
-      <Link to="/home">
+      <Link to="/Q1">
         <button className="font-custom w-96 h-30 p-10 text-5xl bg-yellow-500 rounded-full flex items-center justify-center absolute bottom-10 right-20 shadow-lg">
           oeka mgka.ksuq →
         </button>

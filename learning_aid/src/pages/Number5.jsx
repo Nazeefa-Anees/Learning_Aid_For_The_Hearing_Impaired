@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import React from "react";
+
 import backArrow from '../assets/backarrow.png';
 import number5 from '../assets//dataset_icons/numbers/5.jpg';
 import next from '../assets/next.png';

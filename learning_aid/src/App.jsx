@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom';
 
 import Splashscreen from './pages/Splashscreen';
 import Questionnaire from './pages/Questionnaire';
-{/*
 import QuestionnairePred from './pages/QuestionnairePred';
 import HomeSelection from './pages/HomeSelection';
 import Learning from './pages/Learning';
@@ -50,17 +49,20 @@ import Number8 from './pages/Number8';
 import Number9 from './pages/Number9';
 
 import Q1 from './pages/Q1';
-*/}
-
-
+import Q2 from './pages/Q2';
+import Q3 from './pages/Q3';
+import Q4 from './pages/Q4';
+import Q5 from './pages/Q5';
+import Q6 from './pages/Q6';
+import Q7 from './pages/Q7';
+import Q8 from './pages/Q8';
+import Q9 from './pages/Q9';
+import Q10 from './pages/Q10';
 
 export default function 
 () {
   return (
-    <div>
-
-      {/*
-      
+    <div>     
      <Routes>
         <Route path="/" element={<Splashscreen />} />
         <Route path="questionnaire" element={<Questionnaire />} />
@@ -110,11 +112,21 @@ export default function
         <Route path='number7' element={<Number7/>}/>
         <Route path='number8' element={<Number8/>}/>
         <Route path='number9' element={<Number9/>}/>
-        
+
+        <Route path ='Q1' element={<Q1/>}/>
+        <Route path ='Q2' element={<Q2/>}/>
+        <Route path ='Q3' element={<Q3/>}/>
+        <Route path ='Q4' element={<Q4/>}/>
+        <Route path ='Q5' element={<Q5/>}/>
+        <Route path ='Q6' element={<Q6/>}/>
+        <Route path ='Q7' element={<Q7/>}/>
+        <Route path ='Q8' element={<Q8/>}/>
+        <Route path ='Q9' element={<Q9/>}/>
+        <Route path ='Q10' element={<Q10/>}/>
+
       </Routes>
-      */}
+    
   
-      <Questionnaire/>
     </div>
   )
 }
