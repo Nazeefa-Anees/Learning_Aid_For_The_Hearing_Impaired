@@ -3,8 +3,12 @@ import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Splashscreen from './pages/Splashscreen';
+<<<<<<< Updated upstream
 import Questionnaire from './pages/Questionnaire';
 import QuestionnairePred from './pages/QuestionnairePred';
+=======
+
+>>>>>>> Stashed changes
 import HomeSelection from './pages/HomeSelection';
 import Learning from './pages/Learning';
 import Quiz from './pages/Quiz'
@@ -49,6 +53,7 @@ import Number8 from './pages/Number8';
 import Number9 from './pages/Number9';
 
 import Q1 from './pages/Q1';
+<<<<<<< Updated upstream
 import Q2 from './pages/Q2';
 import Q3 from './pages/Q3';
 import Q4 from './pages/Q4';
@@ -58,11 +63,21 @@ import Q7 from './pages/Q7';
 import Q8 from './pages/Q8';
 import Q9 from './pages/Q9';
 import Q10 from './pages/Q10';
+=======
+
+>>>>>>> Stashed changes
 
 export default function 
 () {
   return (
+<<<<<<< Updated upstream
     <div>     
+=======
+    <div>
+
+    
+      
+>>>>>>> Stashed changes
      <Routes>
         <Route path="/" element={<Splashscreen />} />
         <Route path="questionnaire" element={<Questionnaire />} />
