@@ -1,8 +1,5 @@
 import React, { useRef, useEffect } from "react";
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 import backArrow from '../assets/backarrow.png';
 import twelve from '../assets//dataset_icons/letters/12.jpg';
 import next from '../assets/next.png';
