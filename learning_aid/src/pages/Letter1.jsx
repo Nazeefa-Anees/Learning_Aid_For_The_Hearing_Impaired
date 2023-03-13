@@ -35,6 +35,9 @@ export default function Letter1() {
           color: "#FF0000",
           lineWidth: 2,
         });
+
+        const landmarks = results.multiHandLandmarks[0];
+        sendLandmarks(landmarks);
       }
     });
 
@@ -54,6 +57,11 @@ export default function Letter1() {
       hands.close();
     };
   }, []);
+
+  const sendLandmarks = (landmarks) => {
+    // Do something with the landmarks array here
+    console.log(landmarks);
+  };
 
   return (
     <div className="page-container">
@@ -76,9 +84,14 @@ export default function Letter1() {
           className="video"
           playsInline
         />
-        <canvas ref={canvasRef} className="canvas" />
-        {showOverlay && <div className="overlay" />}
+        {/*<canvas ref={canvasRef} className="canvas" />
+        {showOverlay && <div className="overlay" />}*/}
+        <canvas ref={canvasRef} width={640} height={480} />
       </div>
+      <div>
+        
+      </div>
+
 
       {/*Image*/}
       <div className="box3">
