@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import backArrow from "../assets/backarrow.png";
 import next from "../assets/next.png";
 import one from "../assets//dataset_icons/letters/1.jpg";
@@ -6,62 +6,56 @@ import homeIcon from "../assets/homeicon.png";
 import "./Letter.css";
 import { Link } from "react-router-dom";
 
-import * as mp from "@mediapipe/hands";
-import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
+import { Hands } from "@mediapipe/hands";
+import * as tf from "@tensorflow/tfjs";
 
 export default function Letter1() {
-  const videoRef = useRef();
-  const canvasRef = useRef();
-  const [showOverlay, setShowOverlay] = useState(true);
+  const hands = new Hands({
+    locateFile: (file) => {
+      return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+    },
+  });
+
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    const hands = new mp.Hands({ maxNumHands: 1 });
-    hands.setOptions({
-      staticImageMode: false,
-      maxNumHands: 1,
-      minDetectionConfidence: 0.5,
-      minTrackingConfidence: 0.5,
-    });
-    hands.onResults((results) => {
-      if (results.multiHandLandmarks) {
+    const video = videoRef.current;
+
+    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+      video.srcObject = stream;
+
+      hands.setOptions({
+        maxNumHands: 1,
+        minDetectionConfidence: 0.8,
+        minTrackingConfidence: 0.5,
+      });
+
+      hands.onResults((results) => {
         const canvas = canvasRef.current;
         const context = canvas.getContext("2d");
         context.clearRect(0, 0, canvas.width, canvas.height);
-        drawConnectors(context, results.multiHandLandmarks[0], mp.HAND_CONNECTIONS, {
-          color: "#00FF00",
-          lineWidth: 5,
+      
+        results.multiHandLandmarks.forEach((handLandmarks) => {
+          hands.drawConnectors(context, handLandmarks, Hands.HAND_CONNECTIONS);
+          hands.drawLandmarks(context, handLandmarks, Hands.HAND_CONNECTIONS);
+      
+          const prediction = predictGesture(handLandmarks);
+          console.log(prediction);
         });
-        drawLandmarks(context, results.multiHandLandmarks[0], {
-          color: "#FF0000",
-          lineWidth: 2,
-        });
-
-        const landmarks = results.multiHandLandmarks[0];
-        sendLandmarks(landmarks);
-      }
-    });
-
-    const enableCamera = async () => {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
       });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
-      hands.setInputVideo(videoRef.current);
-      hands.start();
-    };
-    enableCamera();
-
-    return () => {
-      hands.close();
-    };
+      
+      hands.initialize();
+    });
   }, []);
 
-  const sendLandmarks = (landmarks) => {
-    // Do something with the landmarks array here
-    console.log(landmarks);
-  };
+  async function predictGesture(handLandmarks) {
+    const model = await tf.loadLayersModel("../assets/models/model_Letters/tfjs_model/model.json");
+    const tensor = tf.tensor(handLandmarks);
+    const prediction = model.predict(tensor);
+    const output = prediction.arraySync()[0];
+    return output;
+  }  
 
   return (
     <div className="page-container">
@@ -77,21 +71,19 @@ export default function Letter1() {
 
       {/* Camera */}
       <div className="box2">
-        <video
+        <video 
           ref={videoRef}
-          autoPlay
-          muted
           className="video"
-          playsInline
+          autoPlay 
+          muted
         />
-        {/*<canvas ref={canvasRef} className="canvas" />
-        {showOverlay && <div className="overlay" />}*/}
-        <canvas ref={canvasRef} width={640} height={480} />
+        <canvas
+          ref={canvasRef}
+          className="canvas"
+          width={640}
+          height={480}
+        />
       </div>
-      <div>
-        
-      </div>
-
 
       {/*Image*/}
       <div className="box3">
