@@ -56,6 +56,7 @@
 }
 
 .video {
+  box-sizing: content-box
   position: absolute;
   left: 0;
   top: 0;
