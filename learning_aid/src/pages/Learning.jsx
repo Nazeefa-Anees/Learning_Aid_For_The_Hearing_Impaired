@@ -9,7 +9,7 @@ export default function Learning() {
   return (
     <div>
       {/* Background Image */}
-      <div className="bg-[url('./assets/learning.svg')]  bg-cover bg-center min-h-screen bg-fixed"></div>
+      <div className="bg-[url('./assets/learning.svg')]  bg-cover bg-center min-h-screen"></div>
 
       {/* Alphabet Box */}
       <Link to='/letters'>
