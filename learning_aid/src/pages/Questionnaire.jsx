@@ -1,6 +1,6 @@
- import './questionnaire.css'
-import React, {useState} from 'react';
-import one from '../assets/dataset_icons/letters/1.jpg' 
+import './questionnaire.css'
+import * as React from 'react'
+import one from '../assets/dataset_icons/letters/1.jpg'
 import two from '../assets/dataset_icons/letters/5.jpg'
 import three from '../assets/dataset_icons/letters/9.jpg'
 import four from '../assets/dataset_icons/letters/12.jpg'
@@ -10,11 +10,12 @@ import seven from '../assets/dataset_icons/numbers/5.jpg'
 import eight from '../assets/dataset_icons/numbers/7.jpg'
 import nine from '../assets/dataset_icons/numbers/1.jpg'
 import ten from '../assets/dataset_icons/numbers/4.jpg'
+import { Link } from 'react-router-dom'
 
 const questions = [
   {
     id: 1,
-    question: 'fus wlqr fudllao',
+    question:'fus wlqr fudllao',
     image: one,
     options: [
       { id: 1, text: '  j' },
@@ -183,7 +184,7 @@ export default function Questionnaire() {
       <div className="flex flex-col h-full">
         <div className = 'box flex flex-col items-center'>
           <h2 className='font-custom'>{currentQuestionData.question}</h2>
-          <img className=" h-64 resize-y" src={currentQuestionData.image} alt="sign language gesture" />
+          <img className=" h-64 resize-y" src={currentQuestionData.image} a lt="sign language gesture" />
           {currentQuestionData.options.map((option) => (
             <div className='font-custom' key={option.id}>
               <input
@@ -200,6 +201,8 @@ export default function Questionnaire() {
           <button className='font-custom  bg-yellow-500 rounded-full w-32' onClick={handleDoneClick} disabled={selectedAnswer === null}>yrs</button>
         </div>
       </div>
+      
+      
     </div>
   
   )

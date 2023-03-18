@@ -30,11 +30,8 @@ const predict = async (data) => {
 };
 
 // Call the predict function to make predictions on new data
-<<<<<<< Updated upstream
 const data = data ;
-=======
 
->>>>>>> Stashed changes
 const predictions = await predict(data);
 
 // Display the predictions

@@ -2,6 +2,8 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+
+
 import Splashscreen from './pages/Splashscreen';
 import Questionnaire from './pages/Questionnaire';
 import QuestionnairePred from './pages/QuestionnairePred';
@@ -60,13 +62,15 @@ import Q8 from './pages/Q8';
 import Q9 from './pages/Q9';
 import Q10 from './pages/Q10';
 
+
 export default function 
 () {
   return (
-    <div>     
+    <div>  
+      
      <Routes>
         <Route path="/" element={<Splashscreen />} />
-        <Route path="questionnaire" element={<Questionnaire />} />
+        <Route path="questionnaire" element={<Questionnaire/>} />
         <Route path='result' element={<QuestionnairePred/>} />
         <Route path='home' element={<HomeSelection/>}/>
         <Route path='learningCategory' element={<Learning/>}/>
@@ -125,7 +129,10 @@ export default function
         <Route path ='Q9' element={<Q9/>}/>
         <Route path ='Q10' element={<Q10/>}/>
 
+
       </Routes>
+  
+ 
     
   
     </div>

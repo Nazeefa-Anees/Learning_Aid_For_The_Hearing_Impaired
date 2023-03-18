@@ -14,7 +14,7 @@ export default function Splashscreen() {
       </div>
 
 
-      <Link to="/home">
+      <Link to="/questionnaire">
         <button className="font-custom w-96 h-30 p-10 text-5xl bg-yellow-500 rounded-full flex items-center justify-center absolute bottom-10 right-20 shadow-lg">
       
       oeka mgka.ksuq →
