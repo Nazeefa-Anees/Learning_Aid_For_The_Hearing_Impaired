@@ -14,12 +14,19 @@
     background-color: white;
   }
 
-  .box2 {
+  .box2{
     position: absolute;
+    margin-top: auto;
+    margin-right :8%;
+    margin-left: auto;
+    left: 0;
     right: 0;
     top: 50%;
+    text-align: center;
+    z-index: 9;
     transform: translateY(-50%);
-    width: 60%;
+    width: 40%;
+    height:480;
     display: flex;
     justify-content: center;
     align-items: center;
