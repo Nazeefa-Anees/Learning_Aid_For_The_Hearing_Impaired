@@ -1,8 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
+import { Hands } from "@mediapipe/hands";
 import * as tf from "@tensorflow/tfjs";
-import * as handpose from "@mediapipe/hands";
-// import '@mediapipe/hands/dist/hands.css';
-import Webcam from "react-webcam";
 import homeIcon from "../assets/homeicon.png";
 import next from "../assets/next.png";
 import "./Question.css";
@@ -116,36 +114,39 @@ export default function Letter1() {
 
       {/* Camera */}
     
-      <Webcam
-        audio={false}
-        ref={webcamRef}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "70%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 9,
-          width: 640,
-          height: 480,
-          marginLeft: "auto",
-          marginRight: 0,
-        }}
-      />
-
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "72%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 9,
-          width: 640,
-          height: 480,
-          marginLeft: "auto",
-          marginRight: 0,
-        }}
-      />
+      <video 
+          ref={videoRef}
+          className="video"
+          autoPlay 
+          muted 
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "70%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 9,
+            width: 640,
+            height: 480,
+            marginLeft: "auto",
+            marginRight: 0,
+          }}
+        />
+        <canvas
+          ref={canvasRef}
+          className="canvas"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "70%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 9,
+            width: 640,
+            height: 480,
+            marginLeft: "auto",
+            marginRight: 0,
+          }}
+        />
+      
   
 
       {/* Home Icon */}
