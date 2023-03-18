@@ -11,65 +11,67 @@ import { Link } from "react-router-dom";
 export default function Q1() {
   const webcamRef = useRef();
   const canvasRef = useRef();
-  const handsRef = useRef();
-  const modelRef = useRef();
+
+  const predictGesture = async (handLandmarks) => {
+    const model = await tf.loadLayersModel("../assets/models/model_Numbers/tfjs_model/model.json");
+    const tensor = tf.tensor(handLandmarks);
+    const prediction = model.predict(tensor);
+    const output = prediction.arraySync()[0];
+    return output;
+  };
 
   useEffect(() => {
-    async function loadModel() {
-      modelRef.current = await tf.loadLayersModel("../assets/models/model_Numbers/tfjs_model/model.json");
-    }
-
-    async function setupHandPose() {
-      await handpose.load();
-      handsRef.current = new handpose.Hands({
-        maxNumHands: 1,
-        detectionConfidence: 0.8,
-        trackingConfidence: 0.8,
+    const runHandpose = async () => {
+      const net = new handpose.HandPose({
+        locateFile: (path) => {
+          return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${path}`;
+        },
       });
-    }
 
-    loadModel();
-    setupHandPose();
-  }, []);
+      await net.initialize();
 
-  useEffect(() => {
-    async function startHandPoseEstimation() {
-      const video = webcamRef.current.video;
+      const camera = new Webcam(webcamRef.current.video, {
+        width: 640,
+        height: 480,
+      });
+
+      camera.start();
+
       const canvas = canvasRef.current;
-      const hands = handsRef.current;
-      const model = modelRef.current;
+      canvas.width = 640;
+      canvas.height = 480;
 
-      if (video && canvas && hands && model) {
-        hands.onResults(async (results) => {
-          const landmarks = results?.multiHandLandmarks[0];
-          if (landmarks) {
-            const tensor = tf.tensor(landmarks.flat());
-            const prediction = model.predict(tensor.expandDims());
-            const gesture = await prediction.argMax().data();
+      const ctx = canvas.getContext("2d");
 
-            // Provide feedback to the user based on the gesture prediction
-            // ...
+      const drawHands = async () => {
+        const predictions = await net.estimateHands(camera.video);
 
-            tf.dispose([tensor, prediction]);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = "#00FF00";
+        ctx.fillStyle = "#FF0000";
+        ctx.lineWidth = 2;
+
+        if (predictions.length > 0) {
+          const prediction = predictions[0];
+
+          for (let i = 0; i < prediction.landmarks.length; i++) {
+            const [x, y, z] = prediction.landmarks[i];
+
+            ctx.beginPath();
+            ctx.arc(x * canvas.width, y * canvas.height, 5, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
           }
+        }
 
-          hands.drawConnectors(canvas, results?.multiHandLandmarks[0], handpose.HAND_CONNECTIONS);
-          hands.drawLandmarks(canvas, results?.multiHandLandmarks[0], handpose.HAND_CONNECTIONS);
-        });
+        requestAnimationFrame(drawHands);
+      };
 
-        const canvasContext = canvas.getContext('2d');
-        const renderFrame = () => {
-          canvasContext.drawImage(video, 0, 0, canvas.width, canvas.height);
-          hands.send({ image: video });
-          requestAnimationFrame(renderFrame);
-        };
+      drawHands();
+    };
 
-        renderFrame();
-      }
-    }
-
-    startHandPoseEstimation();
-  }, [webcamRef, canvasRef, handsRef, modelRef]);
+    runHandpose();
+  }, []);
 
   return (
     <div className="page-container">
@@ -92,6 +94,7 @@ export default function Q1() {
       </h1>
 
       {/* Camera */}
+    
       <Webcam
         audio={false}
         ref={webcamRef}
@@ -107,8 +110,8 @@ export default function Q1() {
           marginRight: 0,
         }}
       />
-        
-        <canvas
+
+      <canvas
         ref={canvasRef}
         style={{
           position: "absolute",
@@ -120,9 +123,9 @@ export default function Q1() {
           height: 480,
           marginLeft: "auto",
           marginRight: 0,
-          }}
-          />
-
+        }}
+      />
+  
 
       {/* Home Icon */}
       <Link to="/home">
