@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
-import * as tf from '@tensorflow/tfjs';
-import * as handpose from '@mediapipe/hands';
+import * as tf from "@tensorflow/tfjs";
+import * as handpose from "@mediapipe/hands";
 // import '@mediapipe/hands/dist/hands.css';
 import Webcam from "react-webcam";
 import homeIcon from "../assets/homeicon.png";
@@ -8,70 +8,91 @@ import next from "../assets/next.png";
 import "./Question.css";
 import { Link } from "react-router-dom";
 
-export default function Q1() {
-  const webcamRef = useRef();
-  const canvasRef = useRef();
+const handConnections = [
+  [0, 1],
+  [1, 2],
+  [2, 3],
+  [3, 4],
+  [0, 5],
+  [5, 6],
+  [6, 7],
+  [7, 8],
+  [0, 9],
+  [9, 10],
+  [10, 11],
+  [11, 12],
+  [0, 13],
+  [13, 14],
+  [14, 15],
+  [15, 16],
+  [0, 17],
+  [17, 18],
+  [18, 19],
+  [19, 20],
+];
 
-  const predictGesture = async (handLandmarks) => {
-    const model = await tf.loadLayersModel("../assets/models/model_Numbers/tfjs_model/model.json");
+export default function Letter1() {
+  const hands = new Hands({
+    locateFile: (file) => {
+      return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+    },
+  });
+
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+      video.srcObject = stream;
+
+      hands.setOptions({
+        maxNumHands: 1,
+        minDetectionConfidence: 0.8,
+        minTrackingConfidence: 0.5,
+      });
+
+      hands.onResults((results) => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        results.multiHandLandmarks.forEach((handLandmarks) => {
+          for (let i = 0; i < handConnections.length; i++) {
+            const [start, end] = handConnections[i];
+            const startX = handLandmarks[start].x * canvas.width;
+            const startY = handLandmarks[start].y * canvas.height;
+            const endX = handLandmarks[end].x * canvas.width;
+            const endY = handLandmarks[end].y * canvas.height;
+            context.beginPath();
+            context.moveTo(startX, startY);
+            context.lineTo(endX, endY);
+            context.lineWidth = 2;
+            context.strokeStyle = "green";
+            context.stroke();
+          }
+
+          hands.drawLandmarks(context, handLandmarks, Hands.HAND_CONNECTIONS);
+
+          const prediction = predictGesture(handLandmarks);
+          console.log(prediction);
+        });
+      });
+
+      hands.initialize();
+    });
+  }, []);
+
+  async function predictGesture(handLandmarks) {
+    const model = await tf.loadLayersModel(
+      "../assets/models/model_Letters/tfjs_model/model.json"
+    );
     const tensor = tf.tensor(handLandmarks);
     const prediction = model.predict(tensor);
     const output = prediction.arraySync()[0];
     return output;
-  };
-
-  useEffect(() => {
-    const runHandpose = async () => {
-      const net = new handpose.HandPose({
-        locateFile: (path) => {
-          return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${path}`;
-        },
-      });
-
-      await net.initialize();
-
-      const camera = new Webcam(webcamRef.current.video, {
-        width: 640,
-        height: 480,
-      });
-
-      camera.start();
-
-      const canvas = canvasRef.current;
-      canvas.width = 640;
-      canvas.height = 480;
-
-      const ctx = canvas.getContext("2d");
-
-      const drawHands = async () => {
-        const predictions = await net.estimateHands(camera.video);
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = "#00FF00";
-        ctx.fillStyle = "#FF0000";
-        ctx.lineWidth = 2;
-
-        if (predictions.length > 0) {
-          const prediction = predictions[0];
-
-          for (let i = 0; i < prediction.landmarks.length; i++) {
-            const [x, y, z] = prediction.landmarks[i];
-
-            ctx.beginPath();
-            ctx.arc(x * canvas.width, y * canvas.height, 5, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.stroke();
-          }
-        }
-
-        requestAnimationFrame(drawHands);
-      };
-
-      drawHands();
-    };
-
-    runHandpose();
-  }, []);
+  }
 
   return (
     <div className="page-container">
