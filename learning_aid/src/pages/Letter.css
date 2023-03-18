@@ -54,21 +54,3 @@
   width: 100%;
   object-fit: cover;
 }
-
-.video {
-  box-sizing: content-box;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-}
