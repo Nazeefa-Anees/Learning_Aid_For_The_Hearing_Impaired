@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useRef, useEffect } from "react";
 import backArrow from "../assets/backarrow.png";
 import next from "../assets/next.png";
@@ -48,6 +49,19 @@ export default function Letter1() {
       hands.initialize();
     });
   }, []);
+=======
+import React, { useState, useEffect } from "react";
+import backArrow from '../assets/backarrow.png';
+import next from '../assets/next.png';
+import one from '../assets//dataset_icons/letters/1.jpg';
+import homeIcon from '../assets/homeicon.png';
+import "./Letter.css";
+import { Link } from 'react-router-dom';
+import HandTracking from '../components/HandTracking';
+
+export default function Letter1() {
+  const [showBlur, setShowBlur] = useState(true);
+>>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
 
   async function predictGesture(handLandmarks) {
     const model = await tf.loadLayersModel("../assets/models/model_Letters/tfjs_model/model.json");
@@ -65,12 +79,17 @@ export default function Letter1() {
       {/*Text*/}
       <div className="box1">
         <h1 className="font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-16 top-0">
+<<<<<<< HEAD
           w{" "}
+=======
+          w{' '}
+>>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
         </h1>
       </div>
 
       {/* Camera */}
       <div className="box2">
+<<<<<<< HEAD
         <video 
           ref={videoRef}
           className="video"
@@ -83,6 +102,15 @@ export default function Letter1() {
           width={640}
           height={480}
         />
+=======
+        <HandTracking />
+        {showBlur && <div className="blurback"></div>}
+        {showBlur && (
+          <div className="button">
+            <button className="button-text" onClick={() => setShowBlur(false)}>Click to Try</button>
+          </div>
+        )}
+>>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
       </div>
 
       {/*Image*/}
@@ -97,8 +125,13 @@ export default function Letter1() {
             className="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center"
             style={{
               backgroundImage: `url(${backArrow})`,
+<<<<<<< HEAD
               width: "5.5%",
               height: "10%",
+=======
+              width: '5.5%',
+              height: '10%',
+>>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
             }}
           ></div>
         </button>
@@ -111,8 +144,13 @@ export default function Letter1() {
             className="absolute w-12 h-12 right-0 top-0 bg-no-repeat bg-cover bg-center"
             style={{
               backgroundImage: `url(${homeIcon})`,
+<<<<<<< HEAD
               width: "5.5%",
               height: "10%",
+=======
+              width: '5.5%',
+              height: '10%',
+>>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
             }}
           ></div>
         </button>
@@ -125,11 +163,19 @@ export default function Letter1() {
             className="absolute w-12 h-12 bg-no-repeat bg-cover bg-center"
             style={{
               backgroundImage: `url(${next})`,
+<<<<<<< HEAD
               width: "5.5%",
               height: "10%",
               right: 20,
               top: "50%",
               transform: "translateY(-50%)",
+=======
+              width: '5.5%',
+              height: '10%',
+              right: 20,
+              top: '50%',
+              transform: 'translateY(-50%)',
+>>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
             }}
           ></div>
         </button>
