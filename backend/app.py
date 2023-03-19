@@ -29,6 +29,7 @@ def preprocess_image(image_b64):
     image = np.expand_dims(image, axis=0)
     return image
 
+
 @app.route('/api/predict', methods=['POST'])
 def predict():
     # Get the image data from the request

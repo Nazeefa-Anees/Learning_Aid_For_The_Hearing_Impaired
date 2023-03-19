@@ -102,6 +102,14 @@ export default function Q1() {
 hjkak
 </button>
   </div>
+
+  {/* Notification
+  {showNotification && (
+        <div className="bg-green-500 text-white py-2 px-4 rounded mt-4">
+          Image captured successfully!
+        </div>
+      )} */}
+
 </div>
 
   
