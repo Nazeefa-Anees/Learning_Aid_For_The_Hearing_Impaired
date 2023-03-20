@@ -1,6 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
+<<<<<<< HEAD
+import * as tf from '@tensorflow/tfjs';
+import * as handpose from '@mediapipe/hands';
+// import '@mediapipe/hands/dist/hands.css';
+=======
 
 
+>>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
 import Webcam from "react-webcam";
 import homeIcon from "../assets/homeicon.png";
 import next from "../assets/next.png";
@@ -10,6 +16,67 @@ import { Link } from "react-router-dom";
 export default function Q1() {
   const webcamRef = useRef();
   const canvasRef = useRef();
+<<<<<<< HEAD
+  const handsRef = useRef();
+  const modelRef = useRef();
+
+  useEffect(() => {
+    async function loadModel() {
+      modelRef.current = await tf.loadLayersModel("../assets/models/model_Numbers/tfjs_model/model.json");
+    }
+
+    async function setupHandPose() {
+      await handpose.load();
+      handsRef.current = new handpose.Hands({
+        maxNumHands: 1,
+        detectionConfidence: 0.8,
+        trackingConfidence: 0.8,
+      });
+    }
+
+    loadModel();
+    setupHandPose();
+  }, []);
+
+  useEffect(() => {
+    async function startHandPoseEstimation() {
+      const video = webcamRef.current.video;
+      const canvas = canvasRef.current;
+      const hands = handsRef.current;
+      const model = modelRef.current;
+
+      if (video && canvas && hands && model) {
+        hands.onResults(async (results) => {
+          const landmarks = results?.multiHandLandmarks[0];
+          if (landmarks) {
+            const tensor = tf.tensor(landmarks.flat());
+            const prediction = model.predict(tensor.expandDims());
+            const gesture = await prediction.argMax().data();
+
+            // Provide feedback to the user based on the gesture prediction
+            // ...
+
+            tf.dispose([tensor, prediction]);
+          }
+
+          hands.drawConnectors(canvas, results?.multiHandLandmarks[0], handpose.HAND_CONNECTIONS);
+          hands.drawLandmarks(canvas, results?.multiHandLandmarks[0], handpose.HAND_CONNECTIONS);
+        });
+
+        const canvasContext = canvas.getContext('2d');
+        const renderFrame = () => {
+          canvasContext.drawImage(video, 0, 0, canvas.width, canvas.height);
+          hands.send({ image: video });
+          requestAnimationFrame(renderFrame);
+        };
+
+        renderFrame();
+      }
+    }
+
+    startHandPoseEstimation();
+  }, [webcamRef, canvasRef, handsRef, modelRef]);
+=======
 
   const [capturedImage, setCapturedImage] = useState(null);
   const [prediction, setPrediction] = useState(null);
@@ -18,6 +85,7 @@ export default function Q1() {
     const imageSrc = webcamRef.current.getScreenshot();
     setCapturedImage(imageSrc);
   };
+>>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
 
   const handleSendImage = (event) => {
     event.preventDefault();
@@ -56,6 +124,39 @@ export default function Q1() {
       </h1>
 
       {/* Camera */}
+<<<<<<< HEAD
+      <Webcam
+        audio={false}
+        ref={webcamRef}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "70%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 9,
+          width: 640,
+          height: 480,
+          marginLeft: "auto",
+          marginRight: 0,
+        }}
+      />
+        
+        <canvas
+        ref={canvasRef}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "72%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 9,
+          width: 640,
+          height: 480,
+          marginLeft: "auto",
+          marginRight: 0,
+          }}
+          />
+
+=======
       <div style={{
   position: "absolute",
   top: "50%",
@@ -113,6 +214,7 @@ hjkak
 </div>
 
   
+>>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
 
       {/* Home Icon */}
       <Link to="/home">

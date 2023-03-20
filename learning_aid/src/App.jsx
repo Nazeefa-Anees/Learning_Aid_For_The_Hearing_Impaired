@@ -60,18 +60,20 @@ import Q8 from './pages/Q8';
 import Q9 from './pages/Q9';
 import Q10 from './pages/Q10';
 
+
 export default function 
 () {
   return (
-    <div>     
+    <div>  
+   
      <Routes>
         <Route path="/" element={<Splashscreen />} />
-        <Route path="questionnaire" element={<Questionnaire />} />
-        <Route path='result' element={<QuestionnairePred/>} />
+        <Route path="questionnaire" element={<Questionnaire/>} />
+        <Route path='predResult' element={<QuestionnairePred/>} />
         <Route path='home' element={<HomeSelection/>}/>
         <Route path='learningCategory' element={<Learning/>}/>
         <Route path='quizCategory' element={<Quiz/>}/>
-        <Route path='letters' element={<LearningSelectionLetters/>}/>
+        <Route path=' letters' element={<LearningSelectionLetters/>}/>
         <Route path='numbers' element={<LearningSelectionNum/>}/>
 
 
@@ -125,8 +127,11 @@ export default function
         <Route path ='Q9' element={<Q9/>}/>
         <Route path ='Q10' element={<Q10/>}/>
 
+
       </Routes>
-    
+  
+ 
+
   
     </div>
   )
