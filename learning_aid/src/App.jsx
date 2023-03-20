@@ -126,8 +126,6 @@ export default function
         <Route path ='Q8' element={<Q8/>}/>
         <Route path ='Q9' element={<Q9/>}/>
         <Route path ='Q10' element={<Q10/>}/>
-
-
       </Routes>
   
  

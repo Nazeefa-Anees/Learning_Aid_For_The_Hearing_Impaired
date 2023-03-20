@@ -1,12 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
-<<<<<<< HEAD
 import * as tf from '@tensorflow/tfjs';
 import * as handpose from '@mediapipe/hands';
 // import '@mediapipe/hands/dist/hands.css';
-=======
 
 
->>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
 import Webcam from "react-webcam";
 import homeIcon from "../assets/homeicon.png";
 import next from "../assets/next.png";
@@ -16,7 +13,6 @@ import { Link } from "react-router-dom";
 export default function Q1() {
   const webcamRef = useRef();
   const canvasRef = useRef();
-<<<<<<< HEAD
   const handsRef = useRef();
   const modelRef = useRef();
 
@@ -76,7 +72,6 @@ export default function Q1() {
 
     startHandPoseEstimation();
   }, [webcamRef, canvasRef, handsRef, modelRef]);
-=======
 
   const [capturedImage, setCapturedImage] = useState(null);
   const [prediction, setPrediction] = useState(null);
@@ -85,7 +80,6 @@ export default function Q1() {
     const imageSrc = webcamRef.current.getScreenshot();
     setCapturedImage(imageSrc);
   };
->>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
 
   const handleSendImage = (event) => {
     event.preventDefault();
@@ -124,39 +118,6 @@ export default function Q1() {
       </h1>
 
       {/* Camera */}
-<<<<<<< HEAD
-      <Webcam
-        audio={false}
-        ref={webcamRef}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "70%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 9,
-          width: 640,
-          height: 480,
-          marginLeft: "auto",
-          marginRight: 0,
-        }}
-      />
-        
-        <canvas
-        ref={canvasRef}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "72%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 9,
-          width: 640,
-          height: 480,
-          marginLeft: "auto",
-          marginRight: 0,
-          }}
-          />
-
-=======
       <div style={{
   position: "absolute",
   top: "50%",
@@ -214,7 +175,6 @@ hjkak
 </div>
 
   
->>>>>>> fa05612a36641780c2670ae3ff24da3ab421bc86
 
       {/* Home Icon */}
       <Link to="/home">
