@@ -9,9 +9,12 @@ export default function Q1() {
   const canvasRef = useRef();
   const [capturedImage, setCapturedImage] = useState(null);
   const [prediction, setPrediction] = useState(null);
+  const [showNotification, setShowNotification] = useState(false);
+
   const handleCapture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setCapturedImage(imageSrc);
+    setShowNotification(true);
   };
   const handleSendImage = (event) => {
     event.preventDefault();
@@ -94,12 +97,12 @@ hjkak
 </button>
   </div>
 
-  {/* Notification
+  {/* Notification */}
   {showNotification && (
-        <div className="bg-green-500 text-white py-2 px-4 rounded mt-4">
-          Image captured successfully!
-        </div>
-      )} */}
+          <div className="font-custom bg-orange-500 text-black py-2 px-4 rounded mt-4">
+            Pdhd ?mh .;a;d
+          </div>
+        )}
 
 </div>
 
