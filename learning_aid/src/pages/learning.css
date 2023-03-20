@@ -12,6 +12,7 @@
   }
   
   .number-box {
+    box-sizing: border-box;
     position: absolute;
     width: 25%;
     height: 45%;
