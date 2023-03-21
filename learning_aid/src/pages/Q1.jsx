@@ -1,4 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
+
+
 import Webcam from "react-webcam";
 import homeIcon from "../assets/homeicon.png";
 import next from "../assets/next.png";
@@ -7,6 +9,7 @@ import { Link } from "react-router-dom";
 export default function Q1() {
   const webcamRef = useRef();
   const canvasRef = useRef();
+
   const [capturedImage, setCapturedImage] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
