@@ -73,7 +73,7 @@ export default function
         <Route path='home' element={<HomeSelection/>}/>
         <Route path='learningCategory' element={<Learning/>}/>
         <Route path='quizCategory' element={<Quiz/>}/>
-        <Route path='letters' element={<LearningSelectionLetters/>}/>
+        <Route path='let ters' element={<LearningSelectionLetters/>}/>
         <Route path='numbers' element={<LearningSelectionNum/>}/>
 
 
