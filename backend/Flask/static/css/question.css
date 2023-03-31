@@ -1,88 +1,50 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .quiz-page {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-  }
-  
-  .background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('assets/quiz.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: brightness(70%);
-  }
-  
-  .question-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    z-index: 1;
-  }
-  
-  .question-text {
-    font-size: 9rem;
-    font-family: 'Potha', sans-serif;
-  }
-  
-  .camera-container {
-    position: relative;
-    width: 80%;
-    margin: 2rem auto;
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-  }
-  
-  .icon-button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-  }
-  
-  .home-icon {
-    width: 50px;
-    height: 50px;
-    background-image: url('assets/homeicon.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  
-  .back-icon {
-    width: 50px;
-    height: 50px;
-    background-image: url('assets/backicon.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
+  background-image: url('../assets/quiz.jpg');
+  background-size: cover;
 
-  @font-face {
-    font-family: 'CustomFont'; 
-    src: url('assets/2 Astro11 sinhala font by Aluth.com.TTF'); 
-  }
-  
-  h1 {
-    font-family: 'CustomFont', sans-serif; /* Apply the custom font to h1 tag */
-  }
-  
-  
-  
+}
+
+@font-face {
+  font-family: "myFont";
+  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
+h1 {
+  font-family: "myFont", sans-serif;
+  font-size: 7rem;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 8%;
+  margin-right: 55%;
+  letter-spacing: 2px;
+}
+
+
+.next-button {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.next-button img {
+  width: 20%; 
+  height: 20%; 
+  margin-left: 170%;
+  margin-top: 65%;
+}
+
+#camera {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+
+
+
