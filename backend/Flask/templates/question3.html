@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Page 3</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/question.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+        
+        <h1 style="font-family: myFont;">4 <br/>fmkajkak</h1>
+        <div class="next-button-container">
+            <a href="{{ url_for('question4') }}" class="next-button"><img src="{{ url_for('static', filename='assets/next.png') }}" alt="Next"></a>
+          </div>
+        
+      </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/question.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/camera.js') }}"></script>
+</body>
+</html>
