@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Letter1</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/Letter.css">
+  </head>
+  <body>
+    <div class="page-container">
+      <!-- Background Image -->
+      <div class="bg-[url(../static/assets/learning.svg)] bg-cover bg-center min-h-screen"></div>
+
+      <!-- Text -->
+      <div class="Text">
+        <h1 class="font-custom text-9xl text-center mt-8 whitespace-pre-wrap absolute left-16 top-0">
+          w
+        </h1>
+      </div>
+
+      <!-- Camera -->
+      <div class="Camera">
+        <script src="../static/js/HandTracking.js"></script>
+        <div class="blurback"></div>
+        <div class="countdown">
+          <div class="countdown-text"></div>
+        </div>
+        <div class="button">
+          <button class="button-text" onclick="setShowBlur(false)">Click to Try</button>
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="Imgdiv">
+        <img src="../static/assets/dataset_icons/letters/1.JPG" alt="Letter1" class="image">
+      </div>
+
+      <!-- Back Arrow -->
+      <a href="/letters">
+        <button>
+          <div class="absolute w-12 h-12 left-0 top-0 bg-no-repeat bg-cover bg-center" style="background-image: url(../static/assets/back.png); width: 5.5%; height: 10%;"></div>
+        </button>
+      </a>
+
+      <!-- Home Icon -->
+      <a href="/home">
+        <button>
+          <div class="absolute w-12 h-12 right-0 top-0 bg-no-repeat bg-cover bg-center" style="background-image: url(../static/assets/homeicon.png); width: 5.5%; height: 10%;"></div>
+        </button>
+      </a>
+
+      <!-- Next -->
+      <a href="/letter2">
+        <button>
+          <div class="absolute w-12 h-12 bg-no-repeat bg-cover bg-center" style="background-image: url(../static/assets/next.png); width: 5.5%; height: 10%; right: 20px; top: 50%; transform: translateY(-50%);"></div>
+        </button>
+      </a>
+    </div>
+  </body>
+</html>
