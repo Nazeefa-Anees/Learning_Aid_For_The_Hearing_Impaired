@@ -1,12 +1,17 @@
-body { 
-    font-family: 'Sinhala';
-    src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
-    background-image: url('../assets/learning.jpg')
-}
-
 .page-container {
   position: relative;
+  margin: -0.5%;
   height: 100vh;
+  font-family: 'Sinhala';
+  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
+  
+}
+
+.bg {
+    background-image: url('../assets/learning.svg');
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
 }
 
 .Text {
@@ -37,7 +42,7 @@ body {
   transform: translate(-50%, -50%);
   border: 1px solid #000000;
   border-radius: 0px;
-  background-color: white;
+  background-color: rgb(200, 200, 200);
 }
 
 .Imgdiv {
@@ -63,6 +68,8 @@ body {
 
 .video {
   position: absolute;
+  height: 100%;
+  width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -86,10 +93,18 @@ body {
 }
 
 .button-text {
-  font-size: 30px;
-  color: #ffffff;
-  font-weight: bold;
-  text-shadow: 0 0 5px #000000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(200, 200, 200);
+    font-weight: bold;
+    text-shadow: 0 0 5px #000000;
 }
 
 
