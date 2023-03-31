@@ -1,23 +1,30 @@
-function Letter1() {
-    const [showBlur, setShowBlur] = useState(true);
-    const [countdown, setCountdown] = useState(3);
-  
-    useEffect(() => {
-      let countdownInterval;
-  
-      if (countdown > 0 && !showBlur) {
-        countdownInterval = setInterval(() => {
-          setCountdown(countdown - 1);
-        }, 1000);
-      }
-  
-      if (countdown === 0) {
-        setShowBlur(false);
-      }
-  
-      return () => clearInterval(countdownInterval);
-    }, [countdown, showBlur]);
-  }
-  
-  export default Letter1;
+function startCamera() {
+    // Hide the button
+    document.getElementById("start-camera").style.display = "none";
+    
+    // Display the countdown
+    var countdown = 3;
+    var countdownInterval = setInterval(function() {
+        document.getElementById("countdown").innerHTML = countdown;
+        countdown--;
+        if (countdown < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("countdown").style.display = "none";
+        document.getElementById("video").style.display = "block";
+        }
+    }, 1000);
+    
+    // Start the camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+        var video = document.getElementById("video");
+        video.srcObject = stream;
+        video.play();
+        })
+        .catch(function(error) {
+        console.log(error);
+        });
+    }
+    
+export default startCamera;
   

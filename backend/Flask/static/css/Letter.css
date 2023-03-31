@@ -97,15 +97,7 @@ body {
   height: 100%;
 }
 
-.button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-.button-text {
+.camButton {
     position: absolute;
     top: 50%;
     left: 50%;
