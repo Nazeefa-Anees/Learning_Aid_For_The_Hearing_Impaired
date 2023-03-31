@@ -6,6 +6,9 @@ app = Flask(__name__)
 def welcome():
     return render_template('index.html')
 
+
+
+
 @app.route('/success/<int:score>')
 def success(score):
     return 'The marks are'+ str(score)
