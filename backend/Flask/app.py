@@ -3,8 +3,8 @@ from flask import Flask,redirect,url_for,render_template
 app = Flask(__name__)
 
 # @app.route('/')
-# def welcome():
-#     return render_template('index.html')
+# def letter1():
+#     return render_template('Letter1.html')
 
 @app.route('/')
 def question1():

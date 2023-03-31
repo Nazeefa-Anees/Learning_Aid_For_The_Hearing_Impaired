@@ -1,7 +1,10 @@
 body { 
-    font-family: 'Sinhala';
-    src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
     background-image: url('../assets/learning.jpg')
+}
+
+@font-face {
+  font-family: "myFont";
+  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
 }
 
 .page-container {
@@ -25,7 +28,11 @@ body {
 }
 
 .Text h1 {
-  margin: 0 auto;
+    font-family: "myFont", sans-serif;
+    font-size: 7rem;
+    font-weight: bold;
+    text-align: center;
+  
 }
 
 .Camera {
