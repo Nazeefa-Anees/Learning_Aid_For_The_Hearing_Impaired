@@ -3,10 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <title>Letter1</title>
+	<link rel="icon" href="favicon.ico">
     <link rel="stylesheet" type="text/css" href="../static/css/Letter.css">
-	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d@0.3/control_utils_3d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js" crossorigin="anonymous"></script>
+    <script type="module" src="../static/js/handsTest.js"></script>
 
 	<script>
 		function startCamera() {
@@ -16,14 +20,13 @@
 			// Display the countdown
 			var countdown = 3;
 			var countdownInterval = setInterval(function() {
-				document.getElementById("countdown").innerHTML = countdown;
+				document.getElementById("count-down").innerHTML = countdown;
 				countdown--;
 				if (countdown < 0) {
 				clearInterval(countdownInterval);
-				document.getElementById("countdown").style.display = "none";
-				document.getElementById("video").style.display = "block";
-				document.getElementById("canvas").style.display = "block";
-				initHands();
+				document.getElementById("count-down").style.display = "none";
+				document.getElementById("count-blur").style.display = "none";
+				document.getElementById("showHands").style.display = "inline"
 				}
 			}, 1000);
 
@@ -37,38 +40,6 @@
 				.catch(function(error) {
 				console.log(error);
 				});
-			}
-
-			function initHands() {
-				const hands = new Hands({locateFile: (file) => {
-					return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-				}});
-				hands.setOptions({
-					maxNumHands: 1,
-					minDetectionConfidence: 0.8,
-					minTrackingConfidence: 0.5
-				});
-				hands.onResults((results) => {
-					// Draw hand landmarks and connections here
-					const canvas = document.getElementById("canvas");
-					const context = canvas.getContext("2d");
-					context.clearRect(0, 0, canvas.width, canvas.height);
-					context.drawImage(results.image, 0, 0, canvas.width, canvas.height);
-					if (results.multiHandLandmarks) {
-						for (const landmarks of results.multiHandLandmarks) {
-							drawConnectors(context, landmarks, Hands.HAND_CONNECTIONS, {
-								color: "#00FF00",
-								lineWidth: 5,
-							});
-							drawLandmarks(context, landmarks, {
-								color: "#FF0000",
-								lineWidth: 2,
-							});
-						}
-					}
-				});
-				const videoElement = document.getElementsByClassName('video')[0];
-				hands.initialize(videoElement);
 			}
 	</script>
 
@@ -88,11 +59,13 @@
 			<!-- Camera -->
 			<div class="Camera">
 				<button class="camButton" id="start-camera" onclick="startCamera()">Start Camera</button>
-				<div id="countdown"class="countdown-text"></div>
-				<video class="video" id="video" style="display:none;"></video>
-				<canvas id="canvas" class="canvas" style="display:none;"></canvas>
+				<div id="count-blur" class="countdown"><div id="count-down"class="countdown-text"></div></div>
+				<div id="showHands" class="container" style= "display: none;">
+					<video class="input_video" style="display: none;"></video>
+					<canvas class="output_canvas" width="100%" height="100%"></canvas>
+					<div class="control-panel" style="display: none;"></div>
+				</div>
 			</div>
-  
 
 			<!-- Image -->
 			<div class="Imgdiv">

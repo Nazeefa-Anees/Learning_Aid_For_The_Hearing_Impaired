@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 
 
-#@app.route('/')
-#def letter1():
-#    return render_template('Letter1.html')
+@app.route('/')
+def letter1():
+    return render_template('Letter1.html')
 
 @app.route('/')
 def question1():

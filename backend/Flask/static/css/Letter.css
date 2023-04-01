@@ -4,17 +4,16 @@ body {
 }
 
 @font-face {
-  font-family: "myFont";
-  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+    font-family: "myFont";
+    src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
 }
 
 .page-container {
-  position: relative;
-  margin: -0.5%;
-  height: 100vh;
-  font-family: 'myFont';
-  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
-  
+    position: relative;
+    margin: -0.5%;
+    height: 100vh;
+    font-family: 'myFont';
+    src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
 }
 
 .bg {
@@ -25,18 +24,18 @@ body {
 }
 
 .Text {
-  position: absolute;
-  height: 25%;
-  width: 14%;
-  left: 28%;
-  top: 23%;
-  transform: translate(-50%, -50%);
-  border: 2px solid #000000;
-  border-radius: 0px;
-  background-color: rgba(231, 192, 69, 0.75);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: absolute;
+    height: 25%;
+    width: 14%;
+    left: 28%;
+    top: 23%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #000000;
+    border-radius: 0px;
+    background-color: rgba(231, 192, 69, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .Text h1 {
@@ -44,60 +43,62 @@ body {
     font-size: 7rem;
     font-weight: bold;
     text-align: center;
+    transform: translate(0%, -10%);
   
 }
 
 .Camera {
-  position: relative;
-  height: 80%;
-  width: 40%;
-  left: 67%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid #000000;
-  border-radius: 0px;
-  background-color: rgb(200, 200, 200);
+    position: relative;
+    height: 70%;
+    width: 40%;
+    left: 67%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #000000;
+    border-radius: 0px;
+    background-color: rgba(199, 186, 125, 0.75);
+   
+}
+
+.input_video {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.output_canvas {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }
 
 .Imgdiv {
-  position: absolute;
-  height: 50%;
-  width: 30%;
-  left: 28%;
-  top: 65.4%;
-  transform: translate(-50%, -50%);
-  border: 2px solid #000000;
-  border-radius: 0px;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: absolute;
+    height: 50%;
+    width: 30%;
+    left: 28%;
+    top: 65.4%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #000000;
+    border-radius: 0px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
+  
 .Imgdiv img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
-.video {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-.canvas {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .camButton {
@@ -109,45 +110,46 @@ body {
     transform: translate(-50%, -50%);
     z-index: 2;
     font-size: 40px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(200, 200, 200);
     font-weight: bold;
+    color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid #00000000;
     text-shadow: 0 0 5px #000000;
+    backdrop-filter: blur(10px);
 }
 
-
 .blurback {
-  position: absolute;
-  display: flex;
-  border: 1px solid #000000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px);
-  z-index: 1;
+    position: absolute;
+    display: flex;
+    border: 1px solid #000000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    z-index: 1;
 }
 
 .countdown-text{
-  font-size: 150px;
-  color: #ffffff;
-  font-weight: bold;
-  text-shadow: 0 0 5px #000000;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    font-size: 150px;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 0 5px #000000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .countdown{
-  position: absolute;
-  display: flex;
-  border: 1px solid #000000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px);
+    position: absolute;
+    display: flex;
+    border: 1px solid #000000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
 }
 
 
