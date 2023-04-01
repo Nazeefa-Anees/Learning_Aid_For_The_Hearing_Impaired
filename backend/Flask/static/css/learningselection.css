@@ -1,0 +1,98 @@
+body{
+	overflow: hidden;
+}
+
+@font-face {
+  font-family: "myFont";
+  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
+.page-container {
+  position: relative;
+  margin: -0.5%;
+  height: 100vh;
+  font-family: 'Sinhala';
+  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
+  
+}
+
+.bg {
+    background-image: url('../assets/rainbow.png');
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+	overflow: hidden;
+}
+
+.box {
+    box-sizing: border-box;
+    position: absolute;
+    width: 7%;
+    height: 16%;
+    background-color: rgba(231, 192, 69, 0.75);
+    border: 2px solid #000000;
+  }
+
+ .box:hover {
+    background-color: rgba(231, 192, 69, 0.9);
+    transition: background-color 0.5s ease-in-out;
+  }
+  
+
+table {
+	border-spacing: 50px;
+	border-width: 2px;
+
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+td {
+    border: 2px solid #000000;
+	background-color: rgba(231, 192, 69, 0.75);
+	border-width: 2px;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	padding-left: 35px;
+	padding-right: 35px;
+
+}   
+
+.center h1 {
+    font-family: "myFont", sans-serif;
+    font-size: 55px;
+    font-weight: bold;
+    text-align: center;
+	
+}
+
+.button2 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	left: 0.2%; 
+	top: 0%;
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+
+}
+.button3 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	top: 0%; 
+	left: 94%; 
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+}
