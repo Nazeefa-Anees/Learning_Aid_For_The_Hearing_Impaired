@@ -26,9 +26,7 @@
 				clearInterval(countdownInterval);
 				document.getElementById("count-down").style.display = "none";
 				document.getElementById("count-blur").style.display = "none";
-				document.getElementById("video").style.display = "block";
-				document.getElementById("canvas").style.display = "inline";
-				initHands();
+				document.getElementById("showHands").style.display = "inline"
 				}
 			}, 1000);
 
@@ -62,9 +60,11 @@
 			<div class="Camera">
 				<button class="camButton" id="start-camera" onclick="startCamera()">Start Camera</button>
 				<div id="count-blur" class="countdown"><div id="count-down"class="countdown-text"></div></div>
-				<video class="input_video" style="display: none;"></video>
-				<canvas class="output_canvas" width="100%" height="100%"></canvas>
-				<div class="control-panel" style="display: none;"></div>
+				<div id="showHands" class="container" style= "display: none;">
+					<video class="input_video" style="display: none;"></video>
+					<canvas class="output_canvas" width="100%" height="100%"></canvas>
+					<div class="control-panel" style="display: none;"></div>
+				</div>
 			</div>
 
 			<!-- Image -->
