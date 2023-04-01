@@ -1,7 +1,4 @@
-from flask import Flask,redirect,url_for,render_template,request, jsonify,Response
-import cv2
-import numpy as np
-import tensorflow as tf
+from flask import Flask,redirect,url_for,render_template
 
 app = Flask(__name__)
 
@@ -10,9 +7,9 @@ app = Flask(__name__)
 
 
 
-# @app.route('/')
-# def letter1():
-#     return render_template('Letter1.html')
+#@app.route('/')
+#def letter1():
+#    return render_template('Letter1.html')
 
 @app.route('/')
 def question1():
