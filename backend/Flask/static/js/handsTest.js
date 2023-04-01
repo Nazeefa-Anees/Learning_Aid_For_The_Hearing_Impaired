@@ -11,7 +11,12 @@ const config = { locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@${mpHands.VERSION}/${file}`;
     } };
 
+// call tick() each time the graph runs.
+const fpsControl = new controls.FPS();
+
 function onResults(results) {
+    // Update the frame rate.
+    fpsControl.tick();
     // Draw the overlays.
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -63,10 +68,11 @@ new controls.ControlPanel(controlsElement, {
     maxNumHands: 1,
     modelComplexity: 1,
     minDetectionConfidence: 0.8,
-    minTrackingConfidence: 0.5
+    minTrackingConfidence: 0.5,
 })
 
 .add([
+    fpsControl,
     new controls.SourcePicker({
         onFrame: async (input, size) => {
             const aspect = size.height / size.width;
