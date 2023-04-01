@@ -34,7 +34,7 @@ export default function Number9() {
 
      {/*Text*/}
      <div className="box1">
-        <h1 className="font-custom text-9xl text-center mt-8  whitespace-pre-wrap absolute left-16 top-0">
+        <h1 className="font-custom text-8xl text-center mt-8  whitespace-pre-wrap absolute left-0 right-0 top-0">
           9{" "}
         </h1>
       </div>

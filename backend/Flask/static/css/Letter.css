@@ -146,3 +146,43 @@ body {
   height: 100%;
   backdrop-filter: blur(10px);
 }
+
+
+.button2 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	left: 0.2%; 
+	top: 0%;
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+}
+
+.button3 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	top: 0%; 
+	left: 94%; 
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+}
+
+.button4 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	top: 47%; 
+	left: 94%; 
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+}
