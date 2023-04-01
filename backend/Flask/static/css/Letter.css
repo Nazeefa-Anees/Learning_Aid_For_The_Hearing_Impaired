@@ -12,7 +12,7 @@ body {
   position: relative;
   margin: -0.5%;
   height: 100vh;
-  font-family: 'Sinhala';
+  font-family: 'myFont';
   src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
   
 }
