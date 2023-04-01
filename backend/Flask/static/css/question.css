@@ -3,22 +3,46 @@ body {
   background-size: cover;
 
 }
+.page-container {
+  position: relative;
+  margin: -0.5%;
+  height: 100vh;
+  font-family: 'myFont';
+  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
+  
+}
+
+.bg {
+    
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+}
 
 @font-face {
   font-family: "myFont";
   src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
 }
 
-h1 {
-  font-family: "myFont", sans-serif;
-  font-size: 7rem;
-  font-weight: bold;
-  text-align: center;
-  padding-top: 8%;
-  margin-right: 55%;
-  letter-spacing: 2px;
+
+
+.Text {
+  position: absolute;
+  height: 25%;
+  width: 14%;
+  left: 18%;
+  top: 23%;
+  transform: translate(-50%, -50%);
+  
 }
 
+.Text h1 {
+    font-family: "myFont", sans-serif;
+    font-size: 7rem;
+    font-weight: bold;
+    text-align: center;
+  
+}
 
 .next-button {
   position: absolute;
@@ -63,10 +87,12 @@ h1 {
 
 .canvas {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
   height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 .camButton {
@@ -77,9 +103,10 @@ h1 {
     height: 100%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    font-size: 40px;
+    font-size: 7rem;
     color: rgb(255, 255, 255);
     background-color: rgb(200, 200, 200);
+    font-family: "myFont", sans-serif;
     font-weight: bold;
     text-shadow: 0 0 5px #000000;
 }
@@ -98,6 +125,7 @@ h1 {
 }
 
 .countdown-text{
+  font-family: "myFont", sans-serif;
   font-size: 150px;
   color: #ffffff;
   font-weight: bold;

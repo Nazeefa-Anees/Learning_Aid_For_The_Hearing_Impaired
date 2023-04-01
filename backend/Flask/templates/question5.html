@@ -1,22 +1,103 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Quiz Page 5</title>
-  <link rel="stylesheet" type="text/css" href="../static/css/question.css">
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-        
-        <h1 style="font-family: myFont;">ka <br/>fmkajkak</h1>
-        <div class="next-button-container">
-            <a href="{{ url_for('question1') }}" class="next-button"><img src="../static/assets/next.png" alt="Next"></a>
-          </div>
-        
-      </div>
-  </div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Quiz Page 1</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/question.css">
+	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
 
-  <script src="{{ url_for('static', filename='js/question.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/camera.js') }}"></script>
-</body>
+	<script>
+		function startCamera() {
+			// Hide the button
+			document.getElementById("start-camera").style.display = "none";
+
+			// Display the countdown
+			var countdown = 3;
+			var countdownInterval = setInterval(function() {
+				document.getElementById("countdown").innerHTML = countdown;
+				countdown--;
+				if (countdown < 0) {
+				clearInterval(countdownInterval);
+				document.getElementById("countdown").style.display = "none";
+				document.getElementById("video").style.display = "block";
+				document.getElementById("canvas").style.display = "block";
+				initHands();
+				}
+			}, 1000);
+
+			// Start the camera
+			navigator.mediaDevices.getUserMedia({ video: true })
+				.then(function(stream) {
+				var video = document.getElementById("video");
+				video.srcObject = stream;
+				video.play();
+				})
+				.catch(function(error) {
+				console.log(error);
+				});
+			}
+
+			function initHands() {
+				const hands = new Hands({locateFile: (file) => {
+					return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+				}});
+				hands.setOptions({
+					maxNumHands: 1,
+					minDetectionConfidence: 0.8,
+					minTrackingConfidence: 0.5
+				});
+				hands.onResults((results) => {
+					// Draw hand landmarks and connections here
+					const canvas = document.getElementById("canvas");
+					const context = canvas.getContext("2d");
+					context.clearRect(0, 0, canvas.width, canvas.height);
+					context.drawImage(results.image, 0, 0, canvas.width, canvas.height);
+					if (results.multiHandLandmarks) {
+						for (const landmarks of results.multiHandLandmarks) {
+							drawConnectors(context, landmarks, Hands.HAND_CONNECTIONS, {
+								color: "#00FF00",
+								lineWidth: 5,
+							});
+							drawLandmarks(context, landmarks, {
+								color: "#FF0000",
+								lineWidth: 2,
+							});
+						}
+					}
+				});
+				const videoElement = document.getElementsByClassName('video')[0];
+				hands.initialize(videoElement);
+			}
+	</script>
+
+  </head>
+  <body>
+    <div class="page-container">
+		<!-- Background Image -->
+      	<div class="bg">
+
+			<!-- Text -->
+			<div class="Text">
+				<h1 style="font-family: myFont;">w <br/>fmkajkak</h1>
+			</div>
+
+			<!-- Camera -->
+			<div class="Camera">
+				<button class="camButton" id="start-camera" onclick="startCamera()">mgka.kak</button>
+				<div id="countdown"class="countdown-text"></div>
+				<video class="video" id="video" style="display:none;"></video>
+				<canvas id="canvas" class="canvas" style="display:none;"></canvas>
+			</div>
+
+
+			<!-- Next Button -->
+			<div class="next-button-container">
+        <a href="{{ url_for('question2') }}" class="next-button"><img src="../static/assets/next.png" alt="Next"></a>
+      </div>
+		
+		</div>
+    </div>
+  </body>
 </html>
