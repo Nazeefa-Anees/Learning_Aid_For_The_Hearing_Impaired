@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <title>Quiz Page 1</title>
     <link rel="stylesheet" type="text/css" href="../static/css/question.css">
-	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
 
 	<script>
 		function startCamera() {
@@ -39,37 +36,7 @@
 				});
 			}
 
-			function initHands() {
-				const hands = new Hands({locateFile: (file) => {
-					return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-				}});
-				hands.setOptions({
-					maxNumHands: 1,
-					minDetectionConfidence: 0.8,
-					minTrackingConfidence: 0.5
-				});
-				hands.onResults((results) => {
-					// Draw hand landmarks and connections here
-					const canvas = document.getElementById("canvas");
-					const context = canvas.getContext("2d");
-					context.clearRect(0, 0, canvas.width, canvas.height);
-					context.drawImage(results.image, 0, 0, canvas.width, canvas.height);
-					if (results.multiHandLandmarks) {
-						for (const landmarks of results.multiHandLandmarks) {
-							drawConnectors(context, landmarks, Hands.HAND_CONNECTIONS, {
-								color: "#00FF00",
-								lineWidth: 5,
-							});
-							drawLandmarks(context, landmarks, {
-								color: "#FF0000",
-								lineWidth: 2,
-							});
-						}
-					}
-				});
-				const videoElement = document.getElementsByClassName('video')[0];
-				hands.initialize(videoElement);
-			}
+
 	</script>
 
   </head>
@@ -94,7 +61,9 @@
 
 			<!-- Next Button -->
 			<div class="next-button-container">
-        <a href="{{ url_for('question2') }}" class="next-button"><img src="../static/assets/next.png" alt="Next"></a>
+        <a href="{{ url_for('question2') }}" class="next-button">
+			<img src="../static/assets/next.png" alt="Next">
+		</a>
       </div>
 		
 		</div>

@@ -31,6 +31,7 @@
     background: rgba(231, 192, 69, 0.75);
     border: 2px solid #000000;
     border-radius: 30px;
+   
   }
   
   .number-box {
@@ -43,6 +44,7 @@
     background: rgba(231, 192, 69, 0.75);
     border: 2px solid #000000;
     border-radius: 30px;
+    
   }
 
   .alphabet-box:hover, .number-box:hover {

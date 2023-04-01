@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Learning Page</title>
     <link rel="stylesheet" type="text/css" href="../static/css/learning.css">
-
   </head>
   <body>
     <div class="page-container">
@@ -13,43 +12,42 @@
 
 
             <!-- Alphabet Box -->
-                
-                    <div class = "alphabet-box">
-                        <h1 class="font-family: myFont;">
-                            isxy,<br/>fydAvsh
-                        </h1>
-                    </div>
+            <div class="alphabet-box">
+                <a href="{{ url_for('learningselection1') }}">
+                  <h1 style="font-family: myFont;">
+                    isxy,<br/>fydAvsh
+                  </h1>
+                </a>
+            </div>
                 
             
             
-            <!--  Number Box  -->
-                
-                    <div class = "number-box">
-                        <h1 class="font-family: myFont;">
-                            wxl
-                        </h1>
-                    </div>
+            <!-- Number Box  -->
+           
+            <div class="number-box">
+              <a href="{{ url_for('learningselection2') }}">
+                <h1 style="font-family: myFont;">
+                    wxl
+                </h1>
+              </a>
+            </div>
                 
     
 
 			<!-- Back Arrow -->
 			
-				
 				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
+			
 				
 			
-
 
 			<!-- Home Icon -->
 			
-				
 				<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
-				
+			
 			
 		
 		</div>
     </div>
   </body>
 </html>
-
-

@@ -13,18 +13,30 @@ app = Flask(__name__)
 # def learning():
 #     return render_template('learning.html')
 
-# @app.route('/')
+# @app.route('/learningselection1')
+# def learningselection1():
+#     return render_template('learningselection1.html')
+
+# @app.route('/learningselection2')
+# def learningselection2():
+#     return render_template('learningselection2.html')
+
+# @app.route('/letter1')
 # def letter1():
 #     return render_template('Letter1.html')
+
+# @app.route('/number1')
+# def number1():
+#     return render_template('number1.html')
 
 @app.route('/')
 def quiz():
     return render_template('quiz.html')
 
 
-# @app.route('/')
-# def question1():
-#     return render_template('question1.html')
+@app.route('/question1')
+def question1():
+    return render_template('question1.html')
 
 @app.route('/question2')
 def question2():
