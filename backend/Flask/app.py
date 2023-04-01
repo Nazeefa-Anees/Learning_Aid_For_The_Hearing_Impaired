@@ -7,13 +7,19 @@ app = Flask(__name__)
 
 
 
-@app.route('/')
-def letter1():
-    return render_template('Letter1.html')
+
 
 # @app.route('/')
 # def learning():
 #     return render_template('learning.html')
+
+# @app.route('/')
+# def letter1():
+#     return render_template('Letter1.html')
+
+@app.route('/')
+def quiz():
+    return render_template('quiz.html')
 
 
 # @app.route('/')
@@ -39,34 +45,34 @@ def question5():
 
 
 
-# Define a route to handle the quiz
-@app.route("/quiz", methods=["POST"])
-def quiz():
-    score = 0
+# # Define a route to handle the quiz
+# @app.route("/quiz", methods=["POST"])
+# def quiz():
+#     score = 0
 
-    # Ask the user 5 questions
-    for i in range(5):
-        # Show the user the question and ask them to show the sign to the camera
-        # Capture the video stream and process it using the machine learning model
-        video = request.files["video"]
-        image = cv2.imdecode(np.fromstring(video.read(), np.uint8), cv2.IMREAD_UNCHANGED)
-        result = model.predict(image)
-        accuracy = float(result[0][0])
+#     # Ask the user 5 questions
+#     for i in range(5):
+#         # Show the user the question and ask them to show the sign to the camera
+#         # Capture the video stream and process it using the machine learning model
+#         video = request.files["video"]
+#         image = cv2.imdecode(np.fromstring(video.read(), np.uint8), cv2.IMREAD_UNCHANGED)
+#         result = model.predict(image)
+#         accuracy = float(result[0][0])
         
-        # Calculate the accuracy of the sign and add it to the user's score
-        if accuracy > 0.8:
-            score += 1
+#         # Calculate the accuracy of the sign and add it to the user's score
+#         if accuracy > 0.8:
+#             score += 1
 
-    # Determine the feedback based on the user's score
-    if score == 5:
-        feedback = "Congratulations! You got all the questions correct!"
-    elif score == 4:
-        feedback = "Great job! You got 4 out of 5 questions correct."
-    elif score <= 3:
-        feedback = "You need to work harder. Try again!"
+#     # Determine the feedback based on the user's score
+#     if score == 5:
+#         feedback = "Congratulations! You got all the questions correct!"
+#     elif score == 4:
+#         feedback = "Great job! You got 4 out of 5 questions correct."
+#     elif score <= 3:
+#         feedback = "You need to work harder. Try again!"
 
-    # Return the user's score and feedback
-    return jsonify({"score": score, "feedback": feedback})
+#     # Return the user's score and feedback
+#     return jsonify({"score": score, "feedback": feedback})
 
 
 
