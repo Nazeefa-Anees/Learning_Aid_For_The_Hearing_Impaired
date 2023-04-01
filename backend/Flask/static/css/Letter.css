@@ -1,5 +1,6 @@
 body { 
-    background-image: url('../assets/learning.jpg')
+    background-image: url('../assets/learning.jpg');
+    overflow: hidden;
 }
 
 @font-face {
