@@ -1,0 +1,110 @@
+
+
+@font-face {
+    font-family: "myFont";
+    src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
+.page-container {
+    position: relative;
+    margin: -0.5%;
+    height: 100vh;
+    font-family: 'myFont';
+    src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
+}
+
+.bg {
+    background-image: url('../assets/learning.jpg');
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+}
+
+
+
+.alphabet-box {
+    box-sizing: border-box;
+    position: absolute;
+    width: 25%;
+    height: 45%;
+    left: 28%;
+    top: 49%;
+    transform: translate(-50%, -50%);
+    background: rgba(231, 192, 69, 0.75);
+    border: 2px solid #000000;
+    border-radius: 30px;
+  }
+  
+  .number-box {
+    box-sizing: border-box;
+    position: absolute;
+    width: 25%;
+    height: 45%;
+    right: 19%;
+    top: 25.5%;
+    background: rgba(231, 192, 69, 0.75);
+    border: 2px solid #000000;
+    border-radius: 30px;
+  }
+
+  .alphabet-box:hover, .number-box:hover {
+    background-color: rgba(231, 192, 69, 0.9);
+    transition: background-color 0.5s ease-in-out;
+  }
+
+  .number-box h1 {
+    font-family: "myFont", sans-serif;
+    font-size: 6rem;
+    font-weight: bold;
+    text-align: center;
+    transform: translate(0%, -10%);
+  
+}
+
+.alphabet-box h1 {
+    font-family: "myFont", sans-serif;
+    font-size: 5rem;
+    font-weight: bold;
+    text-align: center;
+    transform: translate(0%, -10%);
+  
+}
+
+.button2 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	left: 0.2%; 
+	top: 0%;
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+}
+
+.button3 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	top: 0%; 
+	left: 94%; 
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+}
+
+.button4 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	top: 47%; 
+	left: 94%; 
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+}

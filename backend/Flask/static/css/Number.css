@@ -18,7 +18,7 @@ body {
 }
 
 .bg {
-    background-image: url('../assets/learning.svg');
+    
     background-size: cover;
     background-position: center center;
     height: 100vh;

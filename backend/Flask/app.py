@@ -11,9 +11,14 @@ app = Flask(__name__)
 def letter1():
     return render_template('Letter1.html')
 
-@app.route('/')
-def question1():
-    return render_template('question1.html')
+# @app.route('/')
+# def learning():
+#     return render_template('learning.html')
+
+
+# @app.route('/')
+# def question1():
+#     return render_template('question1.html')
 
 @app.route('/question2')
 def question2():
