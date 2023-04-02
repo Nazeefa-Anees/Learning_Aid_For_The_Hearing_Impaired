@@ -1,0 +1,67 @@
+@font-face {
+    font-family: "myFont";
+    src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
+body { 
+    background-image: url('../assets/quiz.jpg');
+    overflow: hidden;
+}
+
+.page-container {
+    position: relative;
+    margin: -0.5%;
+    height: 100vh;
+    font-family: 'myFont';
+    src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
+}
+
+.bg {
+    background-image: url('../assets/quiz.jpg');
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+}
+
+.button3 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	top: 0%; 
+	left: 94%; 
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+}
+
+
+.Text h1 {
+    font-family: "myFont", sans-serif;
+    font-size: 5rem;
+    text-align: center;
+    transform: translate(0%, -10%);
+  
+}
+
+.Text2 h1{
+    font-family: "myFont", sans-serif;
+    font-size: 5rem;
+    text-align: center;
+    transform: translate(0%, -10%);
+    position: absolute;
+    top: 70%;
+    left: 43%;
+    width: 200px;
+    height: 100px;    
+}
+
+.Imgdiv {
+    position: absolute;
+    height: 20%;
+    width: 10%;
+    left: 45%;
+    top: 50%;
+    background-color: white;
+}
