@@ -78,8 +78,11 @@ def process_camera_stream():
 
 
 
-
 @app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/learning')
 def learning():
     return render_template('learning.html')
 
@@ -241,7 +244,7 @@ def number1():
 #     return render_template('number9.html')
 
 
-@app.route('/')
+@app.route('/quiz')
 def quiz():
     return render_template('quiz.html')
 

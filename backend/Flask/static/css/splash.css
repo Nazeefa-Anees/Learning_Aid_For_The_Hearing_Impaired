@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "myFont";
+  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
+.splash-screen {
+    background-image: url('../assets/Splashbg.jpg');
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 20px;
+  }
+  
+  .logo {
+    position: absolute;
+    top: 2%;
+    right: 20px;
+    height: 10%;
+  }
+  
+  .splashbutton {
+    background-color: #e4ac4c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 35px;
+    margin-bottom: 20px;
+    border-radius: 48%;
+    width: 20%;
+    height: 12%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+  }
+
+  .splashbutton:hover{
+    cursor: pointer;
+    background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+    animation:slidebg 5s linear infinite;
+  }
+
+  @keyframes slidebg {
+    to {
+      background-position:20vw;
+    }
+  }
+  
+  
