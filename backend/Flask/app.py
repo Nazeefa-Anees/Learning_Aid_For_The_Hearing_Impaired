@@ -69,10 +69,16 @@ def process_camera_stream():
 print(process_camera_stream())
 
 
+<<<<<<< HEAD
 
 # @app.route('/')
 # def learning():
 #     return render_template('learning.html')
+=======
+@app.route('/')
+def learning():
+    return render_template('learning.html')
+>>>>>>> 52bf6eb15636787467d80899af7d37d60b83f7d1
 
 @app.route('/learningselection1')
 def learningselection1():

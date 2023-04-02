@@ -40,15 +40,13 @@ body{
   
 
 table {
-	border-spacing: 50px;
+	border-spacing: 175px;
 	border-width: 2px;
 	margin: 0;
 	position: absolute;
 	top: 50%;
 	-ms-transform: translateY(-50%);
 	transform: translateY(-50%);
-	right: 20%;
-	left: 20%;
 }
 
 .center {
