@@ -54,7 +54,6 @@ body {
   left: 67%;
   top: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid #000000;
   border-radius: 0px;
   background-color: rgb(200, 200, 200);
 }
@@ -66,7 +65,6 @@ body {
   left: 28%;
   top: 65.4%;
   transform: translate(-50%, -50%);
-  border: 2px solid #000000;
   border-radius: 0px;
   background-color: white;
   display: flex;
