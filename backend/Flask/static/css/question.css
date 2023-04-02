@@ -62,20 +62,19 @@ body {
   margin-top: 65%;
 }
 
-
 .Camera {
   position: relative;
-  height: 80%;
+  height: 70%;
   width: 40%;
   left: 67%;
-  top: 50%;
+  top: 55%;
   transform: translate(-50%, -50%);
-  border: 1px solid #000000;
   border-radius: 0px;
-  background-color: rgb(200, 200, 200);
+  background-color: rgba(199, 186, 125, 0.75);
+ 
 }
 
-.video {
+.input_video {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -85,7 +84,7 @@ body {
   z-index: 2;
 }
 
-.canvas {
+.output_canvas {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -94,6 +93,20 @@ body {
   transform: translate(-50%, -50%);
   z-index: 2;
 }
+
+.dataCollection {
+  position: absolute;
+  left: 90%;
+  width: 10%;
+  height: 12%;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 5px #000000;
+  z-index: 3;
+}
+
 
 .camButton {
     position: absolute;
