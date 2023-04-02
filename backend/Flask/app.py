@@ -1,5 +1,6 @@
 from flask import Flask,redirect,url_for,render_template
 import cv2
+import os
 import mediapipe as mp
 import numpy as np
 from flask import Flask, Response
@@ -14,7 +15,7 @@ mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.8)
 
 # Define the route for the camera stream
-@app.route('/camera_stream')
+@app.route('/camera_stream', methods=['POST'])
 def camera_stream():
     return Response(process_camera_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
@@ -64,9 +65,16 @@ def process_camera_stream():
 
     # Convert the hand landmarks list to a NumPy array and return it
     hand_landmarks_array = np.array(hand_landmarks_list)
-    return hand_landmarks_array
-
-print(process_camera_stream())
+    # Define the file path and name for the text file
+    file_path = os.path.join(app.static_folder, 'hand_landmarks.txt')
+    
+    # Write the hand landmarks array to the text file
+    with open(file_path, 'w') as f:
+        for row in hand_landmarks_array:
+            f.write(' '.join(str(x) for x in row) + '\n')
+    
+    # Return a message to indicate that the file has been saved
+    return 'Hand landmarks saved to ' + file_path , hand_landmarks_array
 
 
 

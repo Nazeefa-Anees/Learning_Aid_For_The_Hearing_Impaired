@@ -28,7 +28,7 @@
 			document.getElementById("count-blur").style.display = "none";
 			document.getElementById("showHands").style.display = "inline";
 
-			// Start the camera and process_camera_stream
+			// Start a timer for 10 seconds
 			var totalSeconds = 10;
 			var secondsRemaining = totalSeconds;
 			var countDownInterval = setInterval(function() {
@@ -39,11 +39,19 @@
 				}
 			}, 1000);
 
-			// Call the Flask camera_stream and process_camera_stream routes
-			setTimeout(function() {
-				{{ camera_stream }}
-				{{ process_camera_stream }}
-			}, 3000); // Wait for 3 seconds before starting the stream
+			// Start the camera stream, process the camera stream, and save the hand landmarks to a file
+			$.ajax({
+				type: 'POST',
+				url: '/camera_stream',
+				success: function(response) {
+					// Handle the response from the Flask route here
+					console.log(response);
+				},
+				error: function(error) {
+				// Handle the error here
+				}
+			});
+			
 			}
 		}, 1000);
 		}
