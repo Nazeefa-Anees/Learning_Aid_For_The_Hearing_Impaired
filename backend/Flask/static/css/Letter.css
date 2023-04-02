@@ -1,11 +1,11 @@
-body { 
-    background-image: url('../assets/learning.jpg');
-    overflow: hidden;
-}
-
 @font-face {
     font-family: "myFont";
     src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
+body { 
+    background-image: url('../assets/learning.jpg');
+    overflow: hidden;
 }
 
 .page-container {
@@ -17,6 +17,7 @@ body {
 }
 
 .bg {
+    background-image: url('../assets/learning.svg');
     background-size: cover;
     background-position: center center;
     height: 100vh;
@@ -46,51 +47,6 @@ body {
   
 }
 
-.Camera {
-    position: relative;
-    height: 70%;
-    width: 40%;
-    left: 67%;
-    top: 55%;
-    transform: translate(-50%, -50%);
-    border-radius: 0px;
-    background-color: rgba(199, 186, 125, 0.75);
-   
-}
-
-.input_video {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-}
-
-.output_canvas {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-}
-
-.dataCollection {
-    position: absolute;
-    left: 90%;
-    width: 10%;
-    height: 12%;
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    color: rgb(255, 255, 255);
-    text-shadow: 0 0 5px #000000;
-    z-index: 3;
-}
-
 .Imgdiv {
     position: absolute;
     height: 50%;
@@ -112,54 +68,96 @@ body {
     object-fit: cover;
 }
 
+.Camera {
+    position: relative;
+    height: 70%;
+    width: 40%;
+    left: 67%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #000000;
+    border-radius: 5px;
+    background-color: rgba(199, 186, 125, 0.75);
+   
+}
+
 .camButton {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 2;
     font-size: 40px;
     font-weight: bold;
     color: rgb(255, 255, 255);
     background-color: rgba(255, 255, 255, 0);
-    border: 1px solid #00000000;
-    text-shadow: 0 0 5px #000000;
-    backdrop-filter: blur(10px);
-}
-
-.blurback {
-    position: absolute;
-    display: flex;
     border: 1px solid #000000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(10px);
-    z-index: 1;
-}
-
-.countdown-text{
-    font-size: 150px;
-    color: #ffffff;
-    font-weight: bold;
+    border-radius: 5px;
     text-shadow: 0 0 5px #000000;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    backdrop-filter: blur(10px);
+    z-index: 4;
 }
 
 .countdown{
     position: absolute;
     display: flex;
-    border: 1px solid #000000;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    border-radius: 5px;
     backdrop-filter: blur(10px);
 }
 
+.countdown-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 150px;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 0 5px #000000;
+    transform: translate(-50%, -50%);
+}
+
+.dataCollection {
+    position: absolute;
+    left: 90%;
+    width: 10%;
+    height: 12%;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    text-shadow: 0 0 5px #ffffff;
+    border-left: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    border-radius: 0px 0px 0px 25px;
+    background-color: rgba(199, 186, 125, 0.5);
+    z-index: 3;
+}
+
+.input_video {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #000000;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.output_canvas {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #000000;
+    border-radius: 5px;
+    z-index: 2;
+}
 
 .button2 {
 	width: 80px; 

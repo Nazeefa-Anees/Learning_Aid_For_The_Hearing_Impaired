@@ -69,7 +69,6 @@ def process_camera_stream():
 print(process_camera_stream())
 
 
-
 @app.route('/')
 def learning():
     return render_template('learning.html')
