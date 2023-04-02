@@ -74,31 +74,26 @@ print(process_camera_stream())
 # def learning():
 #     return render_template('learning.html')
 
-<<<<<<< HEAD
-# @app.route('/learningselection1')
-# def learningselection1():
-#     return render_template('learningselection1.html')
+@app.route('/learningselection1')
+def learningselection1():
+    return render_template('learningselection1.html')
 
-# @app.route('/learningselection2')
-# def learningselection2():
-#     return render_template('learningselection2.html')
+@app.route('/learningselection2')
+def learningselection2():
+    return render_template('learningselection2.html')
 
-# @app.route('/letter1')
-# def letter1():
-#     return render_template('Letter1.html')
-=======
+
 @app.route('/Letter1')
 def letter1():
      return render_template('Letter1.html')
->>>>>>> e645bbba1ca515504b523f26ca505d51e66337f7
 
 # @app.route('/number1')
 # def number1():
 #     return render_template('number1.html')
 
-@app.route('/')
-def quiz():
-    return render_template('quiz.html')
+# @app.route('/')
+# def quiz():
+#     return render_template('quiz.html')
 
 
 @app.route('/question1')
