@@ -70,9 +70,9 @@ print(process_camera_stream())
 
 
 
-# @app.route('/')
-# def learning():
-#     return render_template('learning.html')
+@app.route('/')
+def learning():
+    return render_template('learning.html')
 
 @app.route('/learningselection1')
 def learningselection1():
@@ -83,7 +83,7 @@ def learningselection2():
     return render_template('learningselection2.html')
 
 
-@app.route('/Letter1')
+@app.route('/letter1')
 def letter1():
      return render_template('Letter1.html')
 
