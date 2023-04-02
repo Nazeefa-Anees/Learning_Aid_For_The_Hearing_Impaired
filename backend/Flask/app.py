@@ -1,11 +1,72 @@
 from flask import Flask,redirect,url_for,render_template
+import cv2
+import mediapipe as mp
+import numpy as np
+from flask import Flask, Response
 
 app = Flask(__name__)
 
 # model1 = tf.keras.models.load_model("backend\models\model_Letters")
 # model2 = tf.keras.models.load_model("backend\models\model_Numbers")
 
+# Initialize MediaPipe Hands
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.8)
 
+# Define the route for the camera stream
+@app.route('/camera_stream')
+def camera_stream():
+    return Response(process_camera_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+# Function to process the camera stream
+def process_camera_stream():
+    # Set up the camera
+    cap = cv2.VideoCapture(0)
+    cap.set(cv2.CAP_PROP_FPS, 5)
+
+    # Initialize the list to store hand landmarks
+    hand_landmarks_list = []
+
+    # Set a timer for 10 seconds
+    end_time = cv2.getTickCount() + 10 * cv2.getTickFrequency()
+
+    while cv2.getTickCount() < end_time:
+        # Read a frame from the camera
+        ret, frame = cap.read()
+
+        if not ret:
+            break
+
+        # Convert the frame to RGB and run it through MediaPipe Hands to get hand landmarks
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        results = hands.process(frame)
+        if results.multi_hand_landmarks:
+            hand_landmarks = results.multi_hand_landmarks[0]
+            hand_landmarks_array = np.zeros((21, 3))
+            for i, landmark in enumerate(hand_landmarks.landmark):
+                hand_landmarks_array[i] = [landmark.x, landmark.y, landmark.z]
+            hand_landmarks_list.append(hand_landmarks_array)
+
+        # Convert the frame back to BGR for display
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+
+        # Convert the frame to a JPEG image for streaming
+        ret, jpeg = cv2.imencode('.jpg', frame)
+        frame_bytes = jpeg.tobytes()
+
+        # Yield the frame as a multipart response
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+
+    # Release the camera and MediaPipe Hands resources
+    cap.release()
+    hands.close()
+
+    # Convert the hand landmarks list to a NumPy array and return it
+    hand_landmarks_array = np.array(hand_landmarks_list)
+    return hand_landmarks_array
+
+print(process_camera_stream())
 
 
 
@@ -13,6 +74,7 @@ app = Flask(__name__)
 # def learning():
 #     return render_template('learning.html')
 
+<<<<<<< HEAD
 # @app.route('/learningselection1')
 # def learningselection1():
 #     return render_template('learningselection1.html')
@@ -24,6 +86,11 @@ app = Flask(__name__)
 # @app.route('/letter1')
 # def letter1():
 #     return render_template('Letter1.html')
+=======
+@app.route('/Letter1')
+def letter1():
+     return render_template('Letter1.html')
+>>>>>>> e645bbba1ca515504b523f26ca505d51e66337f7
 
 # @app.route('/number1')
 # def number1():
