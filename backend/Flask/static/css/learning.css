@@ -18,8 +18,6 @@
     height: 100vh;
 }
 
-
-
 .alphabet-box {
     box-sizing: border-box;
     position: absolute;
@@ -97,5 +95,6 @@
 }
 
 a{
+  color: inherit;
   text-decoration: none;
 }
