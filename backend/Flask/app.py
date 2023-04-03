@@ -76,11 +76,9 @@ def process_camera_stream():
     # Return a message to indicate that the file has been saved
     return 'Hand landmarks saved to ' + file_path , hand_landmarks_array
 
-@app.route('/')
-def splash():
-    return render_template('splash.html')
 
-@app.route('/home')
+
+@app.route('/')
 def home():
     return render_template('home.html')
 
