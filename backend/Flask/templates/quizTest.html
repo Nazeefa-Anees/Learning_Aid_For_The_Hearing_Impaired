@@ -1,43 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hand Sign Recognition</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(function() {
-            // Get references to the canvas and video elements
-            var canvas = document.getElementById('canvas');
-            var video = document.getElementById('video');
-
-            // Start the webcam video stream
-            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-                video.srcObject = stream;
-                video.play();
-            });
-
-            // Capture the image from the canvas and send it to the Flask server
-            $('#submit-btn').click(function() {
-                canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-                var img_data = canvas.toDataURL('image/jpeg', 1.0);
-                $.post('/predict', { image: img_data }, function(data) {
-                    $('#result').text(data.message);
-                    $('#accuracy').text('Accuracy: ' + data.accuracy + '%');
-                });
-            });
-        });
-    </script>
+	<title>Hand Sign Detection Quiz</title>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose@0.10.0/dist/handpose.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose@0.10.0/dist/handpose.min.js"></script>
 </head>
 <body>
-    <h1>Hand Sign Recognition</h1>
-    <div>
-        <video id="video" width="224" height="224" autoplay></video>
-    </div>
-    <p>Use the button below to capture an image of your hand sign and submit it for classification:</p>
-    <canvas id="canvas" width="224" height="224"></canvas>
-    <br>
-    <button id="submit-btn">Submit</button>
-    <br>
-    <p id="result"></p>
-    <p id="accuracy"></p>
+	<h1>Hand Sign Detection Quiz</h1>
+	<video id="video" width="400" height="300"></video>
+	<button id="capture" onclick="capture()">Capture Image</button>
+	<canvas id="canvas" width="400" height="300"></canvas>
+	<img id="image" src="" width="400" height="300" style="display: none;">
+	<div id="result"></div>
+	<script>
+		const video = document.getElementById('video');
+		const canvas = document.getElementById('canvas');
+		const context = canvas.getContext('2d');
+		const captureButton = document.getElementById('capture');
+		const image = document.getElementById('image');
+		const result = document.getElementById('result');
+
+		async function setupCamera() {
+			if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+				throw new Error('Browser API navigator.mediaDevices.getUserMedia not available');
+			}
+
+			video.srcObject = await navigator.mediaDevices.getUserMedia({
+				audio: false,
+				video: {
+					facingMode: "user",
+					width: 400,
+					height: 300
+				}
+			});
+			await new Promise((resolve) => video.onloadedmetadata = resolve);
+			video.play();
+		}
+
+		async function capture() {
+			context.drawImage(video, 0, 0, canvas.width, canvas.height);
+			image.src = canvas.toDataURL('image/png');
+			const data = new FormData();
+			data.append('image', image.src);
+			const response = await fetch('/predict', {
+				method: 'POST',
+				body: data
+			});
+			const resultData = await response.json();
+			result.innerHTML = `Label: ${resultData.label}, Accuracy: ${resultData.accuracy}, Message: ${resultData.message}`;
+		}
+
+		setupCamera();
+	</script>
 </body>
 </html>
