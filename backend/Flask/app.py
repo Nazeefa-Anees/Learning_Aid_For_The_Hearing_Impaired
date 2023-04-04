@@ -7,8 +7,13 @@ import tensorflow as tf
 
 app = Flask(__name__)
 
-letters_model = tf.keras.models.load_model('../hand_sign_model1.h5')
-numbers_model = tf.keras.models.load_model('../hand_sign_model1.h5')
+@app.route('/save_screenshots', methods=['POST'])
+def save_screenshots():
+    screenshots = request.get_json()['screenshots']
+    for i, screenshot in enumerate(screenshots):
+        with open(f'screenshot_{i}.png', 'wb') as f:
+            f.write(base64.b64decode(screenshot.split(',')[1]))
+    return 'Screenshots saved!'
 
 @app.route('/')
 def quizTest():
@@ -394,11 +399,3 @@ def feedback():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-
-
-
-
