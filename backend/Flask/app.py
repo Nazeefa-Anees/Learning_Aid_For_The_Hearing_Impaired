@@ -7,74 +7,41 @@ import tensorflow as tf
 
 app = Flask(__name__)
 
-# Load models
-letters_model = tf.keras.models.load_model('letters_model.h5')
-numbers_model = tf.keras.models.load_model('numbers_model.h5')
+letters_model = tf.keras.models.load_model('../hand_sign_model1.h5')
+numbers_model = tf.keras.models.load_model('../hand_sign_model1.h5')
 
-# Define function to preprocess image for prediction
-def preprocess_image(image):
-    # Resize image
-    image = cv2.resize(image, (672, 672))
+@app.route('/')
+def quizTest():
+    return render_template('quizTest.html')
 
-    # Convert image to RGB format
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-    # Return preprocessed image
-    return image
-
-# Define function to predict image
-def predict_image(image):
-    # Preprocess image
-    preprocessed_image = preprocess_image(image)
-
-    # Normalize pixel values
-    preprocessed_image = preprocessed_image / 255.0
-
-    # Reshape image for model input
-    preprocessed_image = np.reshape(preprocessed_image, (1, 672, 672, 3))
-
-    # Predict using both models
-    letters_prediction = letters_model.predict(preprocessed_image)
-    numbers_prediction = numbers_model.predict(preprocessed_image)
-
-    # Get predicted label with highest confidence
-    letters_label = np.argmax(letters_prediction)
-    numbers_label = np.argmax(numbers_prediction)
-
-    # Get corresponding label name from label encoder
-    letters_label_name = label_encoder_letters.inverse_transform([letters_label])[0]
-    numbers_label_name = label_encoder_numbers.inverse_transform([numbers_label])[0]
-
-    # Determine overall prediction and confidence
-    if letters_prediction[0][letters_label] > numbers_prediction[0][numbers_label]:
-        prediction = letters_label_name
-        confidence = letters_prediction[0][letters_label]
-    else:
-        prediction = numbers_label_name
-        confidence = numbers_prediction[0][numbers_label]
-
-    # Return predicted label and confidence
-    return prediction, confidence
+# Function to preprocess the image
+def preprocess(img):
+    img = cv2.resize(img, (112, 112))
+    img = np.expand_dims(img, axis=0)
+    img = img / 255.0
+    return img
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Get image from request
-    image = request.files.get('image').read()
+    # Get the image from the POST request
+    img_data = request.files['image'].read()
+    nparr = np.fromstring(img_data, np.uint8)
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-    # Convert image to NumPy array
-    image = np.fromstring(image, np.uint8)
-    image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+    # Preprocess the image
+    img = preprocess(img)
 
-    # Predict image
-    prediction, confidence = predict_image(image)
+    # Use the model to make a prediction
+    pred = letters_model.predict(img)[0]
+    label = np.argmax(pred)
+    accuracy = round(pred[label] * 100, 2)
 
-    # Determine if prediction is correct based on confidence threshold
-    if confidence > 0.8:
-        result = {'prediction': prediction, 'confidence': confidence, 'result': 'correct'}
+    # Return the label and accuracy as a JSON response
+    if accuracy >= 80:
+        result = {'label': label, 'accuracy': accuracy, 'message': 'Correct'}
     else:
-        result = {'prediction': prediction, 'confidence': confidence, 'result': 'wrong'}
-
-    # Return result as JSON response
+        result = {'label': label, 'accuracy': accuracy, 'message': 'Wrong'}
     return jsonify(result)
 
 
