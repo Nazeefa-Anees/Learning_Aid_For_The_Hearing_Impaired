@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "myFont";
+  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -48,17 +53,25 @@
   }
   
   .option {
-    font-family: 'CustomFont', sans-serif;
+  
     font-size: 24px;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
   }
   
-  .option input {
+  
+  .option input[type="radio"] {
     margin-right: 10px;
   }
   
+  .hidden {
+    display: none;
+  }
+  
+  
   .submit-btn {
-    font-family: 'CustomFont', sans-serif;
+    
     font-size: 24px;
     background-color: #F7C51F;
     color: #FFFFFF;
