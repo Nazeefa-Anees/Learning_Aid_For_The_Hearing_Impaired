@@ -3,13 +3,13 @@ import cv2
 import numpy as np
 import mediapipe as mp
 from flask import Flask, jsonify,redirect,url_for,render_template,Response,request
-from tensorflow.keras.models import load_model
+import tensorflow as tf
 
 app = Flask(__name__)
 
 # Load models
-letters_model = load_model('letters_model.h5')
-numbers_model = load_model('numbers_model.h5')
+letters_model = tf.keras.models.load_model('letters_model.h5')
+numbers_model = tf.keras.models.load_model('numbers_model.h5')
 
 # Define function to preprocess image for prediction
 def preprocess_image(image):
