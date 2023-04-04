@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capture Canvas Screenshot Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.0/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d@0.3/control_utils_3d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js" crossorigin="anonymous"></script>
+    <script type="module" src="../static/js/showHands.js"></script>
+  </head>
+  <body>
+    <video class="input_video" style="display: none;"></video>
+    <canvas class="output_canvas" width="640" height="480"></canvas>
+    <div class="control-panel" style="display: none;"></div>
+    <div class="counter">Screenshot Counter: 0</div>
+    <script>
+        // Number of screenshots to capture per second
+        const fps = 5;
+
+        // Number of seconds to capture screenshots
+        const duration = 5;
+
+        // Total number of screenshots to capture
+        const totalScreenshots = fps * duration;
+
+        // Counter for the number of screenshots captured
+        let screenshotCounter = 0;
+
+        // Get the screenshot counter element
+        const counterElement = document.querySelector('.counter');
+
+        // Delay the start of the screenshot capturing process by 3 seconds
+        setTimeout(() => {
+            // Set an interval to capture screenshots
+            const intervalId = setInterval(capture, 1000 / fps);
+
+            function capture() {
+                // Get the canvas element
+                const canvasElement = document.querySelector('.output_canvas');
+
+                // Use html2canvas to take a screenshot of the canvas
+                html2canvas(canvasElement).then(canvas => {
+                    // Create a new FormData object
+                    const formData = new FormData();
+
+                    // Add the canvas image data to the FormData object
+                    formData.append('image', canvas.toDataURL());
+
+                    // Send the FormData to the Flask backend using fetch
+                    fetch('/upload', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(responseText => {
+                        console.log(responseText);
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+
+                    // Increment the screenshot counter
+                    screenshotCounter++;
+
+                    // Update the screenshot counter element
+                    counterElement.textContent = `Screenshot Counter: ${screenshotCounter}`;
+
+                    // Stop the interval if the desired number of screenshots have been captured
+                    if (screenshotCounter === totalScreenshots) {
+                        clearInterval(intervalId);
+                    }
+                });
+            }
+        }, 4000);
+    </script>
+  </body>
+</html>
