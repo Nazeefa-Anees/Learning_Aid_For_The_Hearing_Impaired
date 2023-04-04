@@ -1,11 +1,82 @@
-from flask import Flask,redirect,url_for,render_template
-import cv2
 import os
-import mediapipe as mp
+import cv2
 import numpy as np
-from flask import Flask, Response
+import mediapipe as mp
+from flask import Flask, jsonify,redirect,url_for,render_template,Response,request
+import tensorflow as tf
 
 app = Flask(__name__)
+
+# Load models
+letters_model = tf.keras.models.load_model('letters_model.h5')
+numbers_model = tf.keras.models.load_model('numbers_model.h5')
+
+# Define function to preprocess image for prediction
+def preprocess_image(image):
+    # Resize image
+    image = cv2.resize(image, (672, 672))
+
+    # Convert image to RGB format
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+    # Return preprocessed image
+    return image
+
+# Define function to predict image
+def predict_image(image):
+    # Preprocess image
+    preprocessed_image = preprocess_image(image)
+
+    # Normalize pixel values
+    preprocessed_image = preprocessed_image / 255.0
+
+    # Reshape image for model input
+    preprocessed_image = np.reshape(preprocessed_image, (1, 672, 672, 3))
+
+    # Predict using both models
+    letters_prediction = letters_model.predict(preprocessed_image)
+    numbers_prediction = numbers_model.predict(preprocessed_image)
+
+    # Get predicted label with highest confidence
+    letters_label = np.argmax(letters_prediction)
+    numbers_label = np.argmax(numbers_prediction)
+
+    # Get corresponding label name from label encoder
+    letters_label_name = label_encoder_letters.inverse_transform([letters_label])[0]
+    numbers_label_name = label_encoder_numbers.inverse_transform([numbers_label])[0]
+
+    # Determine overall prediction and confidence
+    if letters_prediction[0][letters_label] > numbers_prediction[0][numbers_label]:
+        prediction = letters_label_name
+        confidence = letters_prediction[0][letters_label]
+    else:
+        prediction = numbers_label_name
+        confidence = numbers_prediction[0][numbers_label]
+
+    # Return predicted label and confidence
+    return prediction, confidence
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    # Get image from request
+    image = request.files.get('image').read()
+
+    # Convert image to NumPy array
+    image = np.fromstring(image, np.uint8)
+    image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+
+    # Predict image
+    prediction, confidence = predict_image(image)
+
+    # Determine if prediction is correct based on confidence threshold
+    if confidence > 0.8:
+        result = {'prediction': prediction, 'confidence': confidence, 'result': 'correct'}
+    else:
+        result = {'prediction': prediction, 'confidence': confidence, 'result': 'wrong'}
+
+    # Return result as JSON response
+    return jsonify(result)
+
 
 # model1 = tf.keras.models.load_model("backend\models\model_Letters")
 # model2 = tf.keras.models.load_model("backend\models\model_Numbers")
@@ -356,4 +427,11 @@ def feedback():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+
+
+
 
