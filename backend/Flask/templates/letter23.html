@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Letter23</title>
+	<link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../static/css/Letter.css">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d@0.3/control_utils_3d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js" crossorigin="anonymous"></script>
+    <script type="module" src="../static/js/showHands.js"></script>
+
+	<script>
+		function startCamera() {
+		// Hide the button
+		document.getElementById("start-camera").style.display = "none";
+
+		// Display the countdown
+		var countdown = 3;
+		var countdownInterval = setInterval(function() {
+			document.getElementById("count-down").innerHTML = countdown;
+			countdown--;
+			if (countdown < 0) {
+			clearInterval(countdownInterval);
+			document.getElementById("count-down").style.display = "none";
+			document.getElementById("count-blur").style.display = "none";
+			document.getElementById("showHands").style.display = "inline";
+
+			// Start a timer for 10 seconds
+			var totalSeconds = 10;
+			var secondsRemaining = totalSeconds;
+			var countDownInterval = setInterval(function() {
+				document.getElementById("dataCollection").innerHTML = secondsRemaining;
+				secondsRemaining--;
+				if (secondsRemaining < 0) {
+				clearInterval(countDownInterval);
+				}
+			}, 1000);
+
+			// Start the camera stream, process the camera stream, and save the hand landmarks to a file
+			$.ajax({
+				type: 'POST',
+				url: '/camera_stream',
+				success: function(response) {
+					// Handle the response from the Flask route here
+					console.log(response);
+				},
+				error: function(error) {
+				// Handle the error here
+				}
+			});
+			
+			}
+		}, 1000);
+		}
+	</script>
+
+  </head>
+  <body>
+    <div class="page-container">
+		<!-- Background Image -->
+      	<div class="bg">
+
+			<!-- Text -->
+			<div class="Text">
+				<h1 class="font-family: myFont;">
+				ia
+				</h1>
+			</div>
+
+			<!-- Image -->
+			<div class="Imgdiv">
+				<img src="../static/assets/dataset_icons/letters/23.JPG" alt="Letter23" class="image">
+			</div>
+
+			<!-- Camera -->
+			<div class="Camera">
+				<button class="camButton" id="start-camera" onclick="startCamera()">Start Camera</button>
+				<div class="countdown" id="count-blur">
+					<div class="countdown-text" id="count-down"></div>
+				</div>
+				<div class="container" id="showHands" style= "display: none;">
+					<div class="dataCollection" id="dataCollection"></div>
+					<video class="input_video" style="display: none;"></video>
+					<canvas class="output_canvas" width="100%" height="100%"></canvas>
+					<div class="control-panel" style="display: none;"></div>
+				</div>
+			</div>
+
+			<!-- Back Arrow -->
+				
+				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
+				
+			<!-- Home Icon -->
+			
+				<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
+			<!-- Next -->
+			
+				<div class="button4" style="background-image: url(../static/assets/next.png);"></div>
+			
+		</div>
+    </div>
+  </body>
+</html>
