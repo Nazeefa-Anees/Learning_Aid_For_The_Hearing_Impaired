@@ -2,73 +2,39 @@
 <html>
 <head>
     <title>Hand Sign Recognition</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(function() {
+            // Get references to the canvas and video elements
+            var canvas = document.getElementById('canvas');
+            var video = document.getElementById('video');
+
+            // Start the webcam video stream
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                video.srcObject = stream;
+                video.play();
+            });
+
+            // Capture the image from the canvas and send it to the Flask server
+            $('#submit-btn').click(function() {
+                canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                var img_data = canvas.toDataURL('image/jpeg', 1.0);
+                $.post('/predict', { image: img_data }, function(data) {
+                    $('#result').text(data.message);
+                    $('#accuracy').text('Accuracy: ' + data.accuracy + '%');
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <h1>Hand Sign Recognition</h1>
-
-    <div>
-        <video id="video" width="672" height="672" autoplay></video>
-    </div>
-
-    <div>
-        <button id="capture">Capture Image</button>
-    </div>
-
-    <div>
-        <canvas id="canvas" width="672" height="672"></canvas>
-    </div>
-
-    <div>
-        <button id="predict">Predict</button>
-    </div>
-
-    <div>
-        <p>Prediction: <span id="prediction"></span></p>
-        <p>Confidence: <span id="confidence"></span></p>
-        <p>Result: <span id="result"></span></p>
-    </div>
+    <p>Use the button below to capture an image of your hand sign and submit it for classification:</p>
+    <canvas id="canvas" width="224" height="224"></canvas>
+    <br>
+    <button id="submit-btn">Submit</button>
+    <br>
+    <p id="result"></p>
+    <p id="accuracy"></p>
 </body>
-
-<script type="text/javascript">
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const captureButton = document.getElementById('capture');
-    const predictButton = document.getElementById('predict');
-    const predictionText = document.getElementById('prediction');
-    const confidenceText = document.getElementById('confidence');
-    const resultText = document.getElementById('result');
-
-    // Get video stream
-    navigator.mediaDevices.getUserMedia({video: true})
-    .then(stream => {
-        video.srcObject = stream;
-    });
-
-    // Capture image from video
-    captureButton.addEventListener('click', () => {
-        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-    });
-
-    // Send image to Flask backend for prediction
-    predictButton.addEventListener('click', () => {
-        const dataURL = canvas.toDataURL('image/jpeg');
-
-        fetch('/predict', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                image: dataURL
-            })
-        })
-        .then(response => response.json())
-        .then(prediction => {
-            predictionText.innerText = prediction.label;
-            confidenceText.innerText = prediction.confidence;
-            resultText.innerText = prediction.result;
-        });
-    });
-</script>
-
-   
+</html>
