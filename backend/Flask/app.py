@@ -2,10 +2,11 @@ import os
 import cv2
 import numpy as np
 import mediapipe as mp
-from flask import Flask, jsonify,redirect,url_for,render_template,Response,request
+from flask import Flask, jsonify, redirect, url_for, render_template, Response, request
 import tensorflow as tf
 
 app = Flask(__name__)
+
 
 @app.route('/save_screenshots', methods=['POST'])
 def save_screenshots():
@@ -23,10 +24,12 @@ def save_screenshots():
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.8)
 
+
 # Define the route for the camera stream
 @app.route('/camera_stream', methods=['POST'])
 def camera_stream():
     return Response(process_camera_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 # Function to process the camera stream
 def process_camera_stream():
@@ -76,38 +79,45 @@ def process_camera_stream():
     hand_landmarks_array = np.array(hand_landmarks_list)
     # Define the file path and name for the text file
     file_path = os.path.join(app.static_folder, 'hand_landmarks.txt')
-    
+
     # Write the hand landmarks array to the text file
     with open(file_path, 'w') as f:
         for row in hand_landmarks_array:
             f.write(' '.join(str(x) for x in row) + '\n')
-    
+
     # Return a message to indicate that the file has been saved
-    return 'Hand landmarks saved to ' + file_path , hand_landmarks_array
+    return 'Hand landmarks saved to ' + file_path, hand_landmarks_array
+
 
 @app.route('/')
 def splash():
     return render_template('splash.html')
 
+
 @app.route('/prediction')
 def prediction():
     return render_template('prediction.html')
+
 
 @app.route('/predresult')
 def predresult():
     return render_template('predresult.html')
 
+
 @app.route('/home')
 def home():
     return render_template('home.html')
+
 
 @app.route('/learning')
 def learning():
     return render_template('learning.html')
 
+
 @app.route('/learningselection1')
 def learningselection1():
     return render_template('learningselection1.html')
+
 
 @app.route('/learningselection2')
 def learningselection2():
@@ -116,7 +126,8 @@ def learningselection2():
 
 @app.route('/letter1')
 def letter1():
-     return render_template('Letter1.html')
+    return render_template('Letter1.html')
+
 
 # @app.route('/letter2')
 # def letter2():
@@ -230,6 +241,7 @@ def letter1():
 def number1():
     return render_template('number1.html')
 
+
 # @app.route('/number2')
 # def number2():
 #     return render_template('number2.html')
@@ -272,41 +284,51 @@ def quiz():
 def question1():
     return render_template('question1.html')
 
+
 @app.route('/question2')
 def question2():
     return render_template('question2.html')
+
 
 @app.route('/question3')
 def question3():
     return render_template('question3.html')
 
+
 @app.route('/question4')
 def question4():
     return render_template('question4.html')
+
 
 @app.route('/question5')
 def question5():
     return render_template('question5.html')
 
+
 @app.route('/question6')
 def question6():
     return render_template('question6.html')
+
 
 @app.route('/question7')
 def question7():
     return render_template('question7.html')
 
+
 @app.route('/question8')
 def question8():
     return render_template('question8.html')
+
 
 @app.route('/question9')
 def question9():
     return render_template('question9.html')
 
+
 @app.route('/question10')
 def question10():
     return render_template('question10.html')
+
 
 @app.route('/feedback')
 def feedback():
@@ -326,7 +348,7 @@ def feedback():
 #         image = cv2.imdecode(np.fromstring(video.read(), np.uint8), cv2.IMREAD_UNCHANGED)
 #         result = model.predict(image)
 #         accuracy = float(result[0][0])
-        
+
 #         # Calculate the accuracy of the sign and add it to the user's score
 #         if accuracy > 0.8:
 #             score += 1
@@ -341,7 +363,6 @@ def feedback():
 
 #     # Return the user's score and feedback
 #     return jsonify({"score": score, "feedback": feedback})
-
 
 
 # @app.route('/success/<int:score>')

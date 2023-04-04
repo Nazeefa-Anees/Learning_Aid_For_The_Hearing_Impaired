@@ -5,6 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2ba788c-1d93-4cb6-884d-5a343f8a9d40" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter10.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter11.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter12.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter13.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter14.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter15.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter16.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter17.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter18.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter19.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter20.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter21.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter22.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter23.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter24.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter25.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter26.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter27.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter6.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter7.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter8.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Flask/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Flask/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Flask/static/css/prediction.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Flask/static/css/prediction.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Flask/static/css/quiz.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Flask/static/css/quiz.css" afterDir="false" />
     </list>
@@ -21,19 +48,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Nisuli Hettiarachchi/OneDrive/Documents/GitHub/Learning_Aid_For_The_Hearing_Impaired",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Nisuli Hettiarachchi/OneDrive/Documents/GitHub/Learning_Aid_For_The_Hearing_Impaired&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Learning_Aid_For_The_Hearing_Impaired" />
@@ -69,6 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1680540758928</updated>
       <workItem from="1680540760082" duration="1233000" />
+      <workItem from="1680633533375" duration="1275000" />
     </task>
     <servers />
   </component>
