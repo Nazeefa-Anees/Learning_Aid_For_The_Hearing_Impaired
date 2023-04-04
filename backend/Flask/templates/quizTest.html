@@ -1,74 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <title>Hand Sign Recognition</title>
-</head>
-<body>
-    <h1>Hand Sign Recognition</h1>
-
-    <div>
-        <video id="video" width="672" height="672" autoplay></video>
-    </div>
-
-    <div>
-        <button id="capture">Capture Image</button>
-    </div>
-
-    <div>
-        <canvas id="canvas" width="672" height="672"></canvas>
-    </div>
-
-    <div>
-        <button id="predict">Predict</button>
-    </div>
-
-    <div>
-        <p>Prediction: <span id="prediction"></span></p>
-        <p>Confidence: <span id="confidence"></span></p>
-        <p>Result: <span id="result"></span></p>
-    </div>
-</body>
-
-<script type="text/javascript">
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const captureButton = document.getElementById('capture');
-    const predictButton = document.getElementById('predict');
-    const predictionText = document.getElementById('prediction');
-    const confidenceText = document.getElementById('confidence');
-    const resultText = document.getElementById('result');
-
-    // Get video stream
-    navigator.mediaDevices.getUserMedia({video: true})
-    .then(stream => {
-        video.srcObject = stream;
-    });
-
-    // Capture image from video
-    captureButton.addEventListener('click', () => {
-        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-    });
-
-    // Send image to Flask backend for prediction
-    predictButton.addEventListener('click', () => {
-        const dataURL = canvas.toDataURL('image/jpeg');
-
-        fetch('/predict', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                image: dataURL
-            })
+  <head>
+    <title>Sign Language Recognition</title>
+  </head>
+  <body>
+    <h1>Sign Language Recognition</h1>
+    <form id="myform" method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*" capture>
+      <button type="submit" onclick="captureImage()">Capture</button>
+    </form>
+    <div id="result"></div>
+    <script>
+      function captureImage() {
+        navigator.mediaDevices.getUserMedia({video: true})
+        .then(function(stream) {
+          var video = document.createElement('video');
+          video.srcObject = stream;
+          video.onloadedmetadata = function() {
+            video.play();
+            var canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            var context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            var dataURL = canvas.toDataURL('image/jpeg');
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/predict');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+              if (xhr.status === 200) {
+                var result = JSON.parse(xhr.responseText);
+                document.getElementById('result').innerHTML = result.predicted_letter;
+              } else {
+                alert('Error: ' + xhr.statusText);
+              }
+            };
+            xhr.send(JSON.stringify({image: dataURL}));
+            stream.getTracks().forEach(function(track) {
+              track.stop();
+            });
+            video.remove();
+          };
         })
-        .then(response => response.json())
-        .then(prediction => {
-            predictionText.innerText = prediction.label;
-            confidenceText.innerText = prediction.confidence;
-            resultText.innerText = prediction.result;
+        .catch(function(error) {
+          console.log('Error: ' + error);
         });
-    });
-</script>
-
-   
+      }
+    </script>
+  </body>
+</html>

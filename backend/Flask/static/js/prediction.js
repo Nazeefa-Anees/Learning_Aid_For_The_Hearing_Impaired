@@ -132,6 +132,8 @@ const questions = [
     let userAnswers = [];
    
     function renderQuestion() {
+      const button1 = document.getElementById('submit-btn');
+      const button2 = document.getElementById('done-btn');
       const currentQuestionData = questions[currentQuestion];
       questionEl.innerText = currentQuestionData.question;
       imageEl.src = currentQuestionData.image;
@@ -158,12 +160,17 @@ const questions = [
         optionsEl.appendChild(optionEl);
       });
   
-      if (currentQuestion === questions.length - 1) {
-        submitBtn.innerText = 'yrs';
-      } else {
-        submitBtn.innerText = 'B<. m%YAkh';
-      }
-    
+      
+
+      button1.addEventListener('click', () => {
+        // Perform some action or check some condition
+        const condition = true;
+      
+        if (currentQuestion === 9) {
+          button1.style.display = 'none';
+          button2.style.display = 'block';
+        }
+      });
       // Disable the submit button until an option is selected
       submitBtn.disabled = true;
     }
@@ -202,12 +209,9 @@ const questions = [
     
       // Move to the next question or show the result
       currentQuestion++;
-      if (currentQuestion === questions.length) {
-        // Redirect to a new HTML page
-        window.location.href = "/backend/Flask/templates/predresult.html";
-      } else {
-        renderQuestion();
-      }
+             
+      renderQuestion(); 
+      
     }
     
     
