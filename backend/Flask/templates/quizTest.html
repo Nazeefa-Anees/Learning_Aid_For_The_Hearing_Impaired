@@ -1,57 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-	<title>Hand Sign Detection Quiz</title>
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose@0.10.0/dist/handpose.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose@0.10.0/dist/handpose.min.js"></script>
-</head>
-<body>
-	<h1>Hand Sign Detection Quiz</h1>
-	<video id="video" width="400" height="300"></video>
-	<button id="capture" onclick="capture()">Capture Image</button>
-	<canvas id="canvas" width="400" height="300"></canvas>
-	<img id="image" src="" width="400" height="300" style="display: none;">
-	<div id="result"></div>
-	<script>
-		const video = document.getElementById('video');
-		const canvas = document.getElementById('canvas');
-		const context = canvas.getContext('2d');
-		const captureButton = document.getElementById('capture');
-		const image = document.getElementById('image');
-		const result = document.getElementById('result');
-
-		async function setupCamera() {
-			if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-				throw new Error('Browser API navigator.mediaDevices.getUserMedia not available');
-			}
-
-			video.srcObject = await navigator.mediaDevices.getUserMedia({
-				audio: false,
-				video: {
-					facingMode: "user",
-					width: 400,
-					height: 300
-				}
-			});
-			await new Promise((resolve) => video.onloadedmetadata = resolve);
-			video.play();
-		}
-
-		async function capture() {
-			context.drawImage(video, 0, 0, canvas.width, canvas.height);
-			image.src = canvas.toDataURL('image/png');
-			const data = new FormData();
-			data.append('image', image.src);
-			const response = await fetch('/predict', {
-				method: 'POST',
-				body: data
-			});
-			const resultData = await response.json();
-			result.innerHTML = `Label: ${resultData.label}, Accuracy: ${resultData.accuracy}, Message: ${resultData.message}`;
-		}
-
-		setupCamera();
-	</script>
-</body>
+  <head>
+    <title>Sign Language Recognition</title>
+  </head>
+  <body>
+    <h1>Sign Language Recognition</h1>
+    <form id="myform" method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*" capture>
+      <button type="submit" onclick="captureImage()">Capture</button>
+    </form>
+    <div id="result"></div>
+    <script>
+      function captureImage() {
+        navigator.mediaDevices.getUserMedia({video: true})
+        .then(function(stream) {
+          var video = document.createElement('video');
+          video.srcObject = stream;
+          video.onloadedmetadata = function() {
+            video.play();
+            var canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            var context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            var dataURL = canvas.toDataURL('image/jpeg');
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/predict');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+              if (xhr.status === 200) {
+                var result = JSON.parse(xhr.responseText);
+                document.getElementById('result').innerHTML = result.predicted_letter;
+              } else {
+                alert('Error: ' + xhr.statusText);
+              }
+            };
+            xhr.send(JSON.stringify({image: dataURL}));
+            stream.getTracks().forEach(function(track) {
+              track.stop();
+            });
+            video.remove();
+          };
+        })
+        .catch(function(error) {
+          console.log('Error: ' + error);
+        });
+      }
+    </script>
+  </body>
 </html>
