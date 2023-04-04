@@ -15,40 +15,6 @@ def save_screenshots():
             f.write(base64.b64decode(screenshot.split(',')[1]))
     return 'Screenshots saved!'
 
-@app.route('/')
-def quizTest():
-    return render_template('quizTest.html')
-
-
-# Function to preprocess the image
-def preprocess(img):
-    img = cv2.resize(img, (112, 112))
-    img = np.expand_dims(img, axis=0)
-    img = img / 255.0
-    return img
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    # Get the image from the POST request
-    img_data = request.files['image'].read()
-    nparr = np.fromstring(img_data, np.uint8)
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-
-    # Preprocess the image
-    img = preprocess(img)
-
-    # Use the model to make a prediction
-    pred = letters_model.predict(img)[0]
-    label = np.argmax(pred)
-    accuracy = round(pred[label] * 100, 2)
-
-    # Return the label and accuracy as a JSON response
-    if accuracy >= 80:
-        result = {'label': label, 'accuracy': accuracy, 'message': 'Correct'}
-    else:
-        result = {'label': label, 'accuracy': accuracy, 'message': 'Wrong'}
-    return jsonify(result)
-
 
 # model1 = tf.keras.models.load_model("backend\models\model_Letters")
 # model2 = tf.keras.models.load_model("backend\models\model_Numbers")
