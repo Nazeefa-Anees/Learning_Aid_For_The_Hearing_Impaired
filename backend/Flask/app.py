@@ -86,22 +86,22 @@ def extract_hand_landmarks():
     print("Store the extracted hand_landmarks.npy Done")
 
 
+# @app.route('/')
+# def splash():
+#     return render_template('splash.html')
+
+
+# @app.route('/prediction')
+# def prediction():
+#     return render_template('prediction.html')
+
+
+# @app.route('/predresult')
+# def predresult():
+#     return render_template('predresult.html')
+
+
 @app.route('/')
-def splash():
-    return render_template('splash.html')
-
-
-@app.route('/prediction')
-def prediction():
-    return render_template('prediction.html')
-
-
-@app.route('/predresult')
-def predresult():
-    return render_template('predresult.html')
-
-
-@app.route('/home')
 def home():
     return render_template('home.html')
 
@@ -230,13 +230,13 @@ def letter26():
 def letter27():
      return render_template('Letter27.html')
 
-# @app.route('/number0')
-# def number0():
-#     return render_template('number0.html')
+@app.route('/number0')
+def number0():
+    return render_template('number0.html')
 
-@app.route('/number1')
-def number1():
-    return render_template('number1.html')
+# @app.route('/number1')
+# def number1():
+#     return render_template('number1.html')
 
 
 # @app.route('/number2')

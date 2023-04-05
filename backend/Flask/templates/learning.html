@@ -11,40 +11,37 @@
       	<div class="bg">
 
 
-            <!-- Alphabet Box -->
-            <div class="alphabet-box">
-                <a href="learningselection1.html">
-                  <h1 style="font-family: myFont;">
-                    isxy,<br/>fydAvsh
-                  </h1>
-                </a>
-            </div>
+           <!-- Alphabet Box -->
+           <div class="alphabet-box">
+            <a href="{{ url_for('learningselection1') }}">
+              <h1 style="font-family: myFont;">
+                isxy,<br/>fydAvsh
+              </h1>
+            </a>
+        </div>
+            
+        
+            <!--  Number Box  -->
                 
-            
-            
-            <!-- Number Box  -->
-           
-            <div class="number-box">
-              <a href="learningselection2.html">
-                <h1 style="font-family: myFont;">
-                    wxl
-                </h1>
-              </a>
-            </div>
+                    <div class = "number-box">
+                      <a href="{{ url_for('learningselection2') }}">
+                        <h1 class="font-family: myFont;">
+                            wxl
+                        </h1>
+                      </a>
+                    </div>
                 
     
 
-			<!-- Back Arrow -->
-			<a href="home.html">
-				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
-			</a>
+		<!-- Back Arrow -->
+    <a href="{{ url_for('home') }}">
+      <div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
+    </a>
 
-
-			<!-- Home Icon -->
-			<a href="home.html">
-				
-				<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
-			</a>
+    <!-- Home Icon -->
+    <a href="{{ url_for('home') }}">
+      <div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
+    </a>
 			
 		
 		</div>
