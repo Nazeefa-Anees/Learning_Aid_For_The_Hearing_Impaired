@@ -21,56 +21,69 @@ def save_screenshots():
             f.write(base64.b64decode(screenshot.split(',')[1]))
     return 'Screenshots saved successfully.'
 
-# model1 = tf.keras.models.load_model("backend\models\model_Letters")
-# model2 = tf.keras.models.load_model("backend\models\model_Numbers")
-
-
 
 @app.route("/extract_hand_landmarks")
 def extract_hand_landmarks():
-    # Create a MediaPipe Hands object
+    # Initialize MediaPipe Hands
     mp_hands = mp.solutions.hands
+    hands = mp_hands.Hands(
+        static_image_mode=True,
+        max_num_hands=1,
+        min_detection_confidence=0.8,
+    )
 
-    # Define the folder path containing the images
-    folder_path = "backend/Flask/screenshots"
+    # Set input and output directories
+    input_dir = "backend/Flask/screenshots"
+    output_dir = "backend/Flask/hand_landmarks"
 
-    # Define the output file path for the JSON file
-    output_file_path = "backend/Flask/hand_landmarks.json"
+    # Initialize empty list to store landmarks
+    landmarks = []
 
-    # Initialize the list to store hand landmark data
-    hand_landmarks_list = []
+    # Loop through images in input directory
+    for image_file in os.listdir(input_dir):
+        if not image_file.endswith(".png"):
+            continue
+        
+        # Load input image and resize
+        image_path = os.path.join(input_dir, image_file)
+        image = cv2.imread(image_path)
+        image = cv2.resize(image, (672, 672))  # Replace with your desired size
 
-    # Iterate over the images in the folder
-    for filename in os.listdir(folder_path):
-        if filename.endswith(".jpg") or filename.endswith(".png"):
-            # Load the image
-            image_path = os.path.join(folder_path, filename)
-            image = cv2.imread(image_path)
+        # Convert image to RGB format and run hand detection
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        results = hands.process(image)
 
-            # Convert the image to RGB
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        # Check if hand(s) were detected
+        if results.multi_hand_landmarks:
+            # Extract landmarks for detected hand
+            for hand_landmarks in results.multi_hand_landmarks:
+                # Normalize landmarks with respect to image size
+                image_height, image_width, _ = image.shape
+                landmarks_norm = np.array([[lmk.x * image_width, lmk.y * image_height, lmk.z] for lmk in hand_landmarks.landmark])
+                
+                # Add landmarks to list
+                landmarks.append(landmarks_norm.flatten())
+                
+                # Save output image with landmarks
+                image_draw = image.copy()
+                mp_drawing = mp.solutions.drawing_utils
+                mp_drawing.draw_landmarks(
+                    image_draw, hand_landmarks, mp_hands.HAND_CONNECTIONS,
+                    mp_drawing.DrawingSpec(color=(255, 0, 0), thickness=2, circle_radius=2),
+                    mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2)
+                )
+                output_path = os.path.join(output_dir, image_file)
+                cv2.imwrite(output_path, image_draw)
 
-            # Run Mediapipe Hands to extract hand landmarks
-            with mp_hands.Hands(static_image_mode=True, max_num_hands=2) as hands:
-                results = hands.process(image)
+    # Clean up
+    hands.close()
 
-            # Extract the hand landmark data
-            if results.multi_hand_landmarks:
-                for hand_landmarks in results.multi_hand_landmarks:
-                    hand_landmarks_dict = {}
-                    for idx, landmark in enumerate(hand_landmarks.landmark):
-                        hand_landmarks_dict[f"Landmark {idx}"] = {
-                            "X": landmark.x,
-                            "Y": landmark.y,
-                            "Z": landmark.z,
-                        }
-                    hand_landmarks_list.append(hand_landmarks_dict)
+    # Convert landmarks to NumPy array
+    landmarks = np.array(landmarks)
 
-    # Save the hand landmark data to a JSON file
-    with open(output_file_path, "w") as e:
-        json.dump(hand_landmarks_list, e)
-
-    return "Hand landmarks extracted and saved to JSON file!"
+    # Save landmarks file
+    np.save("hand_landmarks.npy", landmarks)
+    print("Store the extracted hand_landmarks.npy Done")
 
 
 @app.route('/')
