@@ -85,15 +85,20 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    font-size: 40px;
-    font-weight: bold;
     color: rgb(255, 255, 255);
     background-color: rgba(255, 255, 255, 0);
     border: 1px solid #000000;
     border-radius: 5px;
-    text-shadow: 0 0 5px #000000;
     backdrop-filter: blur(10px);
     z-index: 4;
+}
+
+.camButtonText {
+    font-size: 5rem;
+    font-weight: bold;
+    text-shadow: 0 0 5px #000000;
+    text-align: center;
+    transform: translate(0%, 0%);
 }
 
 .countdown{
@@ -111,26 +116,46 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    font-size: 150px;
+    font-size: 20rem;
     color: #ffffff;
     font-weight: bold;
+    text-align: center;
     text-shadow: 0 0 5px #000000;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -60%);
 }
 
 .dataCollection {
     position: absolute;
-    left: 90%;
-    width: 10%;
-    height: 12%;
+    left: 93%;
+    width: 7%;
+    height: 8%;
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
     color: rgb(0, 0, 0);
     text-shadow: 0 0 5px #ffffff;
     border-left: 2px solid #000000;
+    border-right: 1px solid #000000;
     border-bottom: 2px solid #000000;
-    border-radius: 0px 0px 0px 25px;
+    border-radius: 0px 0px 25px 25px;
+    background-color: rgba(199, 186, 125, 0.5);
+    z-index: 3;
+}
+
+.counter {
+    position: absolute;
+    left: 86%;
+    width: 7%;
+    height: 8%;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    text-shadow: 0 0 5px #ffffff;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    border-radius: 0px 0px 25px 25px;
     background-color: rgba(199, 186, 125, 0.5);
     z-index: 3;
 }

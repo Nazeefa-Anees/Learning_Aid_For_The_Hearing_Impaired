@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Quiz Page 1</title>
+    <title>Letter14</title>
 	<link rel="icon" href="favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../static/css/question.css">
-	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/Letter.css">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d@0.3/control_utils_3d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
@@ -28,7 +28,7 @@
 			document.getElementById("count-blur").style.display = "none";
 			document.getElementById("showHands").style.display = "inline";
 
-			// Start the camera and process_camera_stream
+			// Start a timer for 10 seconds
 			var totalSeconds = 10;
 			var secondsRemaining = totalSeconds;
 			var countDownInterval = setInterval(function() {
@@ -39,11 +39,19 @@
 				}
 			}, 1000);
 
-			// Call the Flask camera_stream and process_camera_stream routes
-			setTimeout(function() {
-				{{ camera_stream }}
-				{{ process_camera_stream }}
-			}, 3000); // Wait for 3 seconds before starting the stream
+			// Start the camera stream, process the camera stream, and save the hand landmarks to a file
+			$.ajax({
+				type: 'POST',
+				url: '/camera_stream',
+				success: function(response) {
+					// Handle the response from the Flask route here
+					console.log(response);
+				},
+				error: function(error) {
+				// Handle the error here
+				}
+			});
+			
 			}
 		}, 1000);
 		}
@@ -57,28 +65,41 @@
 
 			<!-- Text -->
 			<div class="Text">
-				<h1 style="font-family: myFont;">w <br/>fmkajkak</h1>
+				<h1 class="font-family: myFont;">
+				ka
+				</h1>
+			</div>
+
+			<!-- Image -->
+			<div class="Imgdiv">
+				<img src="../static/assets/dataset_icons/letters/14.JPG" alt="Letter14" class="image">
 			</div>
 
 			<!-- Camera -->
 			<div class="Camera">
-				<button class="camButton" id="start-camera" onclick="startCamera()">mgka.kak</button>
-				<div id="count-blur" class="countdown"><div id="count-down"class="countdown-text"></div></div>
-				<div id="showHands" class="container" style= "display: none;">
-					<div id="dataCollection" class="dataCollection"></div>
+				<button class="camButton" id="start-camera" onclick="startCamera()">Start Camera</button>
+				<div class="countdown" id="count-blur">
+					<div class="countdown-text" id="count-down"></div>
+				</div>
+				<div class="container" id="showHands" style= "display: none;">
+					<div class="dataCollection" id="dataCollection"></div>
 					<video class="input_video" style="display: none;"></video>
 					<canvas class="output_canvas" width="100%" height="100%"></canvas>
 					<div class="control-panel" style="display: none;"></div>
 				</div>
 			</div>
 
-			<!-- Next Button -->
-			<div class="next-button-container">
-        <a href="question2.html" class="next-button">
-			<img src="../static/assets/next.png" alt="Next">
-		</a>
-      </div>
-		
+			<!-- Back Arrow -->
+				
+				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
+				
+			<!-- Home Icon -->
+			
+				<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
+			<!-- Next -->
+			
+				<div class="button4" style="background-image: url(../static/assets/next.png);"></div>
+			
 		</div>
     </div>
   </body>
