@@ -14,6 +14,7 @@ numbers_model = tf.keras.models.load_model('../hand_sign_model1.h5')
 # model1 = tf.keras.models.load_model("backend\models\model_Letters")
 # model2 = tf.keras.models.load_model("backend\models\model_Numbers")
 
+
 # Initialize MediaPipe Hands
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.8)
@@ -80,19 +81,19 @@ def process_camera_stream():
     # Return a message to indicate that the file has been saved
     return 'Hand landmarks saved to ' + file_path , hand_landmarks_array
 
+# @app.route('/')
+# def splash():
+#     return render_template('splash.html')
+
+# @app.route('/prediction')
+# def prediction():
+#     return render_template('prediction.html')
+
+# @app.route('/predresult')
+# def predresult():
+#     return render_template('predresult.html')
+
 @app.route('/')
-def splash():
-    return render_template('splash.html')
-
-@app.route('/prediction')
-def prediction():
-    return render_template('prediction.html')
-
-@app.route('/predresult')
-def predresult():
-    return render_template('predresult.html')
-
-@app.route('/home')
 def home():
     return render_template('home.html')
 
