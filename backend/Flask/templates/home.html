@@ -6,21 +6,29 @@
   <link rel="stylesheet" href="../static/css/home.css">
 </head>
 <body>
+  <!-- Background Image -->
   <div class="background"></div>
   
     <h1 class="title" style="font-family: myFont;">wms tlAj<br>isxy, ix&#123;d NdIdj<br>bf.k .ksuq</h1>
-<a href="learning.html">
-        <button class="cloud-button1">
-          <img src="../static/assets/cloud.png" alt="Button Image">
-        </button>
-        <p class="text1" style="font-family: myFont;">mdvus</p>
-</a>
-<a href="quiz.html">
-    <button class="cloud-button2">
+
+    <!-- Learning Page -->
+
+    <a href="{{ url_for('learning') }}">
+      <button class="cloud-button1">
         <img src="../static/assets/cloud.png" alt="Button Image">
-    </button>
-    <p class="text2" style="font-family: myFont;">m%Yak</p>
-</a>
+      </button>
+      <p class="text1" style="font-family: myFont;">mdvus</p>
+    </a>
+
+    <!-- Quiz Page -->
+
+    <a href="{{ url_for('quiz') }}">
+      <button class="cloud-button2">
+        <img src="../static/assets/cloud.png" alt="Button Image">
+      </button>
+      <p class="text2" style="font-family: myFont;">m%Yak</p>
+    </a>
+    
   
 </body>
 </html>
