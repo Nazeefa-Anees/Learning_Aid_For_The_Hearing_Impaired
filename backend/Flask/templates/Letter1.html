@@ -66,10 +66,12 @@
 						}).then(function(response) {
 							// Handle the response here if necessary
 							// Send a GET request to /process_screenshots route
-							fetch('/process_screenshots')
-								.then(function(response) {
+							fetch('/process_screenshots').then(function(response) {
+								console.log(response)
+								fetch('/predict').then(function(response) {
 									console.log(response)
 								});
+							});
 						});
 					}, 5000); // take screenshots for 5 seconds
 				}

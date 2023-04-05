@@ -151,70 +151,6 @@ def save_screenshots():
     return jsonify({"message": "Screenshots saved successfully."})
 
 
-@app.route("/extract_hand_landmarks")
-def extract_hand_landmarks():
-    # Initialize MediaPipe Hands
-    mp_hands = mp.solutions.hands
-    hands = mp_hands.Hands(
-        static_image_mode=True,
-        max_num_hands=1,
-        min_detection_confidence=0.8,
-    )
-
-    # Set input and output directories
-    input_dir = "backend/Flask/screenshots"
-    output_dir = "backend/Flask/screenshotsProcessed"
-
-    # Initialize empty list to store landmarks
-    landmarks = []
-
-    # Loop through images in input directory
-    for image_file in os.listdir(input_dir):
-        if not image_file.endswith(".png"):
-            continue
-        
-        # Load input image and resize
-        image_path = os.path.join(input_dir, image_file)
-        image = cv2.imread(image_path)
-        image = cv2.resize(image, (672, 672))  # Replace with your desired size
-
-        # Convert image to RGB format and run hand detection
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        results = hands.process(image)
-
-        # Check if hand(s) were detected
-        if results.multi_hand_landmarks:
-            # Extract landmarks for detected hand
-            for hand_landmarks in results.multi_hand_landmarks:
-                # Normalize landmarks with respect to image size
-                image_height, image_width, _ = image.shape
-                landmarks_norm = np.array([[lmk.x * image_width, lmk.y * image_height, lmk.z] for lmk in hand_landmarks.landmark])
-                
-                # Add landmarks to list
-                landmarks.append(landmarks_norm.flatten())
-                
-                # Save output image with landmarks
-                image_draw = image.copy()
-                mp_drawing = mp.solutions.drawing_utils
-                mp_drawing.draw_landmarks(
-                    image_draw, hand_landmarks, mp_hands.HAND_CONNECTIONS,
-                    mp_drawing.DrawingSpec(color=(255, 0, 0), thickness=2, circle_radius=2),
-                    mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2)
-                )
-                output_path = os.path.join(output_dir, image_file)
-                cv2.imwrite(output_path, image_draw)
-
-    # Clean up
-    hands.close()
-
-    # Convert landmarks to NumPy array
-    landmarks = np.array(landmarks)
-
-    # Save landmarks file
-    np.save("hand_landmarks.npy", landmarks)
-    return jsonify({"message": "Store the extracted hand_landmarks.npy Done."})
-
-
 @app.route('/process_screenshots')
 def process_screenshots():
     # Initialize MediaPipe Hands
@@ -361,7 +297,7 @@ def process_screenshots():
             print("no image_files")
 
         # Loop through images in subdirectory
-        for image_path in tqdm(image_files, desc=f"Processing {sub_dir}", unit="image"):
+        for image_path in image_files:
             # Load input image and resize
             image = cv2.imread(image_path)
             image = cv2.resize(image, (672, 672))  # Replace with your desired size
@@ -410,6 +346,323 @@ def process_screenshots():
 
     return jsonify({"message": "Screenshots processed successfully."})
 
+
+@app.route('/predict')
+def predict():
+    # Load the .npy file
+    hand_landmarks = np.load('backend/Flask/live_hand_landmarks.npy')
+
+    # get page
+    page_name = request.referrer
+
+    # Define input directories based on page
+    if page_name == "http://127.0.0.1:5000/letter1":
+        sub_dir = "1"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter2":
+        sub_dir = "2"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter3":
+        sub_dir = "3"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/letter4":
+        sub_dir = "4"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter5":
+        sub_dir = "5"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter6":
+        sub_dir = "6"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter7":
+        sub_dir = "7"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter8":
+        sub_dir = "8"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter9":
+        sub_dir = "9"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter10":
+        sub_dir = "10"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter11":
+        sub_dir = "11"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter12":
+        sub_dir = "12"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter13":
+        sub_dir = "13"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter14":
+        sub_dir = "14"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter15":
+        sub_dir = "15"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter16":
+        sub_dir = "16"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter17":
+        sub_dir = "17"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter18":
+        sub_dir = "18"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter19":
+        sub_dir = "19"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter20":
+        sub_dir = "20"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter21":
+        sub_dir = "21"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter22":
+        sub_dir = "22"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter23":
+        sub_dir = "23"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter24":
+        sub_dir = "24"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter25":
+        sub_dir = "25"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter26":
+        sub_dir = "26"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/letter27":
+        sub_dir = "27"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/number0":
+        sub_dir = "num0"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/number1":
+        sub_dir = "num1"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/number2":
+        sub_dir = "num2"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/number3":
+        sub_dir = "num3"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/number4":
+        sub_dir = "num4"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/number5":
+        sub_dir = "num5"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/number6":
+        sub_dir = "num6"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/number7":
+        sub_dir = "num7"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/number8":
+        sub_dir = "num8"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    elif page_name == "http://127.0.0.1:5000/number9":
+        sub_dir = "num9"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        
+    else:
+        print(f"Invalid page: {page_name}")
+        exit()
+
+    # Normalize the test data using the same mean and std as the training data
+    mean = np.mean(hand_landmarks, axis=0)
+    std = np.std(hand_landmarks, axis=0)
+    landmarks_test_norm = (hand_landmarks - mean) / std
+
+    # Reshape the test data to match the input shape of the model
+    landmarks_test_resized = np.zeros((landmarks_test_norm.shape[0], 112, 112, 3))
+    for i in range(landmarks_test_norm.shape[0]):
+        img = np.stack([landmarks_test_norm[i]] * 3, axis=-1)
+        img = np.expand_dims(img, axis=0)  # add a new axis to img
+        img_resized = tf.image.resize(img, (112, 112)).numpy()[0]  # resize and remove the added axis
+        landmarks_test_resized[i] = img_resized
+
+    # Get the predicted probabilities for each class
+    preds = model.predict(landmarks_test_resized)
+
+    # Convert the predicted probabilities to class labels using argmax
+    predicted_labels = np.argmax(preds, axis=1)
+
+    # Convert the class labels back to original label strings using inverse_transform
+    label_encoder = LabelEncoder()  # Define label_encoder
+    labels_str = label_encoder.fit_transform(hand_labels)
+    predicted_labels_str = label_encoder.inverse_transform(predicted_labels)
+
+    # Create a dictionary to store counts of unique variables
+    count_dict = {}
+
+    # Loop through the array and count occurrences of each variable
+    for item in predicted_labels_str:
+        if item in count_dict:
+            count_dict[item] += 1
+        else:
+            count_dict[item] = 1
+
+    # sort dictionary by values
+    sorted_count_dict = dict(sorted(count_dict.items(), key=lambda x: x[1]))
+
+    # Create a string with the results
+    result_str = ""
+    for item, count in sorted_count_dict.items():
+        result_str += ('Variable "{}" appears {} times out of {} ({:.3f}%)\n'.format(item.strip(), count, len(predicted_labels_str), count/len(predicted_labels_str)*100))
+
+    # Return the results
+    return result_str
 
 # @app.route('/')
 # def splash():
