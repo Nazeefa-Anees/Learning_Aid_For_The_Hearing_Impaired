@@ -65,10 +65,10 @@
 						})
 						}).then(function(response) {
 							// Handle the response here if necessary
-							// Send a GET request to /extract_hand_landmarks route
-							fetch('/extract_hand_landmarks')
+							// Send a GET request to /process_screenshots route
+							fetch('/process_screenshots')
 								.then(function(response) {
-									// Handle the response here if necessary
+									console.log(response)
 								});
 						});
 					}, 5000); // take screenshots for 5 seconds
@@ -108,7 +108,7 @@
 					<div class="dataCollection" id="dataCollection"></div>
 					<div class="counter">0</div>
 					<video class="input_video" id="liveVideo" style="display: none;"></video>
-					<canvas class="screenshotCanvas" id="screenshotCanvas" width="100%" height="100%"></canvas>
+					<canvas class="screenshotCanvas" id="screenshotCanvas" width="672px" height="672px"></canvas>
 					<canvas class="output_canvas" width="100%" height="100%"></canvas>
 					<div class="control-panel" style="display: none;"></div>
 				</div>

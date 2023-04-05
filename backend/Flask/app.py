@@ -1,4 +1,4 @@
-from flask import Flask, jsonify,redirect,url_for,render_template,Response,request
+from flask import Flask, jsonify, redirect, url_for, render_template, Response, request
 import os
 import cv2
 import base64
@@ -6,6 +6,12 @@ import json
 import numpy as np
 import mediapipe as mp
 import tensorflow as tf
+from tqdm import tqdm
+from tensorflow.keras.applications.vgg19 import VGG19
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.models import Model
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+
 
 app = Flask(__name__)
 
@@ -14,12 +20,135 @@ app = Flask(__name__)
 def save_screenshots():
     screenshots = request.json['screenshots']
     directory = 'backend/Flask/screenshots'
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+
+    # get page
+    page_name = request.referrer
+
+    # Define input directories based on page
+    if page_name == "http://127.0.0.1:5000/letter1":
+        sub_dir = "1"
+        
+    elif page_name == "http://127.0.0.1:5000/letter2":
+        sub_dir = "2"
+        
+    elif page_name == "http://127.0.0.1:5000/letter3":
+        sub_dir = "3"
+        
+    elif page_name == "http://127.0.0.1:5000/letter4":
+        sub_dir = "4"
+        
+    elif page_name == "http://127.0.0.1:5000/letter5":
+        sub_dir = "5"
+        
+    elif page_name == "http://127.0.0.1:5000/letter6":
+        sub_dir = "6"
+        
+    elif page_name == "http://127.0.0.1:5000/letter7":
+        sub_dir = "7"
+        
+    elif page_name == "http://127.0.0.1:5000/letter8":
+        sub_dir = "8"
+        
+    elif page_name == "http://127.0.0.1:5000/letter9":
+        sub_dir = "9"
+        
+    elif page_name == "http://127.0.0.1:5000/letter10":
+        sub_dir = "10"
+        
+    elif page_name == "http://127.0.0.1:5000/letter11":
+        sub_dir = "11"
+        
+    elif page_name == "http://127.0.0.1:5000/letter12":
+        sub_dir = "12"
+        
+    elif page_name == "http://127.0.0.1:5000/letter13":
+        sub_dir = "13"
+        
+    elif page_name == "http://127.0.0.1:5000/letter14":
+        sub_dir = "14"
+        
+    elif page_name == "http://127.0.0.1:5000/letter15":
+        sub_dir = "15"
+        
+    elif page_name == "http://127.0.0.1:5000/letter16":
+        sub_dir = "16"
+        
+    elif page_name == "http://127.0.0.1:5000/letter17":
+        sub_dir = "17"
+        
+    elif page_name == "http://127.0.0.1:5000/letter18":
+        sub_dir = "18"
+        
+    elif page_name == "http://127.0.0.1:5000/letter19":
+        sub_dir = "19"
+        
+    elif page_name == "http://127.0.0.1:5000/letter20":
+        sub_dir = "20"
+        
+    elif page_name == "http://127.0.0.1:5000/letter21":
+        sub_dir = "21"
+        
+    elif page_name == "http://127.0.0.1:5000/letter22":
+        sub_dir = "22"
+        
+    elif page_name == "http://127.0.0.1:5000/letter23":
+        sub_dir = "23"
+        
+    elif page_name == "http://127.0.0.1:5000/letter24":
+        sub_dir = "24"
+        
+    elif page_name == "http://127.0.0.1:5000/letter25":
+        sub_dir = "25"
+        
+    elif page_name == "http://127.0.0.1:5000/letter26":
+        sub_dir = "26"
+        
+    elif page_name == "http://127.0.0.1:5000/letter27":
+        sub_dir = "27"
+        
+    elif page_name == "http://127.0.0.1:5000/number0":
+        sub_dir = "num0"
+        
+    elif page_name == "http://127.0.0.1:5000/number1":
+        sub_dir = "num1"
+        
+    elif page_name == "http://127.0.0.1:5000/number2":
+        sub_dir = "num2"
+        
+    elif page_name == "http://127.0.0.1:5000/number3":
+        sub_dir = "num3"
+        
+    elif page_name == "http://127.0.0.1:5000/number4":
+        sub_dir = "num4"
+        
+    elif page_name == "http://127.0.0.1:5000/number5":
+        sub_dir = "num5"
+        
+    elif page_name == "http://127.0.0.1:5000/number6":
+        sub_dir = "num6"
+        
+    elif page_name == "http://127.0.0.1:5000/number7":
+        sub_dir = "num7"
+        
+    elif page_name == "http://127.0.0.1:5000/number8":
+        sub_dir = "num8"
+        
+    elif page_name == "http://127.0.0.1:5000/number9":
+        sub_dir = "num9"
+        
+    else:
+        print(f"Invalid page: {page_name}")
+        exit()
+
+    # subdirectories path
+    subdir_path = os.path.join(directory, sub_dir)
+
+    if not os.path.exists(subdir_path):
+        os.makedirs(subdir_path)
     for i, screenshot in enumerate(screenshots):
-        with open(f'{directory}/screenshot_{i}.png', 'wb') as f:
+        with open(f'{subdir_path}/screenshot_{i}.png', 'wb') as f:
             f.write(base64.b64decode(screenshot.split(',')[1]))
-    return 'Screenshots saved successfully.'
+    return jsonify({"message": "Screenshots saved successfully."})
 
 
 @app.route("/extract_hand_landmarks")
@@ -34,7 +163,7 @@ def extract_hand_landmarks():
 
     # Set input and output directories
     input_dir = "backend/Flask/screenshots"
-    output_dir = "backend/Flask/hand_landmarks"
+    output_dir = "backend/Flask/screenshotsProcessed"
 
     # Initialize empty list to store landmarks
     landmarks = []
@@ -83,7 +212,203 @@ def extract_hand_landmarks():
 
     # Save landmarks file
     np.save("hand_landmarks.npy", landmarks)
-    print("Store the extracted hand_landmarks.npy Done")
+    return jsonify({"message": "Store the extracted hand_landmarks.npy Done."})
+
+
+@app.route('/process_screenshots')
+def process_screenshots():
+    # Initialize MediaPipe Hands
+    mp_hands = mp.solutions.hands
+    hands = mp_hands.Hands(
+        static_image_mode=True,
+        max_num_hands=1,
+        min_detection_confidence=0.8,
+    )
+
+    # Set input and output directories
+    input_dir = "backend/Flask/screenshots"
+    output_dir = "backend/Flask/screenshotsProcessed"
+
+    # Initialize empty lists to store landmarks and labels
+    landmarks = []
+
+    # get page
+    page_name = request.referrer
+
+    # Define input directories based on page
+    if page_name == "http://127.0.0.1:5000/letter1":
+        sub_dir = "1"
+        
+    elif page_name == "http://127.0.0.1:5000/letter2":
+        sub_dir = "2"
+        
+    elif page_name == "http://127.0.0.1:5000/letter3":
+        sub_dir = "3"
+        
+    elif page_name == "http://127.0.0.1:5000/letter4":
+        sub_dir = "4"
+        
+    elif page_name == "http://127.0.0.1:5000/letter5":
+        sub_dir = "5"
+        
+    elif page_name == "http://127.0.0.1:5000/letter6":
+        sub_dir = "6"
+        
+    elif page_name == "http://127.0.0.1:5000/letter7":
+        sub_dir = "7"
+        
+    elif page_name == "http://127.0.0.1:5000/letter8":
+        sub_dir = "8"
+        
+    elif page_name == "http://127.0.0.1:5000/letter9":
+        sub_dir = "9"
+        
+    elif page_name == "http://127.0.0.1:5000/letter10":
+        sub_dir = "10"
+        
+    elif page_name == "http://127.0.0.1:5000/letter11":
+        sub_dir = "11"
+        
+    elif page_name == "http://127.0.0.1:5000/letter12":
+        sub_dir = "12"
+        
+    elif page_name == "http://127.0.0.1:5000/letter13":
+        sub_dir = "13"
+        
+    elif page_name == "http://127.0.0.1:5000/letter14":
+        sub_dir = "14"
+        
+    elif page_name == "http://127.0.0.1:5000/letter15":
+        sub_dir = "15"
+        
+    elif page_name == "http://127.0.0.1:5000/letter16":
+        sub_dir = "16"
+        
+    elif page_name == "http://127.0.0.1:5000/letter17":
+        sub_dir = "17"
+        
+    elif page_name == "http://127.0.0.1:5000/letter18":
+        sub_dir = "18"
+        
+    elif page_name == "http://127.0.0.1:5000/letter19":
+        sub_dir = "19"
+        
+    elif page_name == "http://127.0.0.1:5000/letter20":
+        sub_dir = "20"
+        
+    elif page_name == "http://127.0.0.1:5000/letter21":
+        sub_dir = "21"
+        
+    elif page_name == "http://127.0.0.1:5000/letter22":
+        sub_dir = "22"
+        
+    elif page_name == "http://127.0.0.1:5000/letter23":
+        sub_dir = "23"
+        
+    elif page_name == "http://127.0.0.1:5000/letter24":
+        sub_dir = "24"
+        
+    elif page_name == "http://127.0.0.1:5000/letter25":
+        sub_dir = "25"
+        
+    elif page_name == "http://127.0.0.1:5000/letter26":
+        sub_dir = "26"
+        
+    elif page_name == "http://127.0.0.1:5000/letter27":
+        sub_dir = "27"
+        
+    elif page_name == "http://127.0.0.1:5000/number0":
+        sub_dir = "num0"
+        
+    elif page_name == "http://127.0.0.1:5000/number1":
+        sub_dir = "num1"
+        
+    elif page_name == "http://127.0.0.1:5000/number2":
+        sub_dir = "num2"
+        
+    elif page_name == "http://127.0.0.1:5000/number3":
+        sub_dir = "num3"
+        
+    elif page_name == "http://127.0.0.1:5000/number4":
+        sub_dir = "num4"
+        
+    elif page_name == "http://127.0.0.1:5000/number5":
+        sub_dir = "num5"
+        
+    elif page_name == "http://127.0.0.1:5000/number6":
+        sub_dir = "num6"
+        
+    elif page_name == "http://127.0.0.1:5000/number7":
+        sub_dir = "num7"
+        
+    elif page_name == "http://127.0.0.1:5000/number8":
+        sub_dir = "num8"
+        
+    elif page_name == "http://127.0.0.1:5000/number9":
+        sub_dir = "num9"
+        
+    else:
+        print(f"Invalid page: {page_name}")
+        exit()
+    
+    # subdirectories path
+    subdir_path = os.path.join(input_dir, sub_dir)
+
+    # Check if subdirectory is valid and has images
+    if os.path.isdir(subdir_path):
+        image_files = [os.path.join(subdir_path, f) for f in os.listdir(subdir_path) if os.path.isfile(os.path.join(subdir_path, f))]
+        if not image_files:
+            print("no image_files")
+
+        # Loop through images in subdirectory
+        for image_path in tqdm(image_files, desc=f"Processing {sub_dir}", unit="image"):
+            # Load input image and resize
+            image = cv2.imread(image_path)
+            image = cv2.resize(image, (672, 672))  # Replace with your desired size
+
+            # Convert image to RGB format and run hand detection
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            results = hands.process(image)
+
+            # Check if hand(s) were detected
+            if results.multi_hand_landmarks:
+                # Extract landmarks for detected hand
+                for hand_landmarks in results.multi_hand_landmarks:
+                    # Normalize landmarks with respect to image size
+                    image_height, image_width, _ = image.shape
+                    landmarks_norm = np.array([[lmk.x * image_width, lmk.y * image_height, lmk.z] for lmk in hand_landmarks.landmark])
+
+                    # Draw landmarks on image
+                    mp_drawing = mp.solutions.drawing_utils
+                    image_draw = image.copy()
+                    mp_drawing.draw_landmarks(
+                        image_draw, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+
+                    # Draw connections between landmarks with red lines
+                    mp_drawing.draw_landmarks(
+                        image_draw, hand_landmarks, mp_hands.HAND_CONNECTIONS,
+                        mp_drawing.DrawingSpec(color=(255, 0, 0), thickness=2, circle_radius=2),
+                        mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2)
+                    )
+
+                    # Add landmarks to lists
+                    landmarks.append(landmarks_norm.flatten())
+
+                    # Save output image
+                    output_path = os.path.join(output_dir, sub_dir, os.path.basename(image_path))
+                    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+                    cv2.imwrite(output_path, image_draw)
+
+    # Clean up
+    hands.close()
+
+    # Convert landmarks to NumPy array
+    landmarks = np.array(landmarks)
+
+    np.save("backend/Flask/live_hand_landmarks.npy", landmarks)
+    #print("Store the extracted live_hand_landmarks.npy Done")
+
+    return jsonify({"message": "Screenshots processed successfully."})
 
 
 # @app.route('/')
