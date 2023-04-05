@@ -90,21 +90,9 @@ def process_camera_stream():
     return 'Hand landmarks saved to ' + file_path, hand_landmarks_array
 
 
-# @app.route('/')
-# def splash():
-#     return render_template('splash.html')
 
-# @app.route('/prediction')
-# def prediction():
-#     return render_template('prediction.html')
-
-# @app.route('/predresult')
-# def predresult():
-#     return render_template('predresult.html')
 
 @app.route('/')
-<<<<<<< HEAD
-=======
 def splash():
     return render_template('splash.html')
 
@@ -120,7 +108,6 @@ def predresult():
 
 
 @app.route('/home')
->>>>>>> b495c0565147ae8c08506de7dd97045f841f664e
 def home():
     return render_template('home.html')
 
@@ -145,109 +132,109 @@ def letter1():
     return render_template('Letter1.html')
 
 
-# @app.route('/letter2')
-# def letter2():
-#      return render_template('Letter2.html')
+@app.route('/letter2')
+def letter2():
+     return render_template('Letter2.html')
 
-# @app.route('/letter3')
-# def letter3():
-#      return render_template('Letter3.html')
+@app.route('/letter3')
+def letter3():
+     return render_template('Letter3.html')
 
-# @app.route('/letter4')
-# def letter4():
-#      return render_template('Letter4.html')
+@app.route('/letter4')
+def letter4():
+     return render_template('Letter4.html')
 
-# @app.route('/letter5')
-# def letter5():
-#      return render_template('Letter5.html')
+@app.route('/letter5')
+def letter5():
+     return render_template('Letter5.html')
 
-# @app.route('/letter6')
-# def letter6():
-#      return render_template('Letter6.html')
+@app.route('/letter6')
+def letter6():
+     return render_template('Letter6.html')
 
-# @app.route('/letter7')
-# def letter7():
-#      return render_template('Letter7.html')
+@app.route('/letter7')
+def letter7():
+     return render_template('Letter7.html')
 
-# @app.route('/letter8')
-# def letter8():
-#      return render_template('Letter8.html')
+@app.route('/letter8')
+def letter8():
+     return render_template('Letter8.html')
 
-# @app.route('/letter9')
-# def letter9():
-#      return render_template('Letter9.html')
+@app.route('/letter9')
+def letter9():
+     return render_template('Letter9.html')
 
-# @app.route('/letter10')
-# def letter10():
-#      return render_template('Letter10.html')
+@app.route('/letter10')
+def letter10():
+     return render_template('Letter10.html')
 
-# @app.route('/letter11')
-# def letter11():
-#      return render_template('Letter11.html')
+@app.route('/letter11')
+def letter11():
+     return render_template('Letter11.html')
 
-# @app.route('/letter12')
-# def letter12():
-#      return render_template('Letter12.html')
+@app.route('/letter12')
+def letter12():
+     return render_template('Letter12.html')
 
-# @app.route('/letter13')
-# def letter13():
-#      return render_template('Letter13.html')
+@app.route('/letter13')
+def letter13():
+     return render_template('Letter13.html')
 
-# @app.route('/letter14')
-# def letter14():
-#      return render_template('Letter14.html')
+@app.route('/letter14')
+def letter14():
+     return render_template('Letter14.html')
 
-# @app.route('/letter15')
-# def letter15():
-#      return render_template('Letter15.html')
+@app.route('/letter15')
+def letter15():
+     return render_template('Letter15.html')
 
-# @app.route('/letter16')
-# def letter16():
-#      return render_template('Letter16.html')
+@app.route('/letter16')
+def letter16():
+     return render_template('Letter16.html')
 
-# @app.route('/letter17')
-# def letter17():
-#      return render_template('Letter17.html')
+@app.route('/letter17')
+def letter17():
+     return render_template('Letter17.html')
 
-# @app.route('/letter18')
-# def letter18():
-#      return render_template('Letter18.html')
+@app.route('/letter18')
+def letter18():
+     return render_template('Letter18.html')
 
-# @app.route('/letter19')
-# def letter19():
-#      return render_template('Letter19.html')
+@app.route('/letter19')
+def letter19():
+     return render_template('Letter19.html')
 
-# @app.route('/letter20')
-# def letter20():
-#      return render_template('Letter20.html')
+@app.route('/letter20')
+def letter20():
+     return render_template('Letter20.html')
 
-# @app.route('/letter21')
-# def letter21():
-#      return render_template('Letter21.html')
+@app.route('/letter21')
+def letter21():
+     return render_template('Letter21.html')
 
-# @app.route('/letter22')
-# def letter22():
-#      return render_template('Letter22.html')
+@app.route('/letter22')
+def letter22():
+     return render_template('Letter22.html')
 
-# @app.route('/letter23')
-# def letter23():
-#      return render_template('Letter23.html')
+@app.route('/letter23')
+def letter23():
+     return render_template('Letter23.html')
 
-# @app.route('/letter24')
-# def letter24():
-#      return render_template('Letter24.html')
+@app.route('/letter24')
+def letter24():
+     return render_template('Letter24.html')
 
-# @app.route('/letter25')
-# def letter25():
-#      return render_template('Letter25.html')
+@app.route('/letter25')
+def letter25():
+     return render_template('Letter25.html')
 
-# @app.route('/letter26')
-# def letter26():
-#      return render_template('Letter26.html')
+@app.route('/letter26')
+def letter26():
+     return render_template('Letter26.html')
 
-# @app.route('/letter27')
-# def letter27():
-#      return render_template('Letter27.html')
+@app.route('/letter27')
+def letter27():
+     return render_template('Letter27.html')
 
 # @app.route('/number0')
 # def number0():
