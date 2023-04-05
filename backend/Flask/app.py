@@ -6,12 +6,12 @@ import json
 import numpy as np
 import mediapipe as mp
 import tensorflow as tf
+import tensorflowjs as tfjs
 from tqdm import tqdm
 from tensorflow.keras.applications.vgg19 import VGG19
 from tensorflow.keras.layers import Dense, Flatten
 from tensorflow.keras.models import Model
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-
 
 app = Flask(__name__)
 
@@ -659,10 +659,11 @@ def predict():
     # Create a string with the results
     result_str = ""
     for item, count in sorted_count_dict.items():
-        result_str += ('Variable "{}" appears {} times out of {} ({:.3f}%)\n'.format(item.strip(), count, len(predicted_labels_str), count/len(predicted_labels_str)*100))
+        result_str += ('Variable "{}" appears {} times out of {} ({:.2f}%)\n'.format(item.strip(), count, len(predicted_labels_str), count/len(predicted_labels_str)*100))
 
     # Return the results
     return jsonify({"result_str": result_str})
+
 
 # @app.route('/')
 # def splash():

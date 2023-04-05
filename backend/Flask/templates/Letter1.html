@@ -100,8 +100,9 @@
 								console.log(data.message)// response data
 								// Send a GET request to /predict route
 								fetch('/predict').then(response => response.json()).then(data => {
-									const resultDiv = document.getElementById("result-div");
+									const resultDiv = document.getElementById("results");
 									resultDiv.innerHTML = data.result_str;
+									document.getElementById("result-div").style.display = "inline";
 								});
 							})
 							.catch(error => console.error(error));
@@ -146,7 +147,9 @@
 					<canvas class="screenshotCanvas" id="screenshotCanvas" ></canvas>
 					<canvas class="output_canvas" width="100%" height="100%"></canvas>
 					<div class="control-panel" style="display: none;"></div>
-					<div id="result-div"></div>
+					<div id="result-div" style="display: none;">
+						<div id="results"></div>
+					</div>
 				</div>
 			</div>
 

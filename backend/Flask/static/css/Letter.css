@@ -193,6 +193,28 @@ body {
     z-index: 2;
 }
 
+#result-div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #000000;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: rgba(199, 186, 125, 1);
+    z-index: 4;
+}
+
+#results {
+    top: 10%;
+    height: 70%;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2rem;
+}
+
 .button2 {
 	width: 80px; 
 	height: 80px; 
