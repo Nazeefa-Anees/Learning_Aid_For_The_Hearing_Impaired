@@ -1,8 +1,10 @@
+from flask import Flask, jsonify,redirect,url_for,render_template,Response,request
 import os
 import cv2
+import base64
+import json
 import numpy as np
 import mediapipe as mp
-from flask import Flask, jsonify, redirect, url_for, render_template, Response, request
 import tensorflow as tf
 
 app = Flask(__name__)
@@ -10,86 +12,65 @@ app = Flask(__name__)
 
 @app.route('/save_screenshots', methods=['POST'])
 def save_screenshots():
-    screenshots = request.get_json()['screenshots']
+    screenshots = request.json['screenshots']
+    directory = 'backend/Flask/screenshots'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
     for i, screenshot in enumerate(screenshots):
-        with open(f'screenshot_{i}.png', 'wb') as f:
+        with open(f'{directory}/screenshot_{i}.png', 'wb') as f:
             f.write(base64.b64decode(screenshot.split(',')[1]))
-    return 'Screenshots saved!'
-
+    return 'Screenshots saved successfully.'
 
 # model1 = tf.keras.models.load_model("backend\models\model_Letters")
 # model2 = tf.keras.models.load_model("backend\models\model_Numbers")
 
 
-# Initialize MediaPipe Hands
-mp_hands = mp.solutions.hands
-hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.8)
 
+@app.route("/extract_hand_landmarks")
+def extract_hand_landmarks():
+    # Create a MediaPipe Hands object
+    mp_hands = mp.solutions.hands
 
-# Define the route for the camera stream
-@app.route('/camera_stream', methods=['POST'])
-def camera_stream():
-    return Response(process_camera_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    # Define the folder path containing the images
+    folder_path = "backend/Flask/screenshots"
 
+    # Define the output file path for the JSON file
+    output_file_path = "backend/Flask/hand_landmarks.json"
 
-# Function to process the camera stream
-def process_camera_stream():
-    # Set up the camera
-    cap = cv2.VideoCapture(0)
-    cap.set(cv2.CAP_PROP_FPS, 5)
-
-    # Initialize the list to store hand landmarks
+    # Initialize the list to store hand landmark data
     hand_landmarks_list = []
 
-    # Set a timer for 10 seconds
-    end_time = cv2.getTickCount() + 10 * cv2.getTickFrequency()
+    # Iterate over the images in the folder
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".jpg") or filename.endswith(".png"):
+            # Load the image
+            image_path = os.path.join(folder_path, filename)
+            image = cv2.imread(image_path)
 
-    while cv2.getTickCount() < end_time:
-        # Read a frame from the camera
-        ret, frame = cap.read()
+            # Convert the image to RGB
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-        if not ret:
-            break
+            # Run Mediapipe Hands to extract hand landmarks
+            with mp_hands.Hands(static_image_mode=True, max_num_hands=2) as hands:
+                results = hands.process(image)
 
-        # Convert the frame to RGB and run it through MediaPipe Hands to get hand landmarks
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        results = hands.process(frame)
-        if results.multi_hand_landmarks:
-            hand_landmarks = results.multi_hand_landmarks[0]
-            hand_landmarks_array = np.zeros((21, 3))
-            for i, landmark in enumerate(hand_landmarks.landmark):
-                hand_landmarks_array[i] = [landmark.x, landmark.y, landmark.z]
-            hand_landmarks_list.append(hand_landmarks_array)
+            # Extract the hand landmark data
+            if results.multi_hand_landmarks:
+                for hand_landmarks in results.multi_hand_landmarks:
+                    hand_landmarks_dict = {}
+                    for idx, landmark in enumerate(hand_landmarks.landmark):
+                        hand_landmarks_dict[f"Landmark {idx}"] = {
+                            "X": landmark.x,
+                            "Y": landmark.y,
+                            "Z": landmark.z,
+                        }
+                    hand_landmarks_list.append(hand_landmarks_dict)
 
-        # Convert the frame back to BGR for display
-        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+    # Save the hand landmark data to a JSON file
+    with open(output_file_path, "w") as e:
+        json.dump(hand_landmarks_list, e)
 
-        # Convert the frame to a JPEG image for streaming
-        ret, jpeg = cv2.imencode('.jpg', frame)
-        frame_bytes = jpeg.tobytes()
-
-        # Yield the frame as a multipart response
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
-
-    # Release the camera and MediaPipe Hands resources
-    cap.release()
-    hands.close()
-
-    # Convert the hand landmarks list to a NumPy array and return it
-    hand_landmarks_array = np.array(hand_landmarks_list)
-    # Define the file path and name for the text file
-    file_path = os.path.join(app.static_folder, 'hand_landmarks.txt')
-
-    # Write the hand landmarks array to the text file
-    with open(file_path, 'w') as f:
-        for row in hand_landmarks_array:
-            f.write(' '.join(str(x) for x in row) + '\n')
-
-    # Return a message to indicate that the file has been saved
-    return 'Hand landmarks saved to ' + file_path, hand_landmarks_array
-
-
+    return "Hand landmarks extracted and saved to JSON file!"
 
 
 @app.route('/')
