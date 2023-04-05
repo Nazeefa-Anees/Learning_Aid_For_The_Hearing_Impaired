@@ -13,6 +13,7 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 	<script type="module" src="../static/js/showHands.js"></script>
 	<script type="module" src="../static/js/videoOnCanvas.js"></script>
+	<script type="module" src="../static/js/takeScreenshots.js"></script>
 
 	<script>
 		function startCamera() {
@@ -46,32 +47,64 @@
 					var screenshotCounter = 0;
 					var screenshotInterval = setInterval(function() {
 						html2canvas(document.querySelector(".screenshotCanvas")).then(function(canvas) {
-							screenshots.push(canvas.toDataURL());
+							// Get the context of the canvas
+							var ctx = canvas.getContext('2d');
+							// Calculate the aspect ratio of the canvas
+							var aspectRatio = canvas.width / canvas.height;
+							// Calculate the new dimensions for cropping
+							var newWidth, newHeight, offsetX, offsetY;
+							if (aspectRatio > 1) {
+								// Landscape
+								newHeight = canvas.height;
+								newWidth = canvas.height;
+								offsetX = (canvas.width - newWidth) / 2;
+								offsetY = 0;
+							} else {
+								// Portrait or square
+								newWidth = canvas.width;
+								newHeight = canvas.width;
+								offsetX = 0;
+								offsetY = (canvas.height - newHeight) / 2;
+							}
+							// Create a new canvas with the cropped dimensions
+							var croppedCanvas = document.createElement('canvas');
+							croppedCanvas.width = newWidth;
+							croppedCanvas.height = newHeight;
+							// Get the context of the new canvas
+							var croppedCtx = croppedCanvas.getContext('2d');
+							// Draw the cropped image onto the new canvas
+							croppedCtx.drawImage(canvas, offsetX, offsetY, newWidth, newHeight, 0, 0, newWidth, newHeight);
+							// Add the cropped image to the screenshots array if it hasn't reached the limit
+							if (screenshots.length < 20) {
+								screenshots.push(croppedCanvas.toDataURL());
+							}
 							screenshotCounter++;
 							document.querySelector(".counter").innerHTML = screenshotCounter;
 						});
 					}, 200); // take 5 screenshots per second (1000ms/5 = 200ms)
-			
+
 					setTimeout(function() {
 						clearInterval(screenshotInterval);
 						// Send the screenshots to Flask app.py using fetch
 						fetch('/save_screenshots', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({
-							screenshots: screenshots
-						})
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({
+								screenshots: screenshots
+							})
 						}).then(function(response) {
-							// Handle the response here if necessary
 							// Send a GET request to /process_screenshots route
-							fetch('/process_screenshots').then(function(response) {
-								console.log(response)
-								fetch('/predict').then(function(response) {
-									console.log(response)
+							fetch('/process_screenshots').then(response => response.json()).then(data => {
+								console.log(data.message)// response data
+								// Send a GET request to /predict route
+								fetch('/predict').then(response => response.json()).then(data => {
+									const resultDiv = document.getElementById("result-div");
+									resultDiv.innerHTML = data.result_str;
 								});
-							});
+							})
+							.catch(error => console.error(error));
 						});
 					}, 5000); // take screenshots for 5 seconds
 				}
@@ -109,10 +142,11 @@
 				<div class="container" id="showHands" style= "display: none;">
 					<div class="dataCollection" id="dataCollection"></div>
 					<div class="counter">0</div>
-					<video class="input_video" id="liveVideo" style="display: none;"></video>
-					<canvas class="screenshotCanvas" id="screenshotCanvas" width="672px" height="672px"></canvas>
+					<video class="input_video" id="liveVideo" style="display: none;" muted></video>
+					<canvas class="screenshotCanvas" id="screenshotCanvas" ></canvas>
 					<canvas class="output_canvas" width="100%" height="100%"></canvas>
 					<div class="control-panel" style="display: none;"></div>
+					<div id="result-div"></div>
 				</div>
 			</div>
 

@@ -662,7 +662,7 @@ def predict():
         result_str += ('Variable "{}" appears {} times out of {} ({:.3f}%)\n'.format(item.strip(), count, len(predicted_labels_str), count/len(predicted_labels_str)*100))
 
     # Return the results
-    return result_str
+    return jsonify({"result_str": result_str})
 
 # @app.route('/')
 # def splash():
