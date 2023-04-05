@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js" crossorigin="anonymous"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 	<script type="module" src="../static/js/showHands.js"></script>
+	<script type="module" src="../static/js/videoOnCanvas.js"></script>
 
 	<script>
 		function startCamera() {
@@ -44,7 +45,7 @@
 					var screenshots = [];
 					var screenshotCounter = 0;
 					var screenshotInterval = setInterval(function() {
-						html2canvas(document.querySelector(".output_canvas")).then(function(canvas) {
+						html2canvas(document.querySelector(".screenshotCanvas")).then(function(canvas) {
 							screenshots.push(canvas.toDataURL());
 							screenshotCounter++;
 							document.querySelector(".counter").innerHTML = screenshotCounter;
@@ -64,6 +65,11 @@
 						})
 						}).then(function(response) {
 							// Handle the response here if necessary
+							// Send a GET request to /extract_hand_landmarks route
+							fetch('/extract_hand_landmarks')
+								.then(function(response) {
+									// Handle the response here if necessary
+								});
 						});
 					}, 5000); // take screenshots for 5 seconds
 				}
@@ -101,7 +107,8 @@
 				<div class="container" id="showHands" style= "display: none;">
 					<div class="dataCollection" id="dataCollection"></div>
 					<div class="counter">0</div>
-					<video class="input_video" style="display: none;"></video>
+					<video class="input_video" id="liveVideo" style="display: none;"></video>
+					<canvas class="screenshotCanvas" id="screenshotCanvas" width="100%" height="100%"></canvas>
 					<canvas class="output_canvas" width="100%" height="100%"></canvas>
 					<div class="control-panel" style="display: none;"></div>
 				</div>
