@@ -4,37 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2ba788c-1d93-4cb6-884d-5a343f8a9d40" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter10.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter11.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter12.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter13.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter14.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter15.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter16.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter17.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter18.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter19.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter20.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter21.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter22.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter23.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter24.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter25.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter26.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter27.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter4.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter5.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter6.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter7.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter8.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Flask/templates/letter9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Flask/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Flask/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Flask/static/css/prediction.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Flask/static/css/prediction.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Flask/static/css/quiz.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Flask/static/css/quiz.css" afterDir="false" />
-    </list>
+    <list default="true" id="f2ba788c-1d93-4cb6-884d-5a343f8a9d40" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +36,9 @@
       <module name="Learning_Aid_For_The_Hearing_Impaired" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend/Flask" />
       <option name="IS_MODULE_SDK" value="true" />
