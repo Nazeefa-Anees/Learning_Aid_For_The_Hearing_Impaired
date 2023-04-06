@@ -16,10 +16,6 @@ function draw() {
     screenshotCanvas.width = liveVideo.videoWidth;
     screenshotCanvas.height = liveVideo.videoHeight;
 
-    // Flip the context horizontally
-    context.scale(-1, 1);
-    context.translate(-screenshotCanvas.width, 0);
-
     // Draw the current video frame onto the canvas
     context.drawImage(liveVideo, 0, 0, screenshotCanvas.width, screenshotCanvas.height);
 

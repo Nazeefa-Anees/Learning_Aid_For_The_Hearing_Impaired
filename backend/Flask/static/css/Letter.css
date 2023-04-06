@@ -70,7 +70,7 @@ body {
 
 .Camera {
     position: relative;
-    height: 64.7%;
+    height: 71%;
     width: 40%;
     left: 67%;
     top: 55%;
@@ -124,46 +124,59 @@ body {
     transform: translate(-50%, -60%);
 }
 
-.dataCollection {
+#showHands {
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#timer-div {
     position: absolute;
     left: 93%;
     width: 7%;
     height: 8%;
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    text-shadow: 0 0 5px #ffffff;
     border-left: 2px solid #000000;
     border-right: 1px solid #000000;
     border-bottom: 2px solid #000000;
-    border-radius: 0px 0px 25px 25px;
+    border-radius: 0px 0px 10px 10px;
     background-color: rgba(199, 186, 125, 0.5);
     z-index: 3;
 }
 
-.counter {
-    position: absolute;
-    left: 86%;
-    width: 7%;
-    height: 8%;
+#timer-text {
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
     color: rgb(0, 0, 0);
     text-shadow: 0 0 5px #ffffff;
+} 
+
+#info-div {
+    position: absolute;
+    width: 93%;
+    height: 8%;
     border-left: 2px solid #000000;
     border-right: 2px solid #000000;
     border-bottom: 2px solid #000000;
-    border-radius: 0px 0px 25px 25px;
+    border-radius: 0px 0px 10px 10px;
     background-color: rgba(199, 186, 125, 0.5);
+    transform: translate(-0.2%, 0%);
     z-index: 3;
+}
+
+#info-text {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    text-shadow: 0 0 5px #ffffff;
+    transform: translate(0%, 50%);
 }
 
 .input_video {
     position: absolute;
     width: 100%;
-    height: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -177,14 +190,15 @@ body {
     position: absolute;
     overflow: hidden;
     width: 100%;
-    height: 100%;
+    top: 54.2%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }  
 
 .output_canvas {
     position: absolute;
-    height: 100%;
     width: 100%;
-    top: 50%;
+    top: 54.2%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: 2px solid #000000;

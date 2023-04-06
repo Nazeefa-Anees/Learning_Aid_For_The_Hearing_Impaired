@@ -42,8 +42,7 @@ body{
 table {
 	border-spacing: 50px;
 	border-width: 2px;
-	padding-top: 3%;
-
+	top: 50px;
 }
 
 .center {

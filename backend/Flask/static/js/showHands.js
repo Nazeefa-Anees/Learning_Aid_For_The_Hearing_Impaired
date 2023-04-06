@@ -20,6 +20,9 @@ function onResults(results) {
     // Draw the overlays.
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    // Flip the context horizontally
+    canvasCtx.scale(-1, 1);
+    canvasCtx.translate(-canvasElement.width, 0);
     canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
     if (results.multiHandLandmarks && results.multiHandedness) {
         for (let index = 0; index < results.multiHandLandmarks.length; index++) {
@@ -96,3 +99,4 @@ new controls.ControlPanel(controlsElement, {
     videoElement.classList.toggle('selfie', true); // always set to true
     hands.setOptions(options);
 });
+
