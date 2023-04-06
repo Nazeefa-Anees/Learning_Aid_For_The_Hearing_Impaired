@@ -176,22 +176,46 @@ const questions = [
     }
     
     
+  
     
-    function renderFeedback(isCorrect) {
-      const feedbackEl = document.createElement('div');
-      feedbackEl.classList.add('feedback');
-      feedbackEl.innerText = isCorrect ? 'Correct!' : 'Incorrect.';
-      optionsEl.appendChild(feedbackEl);
+  function renderResult() {
+    console.log(userAnswers)
+  const numCorrectAnswers = userAnswers.filter(
+    (answer, index) => answer === questions[index].answer
+  ).length;
+
+  const resultPercentage = (numCorrectAnswers / questions.length) * 100;
+  const totalMarks = 10;
+  const marks = numCorrectAnswers * (totalMarks / questions.length);
+
+  let feedback = '';
+  if (marks >= 9) {
+    feedback = 'You can continue with the quiz directly.';
+  } else if (marks < 5) {
+    feedback = 'Continue with learning.';
+  } else {
+    const firstHalf = userAnswers.slice(0, 5);
+    const secondHalf = userAnswers.slice(5);
+    const firstHalfMarks = firstHalf.filter(
+      (answer, index) => answer === questions[index].answer
+    ).length;
+    const secondHalfMarks = secondHalf.filter(
+      (answer, index) => answer === questions[index + 5].answer
+    ).length;
+
+    if (firstHalfMarks < 3 && secondHalfMarks > 3) {
+      feedback = 'You can continue with the learning process-alphabet.';
+    } else if (firstHalfMarks > 3 && secondHalfMarks < 3) {
+      feedback = 'You can continue with the learning process-numbers.';
+    } else {
+      feedback = 'You have a basic knowledge. You can do learning or you can take the quiz.';
     }
-    
-    function renderResult() {
-      const numCorrectAnswers = userAnswers.filter(
-        (answer, index) => answer === questions[index].answer
-      ).length;
-    
-      const resultPercentage = (numCorrectAnswers / questions.length) * 100;
-      resultEl.innerText = `You got ${numCorrectAnswers} out of ${questions.length} (${resultPercentage}%) questions correct.`;
-    }
+  }
+
+  const resultEl = document.getElementById('result');
+  resultEl.innerHTML = `You got ${numCorrectAnswers} out of ${questions.length} (${resultPercentage}%) questions correct. Your score is ${marks} out of ${totalMarks}.<br><br>${feedback}`;
+}
+
     
     function handleNextQuestion() {
       // Check if an option has been selected
@@ -205,7 +229,7 @@ const questions = [
       const userAnswer = Number(selectedOption.value);
       userAnswers[currentQuestion] = userAnswer;
       const isCorrect = userAnswer === questions[currentQuestion].answer;
-      renderFeedback(isCorrect);
+      
     
       // Move to the next question or show the result
       currentQuestion++;

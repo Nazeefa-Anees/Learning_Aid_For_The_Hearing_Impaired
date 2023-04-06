@@ -1,18 +1,47 @@
 @font-face {
-    font-family: "myFont";
-    src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+  font-family: "myFont";
+  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
   
-  * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    .bg {
-      background-image: url('../assets/rainbow.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      min-height: 100vh;
+  .bg {
+    background-image: url('../assets/rainbow.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .question-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+    #done {
+      font-size: 24px;
+      background-color: #F7C51F;
+      color: #FFFFFF;
+      border-radius: 50px;
+      padding: 10px 20px;
+      margin-top: 20px;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     }
