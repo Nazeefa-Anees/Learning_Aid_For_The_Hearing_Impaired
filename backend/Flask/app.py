@@ -6,9 +6,7 @@ import json
 import numpy as np
 import mediapipe as mp
 import tensorflow as tf
-import tensorflowjs as tfjs
-from tqdm import tqdm
-from tensorflow.keras.applications.vgg19 import VGG19
+import tensorflowjs as tfjs 
 from tensorflow.keras.layers import Dense, Flatten
 from tensorflow.keras.models import Model
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
@@ -146,7 +144,7 @@ def save_screenshots():
     if not os.path.exists(subdir_path):
         os.makedirs(subdir_path)
     for i, screenshot in enumerate(screenshots):
-        with open(f'{subdir_path}/screenshot_{i}.png', 'wb') as f:
+        with open(f'{subdir_path}/screenshot_{i}.jpg', 'wb') as f:
             f.write(base64.b64decode(screenshot.split(',')[1]))
     return jsonify({"message": "Screenshots saved successfully."})
 
