@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Number1</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/Number.css">
+	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+
+	<script>
+		function startCamera() {
+			// Hide the button
+			document.getElementById("start-camera").style.display = "none";
+
+			// Display the countdown
+			var countdown = 3;
+			var countdownInterval = setInterval(function() {
+				document.getElementById("countdown").innerHTML = countdown;
+				countdown--;
+				if (countdown < 0) {
+				clearInterval(countdownInterval);
+				document.getElementById("countdown").style.display = "none";
+				document.getElementById("video").style.display = "block";
+				document.getElementById("canvas").style.display = "block";
+				initHands();
+				}
+			}, 1000);
+
+			// Start the camera
+			navigator.mediaDevices.getUserMedia({ video: true })
+				.then(function(stream) {
+				var video = document.getElementById("video");
+				video.srcObject = stream;
+				video.play();
+				})
+				.catch(function(error) {
+				console.log(error);
+				});
+			}
+
+			function initHands() {
+				const hands = new Hands({locateFile: (file) => {
+					return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+				}});
+				hands.setOptions({
+					maxNumHands: 1,
+					minDetectionConfidence: 0.8,
+					minTrackingConfidence: 0.5
+				});
+				hands.onResults((results) => {
+					// Draw hand landmarks and connections here
+					const canvas = document.getElementById("canvas");
+					const context = canvas.getContext("2d");
+					context.clearRect(0, 0, canvas.width, canvas.height);
+					context.drawImage(results.image, 0, 0, canvas.width, canvas.height);
+					if (results.multiHandLandmarks) {
+						for (const landmarks of results.multiHandLandmarks) {
+							drawConnectors(context, landmarks, Hands.HAND_CONNECTIONS, {
+								color: "#00FF00",
+								lineWidth: 5,
+							});
+							drawLandmarks(context, landmarks, {
+								color: "#FF0000",
+								lineWidth: 2,
+							});
+						}
+					}
+				});
+				const videoElement = document.getElementsByClassName('video')[0];
+				hands.initialize(videoElement);
+			}
+	</script>
+
+  </head>
+  <body>
+    <div class="page-container">
+		<!-- Background Image -->
+      	<div class="bg">
+
+			<!-- Text -->
+			<div class="Text">
+				<h1 class="font-family: myFont;">
+				1
+				</h1>
+			</div>
+
+			<!-- Camera -->
+			<div class="Camera">
+				<button class="camButton" id="start-camera" onclick="startCamera()">Start Camera</button>
+				<div id="countdown"class="countdown-text"></div>
+				<video class="video" id="video" style="display:none;"></video>
+				<canvas id="canvas" class="canvas" style="display:none;"></canvas>
+			</div>
+  
+			<!-- Image -->
+			<div class="Imgdiv">
+				<img src="../static/assets/dataset_icons/numbers/1.JPG" alt="number1" class="image">
+			</div>
+
+			<!-- Back Arrow -->
+			<a href="{{ url_for('number0') }}">
+				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
+			</a>
+
+			<!-- Home Icon -->
+			<a href="{{ url_for('home') }}">
+				<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
+			</a>
+				
+			<!-- Next -->
+			<a href="{{ url_for('number2') }}">
+				<div class="button4" style="background-image: url(../static/assets/next.png);"></div>
+			</a>
+
+		</div>
+    </div>
+  </body>
+</html>

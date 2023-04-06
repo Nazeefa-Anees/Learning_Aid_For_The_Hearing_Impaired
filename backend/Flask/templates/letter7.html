@@ -10,50 +10,106 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js" crossorigin="anonymous"></script>
-    <script type="module" src="../static/js/showHands.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	<script type="module" src="../static/js/showHands.js"></script>
+	<script type="module" src="../static/js/videoOnCanvas.js"></script>
+	<script type="module" src="../static/js/takeScreenshots.js"></script>
 
 	<script>
 		function startCamera() {
-		// Hide the button
-		document.getElementById("start-camera").style.display = "none";
+		  	// Hide the button
+		  	document.getElementById("start-camera").style.display = "none";
+	  
+		  	// Display the countdown
+			var countdown = 3;
+			var countdownInterval = setInterval(function() {
+				document.getElementById("count-down").innerHTML = countdown;
+				countdown--;
+				if (countdown < 0) {
+					clearInterval(countdownInterval);
+					document.getElementById("count-down").style.display = "none";
+					document.getElementById("count-blur").style.display = "none";
+					document.getElementById("showHands").style.display = "inline";
+			
+  					// Start a timer for 5 seconds
+					var totalSeconds = 5;
+					var secondsRemaining = totalSeconds;
+					var countDownInterval = setInterval(function() {
+						document.getElementById("dataCollection").innerHTML = secondsRemaining;
+						secondsRemaining--;
+						if (secondsRemaining < 0) {
+							clearInterval(countDownInterval);
+						}
+					}, 1000);
 
-		// Display the countdown
-		var countdown = 3;
-		var countdownInterval = setInterval(function() {
-			document.getElementById("count-down").innerHTML = countdown;
-			countdown--;
-			if (countdown < 0) {
-			clearInterval(countdownInterval);
-			document.getElementById("count-down").style.display = "none";
-			document.getElementById("count-blur").style.display = "none";
-			document.getElementById("showHands").style.display = "inline";
+					// Take 5 screenshots per second for 5 seconds
+					var screenshots = [];
+					var screenshotCounter = 0;
+					var screenshotInterval = setInterval(function() {
+						html2canvas(document.querySelector(".screenshotCanvas")).then(function(canvas) {
+							// Get the context of the canvas
+							var ctx = canvas.getContext('2d');
+							// Calculate the aspect ratio of the canvas
+							var aspectRatio = canvas.width / canvas.height;
+							// Calculate the new dimensions for cropping
+							var newWidth, newHeight, offsetX, offsetY;
+							if (aspectRatio > 1) {
+								// Landscape
+								newHeight = canvas.height;
+								newWidth = canvas.height;
+								offsetX = (canvas.width - newWidth) / 2;
+								offsetY = 0;
+							} else {
+								// Portrait or square
+								newWidth = canvas.width;
+								newHeight = canvas.width;
+								offsetX = 0;
+								offsetY = (canvas.height - newHeight) / 2;
+							}
+							// Create a new canvas with the cropped dimensions
+							var croppedCanvas = document.createElement('canvas');
+							croppedCanvas.width = newWidth;
+							croppedCanvas.height = newHeight;
+							// Get the context of the new canvas
+							var croppedCtx = croppedCanvas.getContext('2d');
+							// Draw the cropped image onto the new canvas
+							croppedCtx.drawImage(canvas, offsetX, offsetY, newWidth, newHeight, 0, 0, newWidth, newHeight);
+							// Add the cropped image to the screenshots array if it hasn't reached the limit
+							if (screenshots.length < 20) {
+								screenshots.push(croppedCanvas.toDataURL());
+							}
+							screenshotCounter++;
+							document.querySelector(".counter").innerHTML = screenshotCounter;
+						});
+					}, 200); // take 5 screenshots per second (1000ms/5 = 200ms)
 
-			// Start a timer for 10 seconds
-			var totalSeconds = 10;
-			var secondsRemaining = totalSeconds;
-			var countDownInterval = setInterval(function() {
-				document.getElementById("dataCollection").innerHTML = secondsRemaining;
-				secondsRemaining--;
-				if (secondsRemaining < 0) {
-				clearInterval(countDownInterval);
+					setTimeout(function() {
+						clearInterval(screenshotInterval);
+						// Send the screenshots to Flask app.py using fetch
+						fetch('/save_screenshots', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({
+								screenshots: screenshots
+							})
+						}).then(function(response) {
+							// Send a GET request to /process_screenshots route
+							fetch('/process_screenshots').then(response => response.json()).then(data => {
+								console.log(data.message)// response data
+								// Send a GET request to /predict route
+								fetch('/predict').then(response => response.json()).then(data => {
+									const resultDiv = document.getElementById("results");
+									resultDiv.innerHTML = data.result_str;
+									document.getElementById("result-div").style.display = "inline";
+								});
+							})
+							.catch(error => console.error(error));
+						});
+					}, 5000); // take screenshots for 5 seconds
 				}
 			}, 1000);
-
-			// Start the camera stream, process the camera stream, and save the hand landmarks to a file
-			$.ajax({
-				type: 'POST',
-				url: '/camera_stream',
-				success: function(response) {
-					// Handle the response from the Flask route here
-					console.log(response);
-				},
-				error: function(error) {
-				// Handle the error here
-				}
-			});
-			
-			}
-		}, 1000);
 		}
 	</script>
 
