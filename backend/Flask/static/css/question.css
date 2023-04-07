@@ -64,100 +64,163 @@ body {
 
 .Camera {
   position: relative;
-  height: 70%;
+  height: 71%;
   width: 40%;
   left: 67%;
   top: 55%;
   transform: translate(-50%, -50%);
-  border-radius: 0px;
+  border: 2px solid #000000;
+  border-radius: 5px;
   background-color: rgba(199, 186, 125, 0.75);
  
 }
 
-.input_video {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-.output_canvas {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-.dataCollection {
-  position: absolute;
-  left: 90%;
-  width: 10%;
-  height: 12%;
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  color: rgb(255, 255, 255);
-  text-shadow: 0 0 5px #000000;
-  z-index: 3;
-}
-
-
 .camButton {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    font-size: 7rem;
-    color: rgb(255, 255, 255);
-    background-color: rgb(200, 200, 200);
-    font-family: "myFont", sans-serif;
-    font-weight: bold;
-    text-shadow: 0 0 5px #000000;
-}
-
-
-.blurback {
   position: absolute;
-  display: flex;
-  border: 1px solid #000000;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid #000000;
+  border-radius: 5px;
   backdrop-filter: blur(10px);
-  z-index: 1;
+  z-index: 4;
 }
 
-.countdown-text{
-  font-family: "myFont", sans-serif;
-  font-size: 150px;
-  color: #ffffff;
+.camButtonText {
+  font-size: 5rem;
   font-weight: bold;
   text-shadow: 0 0 5px #000000;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  text-align: center;
+  transform: translate(0%, 0%);
 }
 
 .countdown{
   position: absolute;
   display: flex;
-  border: 1px solid #000000;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 5px;
   backdrop-filter: blur(10px);
+}
+
+.countdown-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 20rem;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 0 5px #000000;
+  transform: translate(-50%, -60%);
+}
+
+#showHands {
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#timer-div {
+  position: absolute;
+  left: 93%;
+  width: 7%;
+  height: 8%;
+  border-left: 2px solid #000000;
+  border-right: 1px solid #000000;
+  border-bottom: 2px solid #000000;
+  border-radius: 0px 0px 10px 10px;
+  background-color: rgba(199, 186, 125, 0.5);
+  z-index: 3;
+}
+
+#timer-text {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  text-shadow: 0 0 5px #ffffff;
+} 
+
+#info-div {
+  position: absolute;
+  width: 93%;
+  height: 8%;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  border-radius: 0px 0px 10px 10px;
+  background-color: rgba(199, 186, 125, 0.5);
+  transform: translate(-0.2%, 0%);
+  z-index: 3;
+}
+
+#info-text {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  text-shadow: 0 0 5px #ffffff;
+  transform: translate(0%, 50%);
+}
+
+.input_video {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #000000;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.screenshotCanvas{
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  top: 54.2%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}  
+
+.output_canvas {
+  position: absolute;
+  width: 100%;
+  top: 54.2%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #000000;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+#result-div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #000000;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: rgba(199, 186, 125, 1);
+  z-index: 4;
+}
+
+#results {
+  top: 10%;
+  height: 70%;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2rem;
 }
 
 
