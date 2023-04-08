@@ -120,59 +120,73 @@
 		<!-- Background Image -->
       	<div class="bg">
 
-			<!-- Text -->
-			<div class="Text">
-				<h1 class="font-family: myFont;">
-				wd
-				</h1>
-			</div>
+			<!-- Leftside Text and Image -->
+			<div class="TextImage">
 
-			<!-- Image -->
-			<div class="Imgdiv">
-				<img src="../static/assets/dataset_icons/letters/2.JPG" alt="Letter2" class="image">
+				<!-- Text -->
+				<div class="Text">
+					<h1 class="font-family: myFont;">wd</h1>
+				</div>
+
+				<!-- Image -->
+				<div class="Imgdiv">
+					<img src="../static/assets/dataset_icons/letters/2.JPG" alt="Letter1" class="image">
+				</div>
 			</div>
 
 			<!-- Camera -->
 			<div class="Camera">
 				<button class="camButton" id="start-camera" onclick="startCamera()">
-					<div class="camButtonText">
-						Show camera
-					</div>
+					<div class="camButtonText" style="font-family: myFont;">mgka.kak</div>
 				</button>
-				<div class="countdown" id="count-blur">
-					<div class="countdown-text" id="count-down"></div>
-				</div>
+
 				<div class="container" id="showHands" style= "display: none;">
 					<div id="timer-div">
 						<div class="timer-text" id="timer-text">
 						</div>
 					</div>
+
 					<div id="info-div">
-						<div id="info-text">show the hands in the center of the camera</div>
+						<div id="info-text"style="font-family: myFont;">keurdjg w; fmkajkak</div>
 					</div>
+
 					<video class="input_video" id="liveVideo" style="display: none;" muted></video>
 					<canvas class="screenshotCanvas" id="screenshotCanvas" ></canvas>
 					<canvas class="output_canvas" width="100%" height="100%"></canvas>
 					<div class="control-panel" style="display: none;"></div>
-					<div id="result-div" style="display: none;">
-						<div id="results"></div>
-					</div>
+				</div>
+
+				<button class="takeScreenshot" id="takeSS" onclick="takeScreenshot()" style="display: none;">
+					<div class="takeScreenshotText">></div>
+				</button>
+
+				<div class="countdown" id="count-blur" style="display: none;">
+					<div class="countdown-text" id="count-down"></div>
+				</div>
+
+				<div id="result-div" style="display: none;">
+					<div id="results"></div>
 				</div>
 			</div>
 
 			<!-- Back Arrow -->
-			<a href="{{ url_for(letter1)}}">	
+			<a href="{{ url_for('learningselection1') }}">
 				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
 			</a>
 
 			<!-- Home Icon -->
-			<a href="{{ url_for(home) }}">
+			<a href="{{ url_for('home') }}">
 				<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
 			</a>
 				
 			<!-- Next -->
-			<a href="{{ url_for(letter3) }}">
+			<a href="{{ url_for('letter3') }}">
 				<div class="button4" style="background-image: url(../static/assets/next.png);"></div>
+			</a>
+
+			<!-- Back-->
+			<a href="{{ url_for('letter1') }}">
+				<div class="button5" style="background-image: url(../static/assets/back.png);"></div>
 			</a>
 
 		</div>

@@ -17,7 +17,7 @@ body{
 }
 
 .bg {
-    background-image: url('../assets/learning.jpg');
+    background-image: url('../assets/learning.svg');
     background-size: cover;
     background-position: center center;
     height: 100vh;
@@ -42,7 +42,7 @@ body{
 table {
 	border-spacing: 50px;
 	border-width: 2px;
-	top: 50px;
+	padding-top: 3%;
 }
 
 .center {

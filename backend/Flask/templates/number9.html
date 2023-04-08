@@ -87,7 +87,7 @@
 
 			<!-- Camera -->
 			<div class="Camera">
-				<button class="camButton" id="start-camera" onclick="startCamera()">Start Camera</button>
+				<button class="camButton" id="start-camera" onclick="startCamera()">mgka.kak</button>
 				<div id="countdown"class="countdown-text"></div>
 				<video class="video" id="video" style="display:none;"></video>
 				<canvas id="canvas" class="canvas" style="display:none;"></canvas>
@@ -98,14 +98,20 @@
 				<img src="../static/assets/dataset_icons/numbers/9.JPG" alt="number9" class="image">
 			</div>
 
+
 			<!-- Back Arrow -->
-			<a href="{{ url_for('number8') }}">
+			<a href="{{ url_for('learningselection2') }}">
 				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
 			</a>
 
 			<!-- Home Icon -->
 			<a href="{{ url_for('home') }}">
 				<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
+			</a>
+
+			<!-- Back-->
+			<a href="{{ url_for('number8') }}">
+				<div class="button5" style="background-image: url(../static/assets/back.png);"></div>
 			</a>
 
 		</div>

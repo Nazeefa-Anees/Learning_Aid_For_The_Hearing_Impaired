@@ -1,5 +1,5 @@
 body { 
-    background-image: url('../assets/learning.jpg');
+    background-image: url('../assets/learning.svg');
     overflow: hidden;
 }
 
@@ -180,6 +180,19 @@ body {
 	position: absolute; 
 	top: 47%; 
 	left: 94%; 
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+}
+
+.button5 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	top: 47%; 
+	right: 94%; 
 	border: none; 
 	background-color: transparent; 
 	cursor: pointer; 
