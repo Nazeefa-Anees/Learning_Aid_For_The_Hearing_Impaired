@@ -399,6 +399,69 @@ def predict():
         hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
         # Load the trained model
         model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+    
+    elif page_name == "http://127.0.0.1:5000/question1":
+        sub_dir = "1"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question2":
+        sub_dir = "6"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+    
+    elif page_name == "http://127.0.0.1:5000/question3":
+        sub_dir = "9"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question4":
+        sub_dir = "23"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question5":
+        sub_dir = "5"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question7":
+        sub_dir = "num7"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+    
+    elif page_name == "http://127.0.0.1:5000/question8":
+        sub_dir = "num3"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+    
+    elif page_name == "http://127.0.0.1:5000/question9":
+        sub_dir = "num1"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question10":
+        sub_dir = "num5"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
         
     else:
         print(f"Invalid page: {page_name}")
@@ -718,25 +781,6 @@ def feedback():
 #     # Return the user's score and feedback
 #     return jsonify({"score": score, "feedback": feedback})
 
-
-# @app.route('/success/<int:score>')
-# def success(score):
-#     return 'The marks are'+ str(score)
-
-# @app.route('/fail/<int:score>')
-# def fail(score):
-#     return 'The marks are'+ str(score)
-
-
-# #result checker
-# @app.route('/results/<int:marks>')
-# def results(marks):
-#     result = ""
-#     if marks<50:
-#         result = 'fail'
-#     else:
-#         result ='success'
-#     return redirect(url_for(result,score=marks))
 
 if __name__ == '__main__':
     app.run(debug=True)
