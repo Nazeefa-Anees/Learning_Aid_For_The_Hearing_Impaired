@@ -98,6 +98,7 @@ body {
 }
 
 .camButtonText {
+    font-family: "myFont", sans-serif;
     font-size: 5rem;
     font-weight: bold;
     text-shadow: 0 0 5px #000000;
@@ -125,6 +126,7 @@ body {
 }
 
 #info-text {
+    font-family: "myFont", sans-serif;
     font-family: myFont;
     font-size: 1.5rem;
     font-weight: bold;
@@ -181,6 +183,7 @@ body {
 }
 
 .takeScreenshotText {
+    font-family: "myFont", sans-serif;
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
