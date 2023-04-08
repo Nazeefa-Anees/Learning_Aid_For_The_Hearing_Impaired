@@ -16,7 +16,7 @@ body {
   }
 
 .bg {
-    background-image: url('../assets/quiz.jpg');
+    background-image: url('../assets/quiz.svg');
     background-size: cover;
     background-position: center center;
     height: 100vh;
