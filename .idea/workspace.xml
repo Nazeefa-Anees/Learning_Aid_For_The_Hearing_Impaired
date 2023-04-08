@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="f2ba788c-1d93-4cb6-884d-5a343f8a9d40" name="Changes" comment="" />
-=======
     <list default="true" id="f2ba788c-1d93-4cb6-884d-5a343f8a9d40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Flask/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Flask/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Flask/templates/quiz.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Flask/templates/quiz.html" afterDir="false" />
     </list>
->>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
