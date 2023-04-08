@@ -3,73 +3,97 @@
   <head>
     <meta charset="UTF-8">
     <title>Number3</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/Number.css">
-	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/Letter.css">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d@0.3/control_utils_3d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js" crossorigin="anonymous"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	<script type="module" src="../static/js/showHands.js"></script>
+	<script type="module" src="../static/js/videoOnCanvas.js"></script>
 
 	<script>
+		let cameraStarted = false;
+
 		function startCamera() {
 			// Hide the button
 			document.getElementById("start-camera").style.display = "none";
+			document.getElementById("showHands").style.display = "inline";
+			document.getElementById("takeSS").style.display = "inline";
+			cameraStarted = true;
+		}
 
-			// Display the countdown
-			var countdown = 3;
-			var countdownInterval = setInterval(function() {
-				document.getElementById("countdown").innerHTML = countdown;
-				countdown--;
-				if (countdown < 0) {
-				clearInterval(countdownInterval);
-				document.getElementById("countdown").style.display = "none";
-				document.getElementById("video").style.display = "block";
-				document.getElementById("canvas").style.display = "block";
-				initHands();
-				}
-			}, 1000);
+		function takeScreenshot() {
+			document.getElementById("takeSS").style.display = "none";
+			document.getElementById("count-blur").style.display = "inline";
 
-			// Start the camera
-			navigator.mediaDevices.getUserMedia({ video: true })
-				.then(function(stream) {
-				var video = document.getElementById("video");
-				video.srcObject = stream;
-				video.play();
-				})
-				.catch(function(error) {
-				console.log(error);
-				});
-			}
-
-			function initHands() {
-				const hands = new Hands({locateFile: (file) => {
-					return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-				}});
-				hands.setOptions({
-					maxNumHands: 1,
-					minDetectionConfidence: 0.8,
-					minTrackingConfidence: 0.5
-				});
-				hands.onResults((results) => {
-					// Draw hand landmarks and connections here
-					const canvas = document.getElementById("canvas");
-					const context = canvas.getContext("2d");
-					context.clearRect(0, 0, canvas.width, canvas.height);
-					context.drawImage(results.image, 0, 0, canvas.width, canvas.height);
-					if (results.multiHandLandmarks) {
-						for (const landmarks of results.multiHandLandmarks) {
-							drawConnectors(context, landmarks, Hands.HAND_CONNECTIONS, {
-								color: "#00FF00",
-								lineWidth: 5,
-							});
-							drawLandmarks(context, landmarks, {
-								color: "#FF0000",
-								lineWidth: 2,
-							});
+			// Start a timer for 3 seconds
+			var secondsRemaining = 1;
+			var countDownInterval = setInterval(function() {
+				secondsRemaining--;
+				if (secondsRemaining < 0) {
+					document.getElementById("count-blur").style.display = "none";
+					document.getElementById("takeSS").style.display = "inline";
+					clearInterval(countDownInterval);
+					html2canvas(document.querySelector(".screenshotCanvas")).then(function(canvas) {
+						// Get the context of the canvas
+						var ctx = canvas.getContext('2d');
+						// Calculate the aspect ratio of the canvas
+						var aspectRatio = canvas.width / canvas.height;
+						// Calculate the new dimensions for cropping
+						var newWidth, newHeight, offsetX, offsetY;
+						if (aspectRatio > 1) {
+							// Landscape
+							newHeight = canvas.height;
+							newWidth = canvas.height;
+							offsetX = (canvas.width - newWidth) / 2;
+							offsetY = 0;
+						} else {
+							// Portrait or square
+							newWidth = canvas.width;
+							newHeight = canvas.width;
+							offsetX = 0;
+							offsetY = (canvas.height - newHeight) / 2;
 						}
-					}
-				});
-				const videoElement = document.getElementsByClassName('video')[0];
-				hands.initialize(videoElement);
-			}
+						// Create a new canvas with the cropped dimensions
+						var croppedCanvas = document.createElement('canvas');
+						croppedCanvas.width = newWidth;
+						croppedCanvas.height = newHeight;
+						// Get the context of the new canvas
+						var croppedCtx = croppedCanvas.getContext('2d');
+						// Draw the cropped image onto the new canvas
+						croppedCtx.drawImage(canvas, offsetX, offsetY, newWidth, newHeight, 0, 0, newWidth, newHeight);
+						// Convert the canvas to a JPEG data URL with a quality of 100%
+						var screenshot = croppedCanvas.toDataURL('image/jpeg', 1);
+
+						// Send the screenshot to Flask app.py using fetch
+						fetch('/save_screenshot', {
+							method: 'POST',
+							headers: {'Content-Type': 'application/json'},
+							body: JSON.stringify({screenshot: screenshot})
+						}).then(function(response) {
+							// Send a GET request to /process_screenshot route
+							fetch('/process_screenshots').then(response => response.json()).then(data => {
+								console.log(data.message)// response data
+								// Send a GET request to /predict route
+								fetch('/predict').then(response => response.json()).then(data => {
+									const resultDiv = document.getElementById("results");
+									resultDiv.innerHTML = data.result_str;
+									document.getElementById("result-div").style.display = "inline";
+								});
+							})
+						}).catch(error => console.error(error));
+					});
+				}
+			}, 100);
+		}
+
+		document.addEventListener("keydown", function(event) {
+		if (event.code === "Space" && cameraStarted) {
+			takeScreenshot();
+		}
+		});
 	</script>
 
   </head>
@@ -78,28 +102,56 @@
 		<!-- Background Image -->
       	<div class="bg">
 
-			<!-- Text -->
-			<div class="Text">
-				<h1 class="font-family: myFont;">
-				3
-				</h1>
-			</div>
+			<!-- Leftside Text and Image -->
+			<div class="TextImage">
 
+				<!-- Text -->
+				<div class="Text">
+					<h1 class="font-family: myFont;">3</h1>
+				</div>
+
+				<!-- Image -->
+				<div class="Imgdiv">
+					<img src="../static/assets/dataset_icons/numbers/3.JPG" alt="number3" class="image">
+				</div>
+			</div>
 			<!-- Camera -->
 			<div class="Camera">
-				<button class="camButton" id="start-camera" onclick="startCamera()">mgka.kak</button>
-				<div id="countdown"class="countdown-text"></div>
-				<video class="video" id="video" style="display:none;"></video>
-				<canvas id="canvas" class="canvas" style="display:none;"></canvas>
-			</div>
-  
-			<!-- Image -->
-			<div class="Imgdiv">
-				<img src="../static/assets/dataset_icons/numbers/3.JPG" alt="number3" class="image">
+				<button class="camButton" id="start-camera" onclick="startCamera()">
+					<div class="camButtonText">mgka.kak</div>
+				</button>
+
+				<div class="container" id="showHands" style= "display: none;">
+					<div id="timer-div">
+						<div class="timer-text" id="timer-text">
+						</div>
+					</div>
+
+					<div id="info-div">
+						<div id="info-text">leurdfgs ueo w; fmkajkak</div>
+					</div>
+
+					<video class="input_video" id="liveVideo" style="display: none;" muted></video>
+					<canvas class="screenshotCanvas" id="screenshotCanvas" ></canvas>
+					<canvas class="output_canvas" width="100%" height="100%"></canvas>
+					<div class="control-panel" style="display: none;"></div>
+				</div>
+
+				<button class="takeScreenshot" id="takeSS" onclick="takeScreenshot()" style="display: none;">
+					<div class="takeScreenshotText">></div>
+				</button>
+
+				<div class="countdown" id="count-blur" style="display: none;">
+					<div class="countdown-text" id="count-down"></div>
+				</div>
+
+				<div id="result-div" style="display: none;">
+					<div id="results"></div>
+				</div>
 			</div>
 
 			<!-- Back Arrow -->
-			<a href="{{ url_for('learningselection2') }}">
+			<a href="{{ url_for('number2') }}">
 				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
 			</a>
 
@@ -111,11 +163,6 @@
 			<!-- Next -->
 			<a href="{{ url_for('number4') }}">
 				<div class="button4" style="background-image: url(../static/assets/next.png);"></div>
-			</a>
-
-			<!-- Back-->
-			<a href="{{ url_for('number2') }}">
-				<div class="button5" style="background-image: url(../static/assets/back.png);"></div>
 			</a>
 
 		</div>
