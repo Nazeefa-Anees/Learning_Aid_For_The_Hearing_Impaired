@@ -13,89 +13,68 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 	<script type="module" src="../static/js/showHands.js"></script>
 	<script type="module" src="../static/js/videoOnCanvas.js"></script>
-	<script type="module" src="../static/js/takeScreenshots.js"></script>
 
 	<script>
+		let cameraStarted = false;
+
 		function startCamera() {
-		  	// Hide the button
-		  	document.getElementById("start-camera").style.display = "none";
-	  
-		  	// Display the countdown
-			var countdown = 3;
-			var countdownInterval = setInterval(function() {
-				document.getElementById("count-down").innerHTML = countdown;
-				countdown--;
-				if (countdown < 0) {
-					clearInterval(countdownInterval);
-					document.getElementById("count-down").style.display = "none";
+			// Hide the button
+			document.getElementById("start-camera").style.display = "none";
+			document.getElementById("showHands").style.display = "inline";
+			document.getElementById("takeSS").style.display = "inline";
+			cameraStarted = true;
+		}
+
+		function takeScreenshot() {
+			document.getElementById("takeSS").style.display = "none";
+			document.getElementById("count-blur").style.display = "inline";
+
+			// Start a timer for 3 seconds
+			var secondsRemaining = 1;
+			var countDownInterval = setInterval(function() {
+				secondsRemaining--;
+				if (secondsRemaining < 0) {
 					document.getElementById("count-blur").style.display = "none";
-					document.getElementById("showHands").style.display = "inline";
-			
-  					// Start a timer for 5 seconds
-					var totalSeconds = 5;
-					var secondsRemaining = totalSeconds;
-					var countDownInterval = setInterval(function() {
-						document.getElementById("dataCollection").innerHTML = secondsRemaining;
-						secondsRemaining--;
-						if (secondsRemaining < 0) {
-							clearInterval(countDownInterval);
+					document.getElementById("takeSS").style.display = "inline";
+					clearInterval(countDownInterval);
+					html2canvas(document.querySelector(".screenshotCanvas")).then(function(canvas) {
+						// Get the context of the canvas
+						var ctx = canvas.getContext('2d');
+						// Calculate the aspect ratio of the canvas
+						var aspectRatio = canvas.width / canvas.height;
+						// Calculate the new dimensions for cropping
+						var newWidth, newHeight, offsetX, offsetY;
+						if (aspectRatio > 1) {
+							// Landscape
+							newHeight = canvas.height;
+							newWidth = canvas.height;
+							offsetX = (canvas.width - newWidth) / 2;
+							offsetY = 0;
+						} else {
+							// Portrait or square
+							newWidth = canvas.width;
+							newHeight = canvas.width;
+							offsetX = 0;
+							offsetY = (canvas.height - newHeight) / 2;
 						}
-					}, 1000);
+						// Create a new canvas with the cropped dimensions
+						var croppedCanvas = document.createElement('canvas');
+						croppedCanvas.width = newWidth;
+						croppedCanvas.height = newHeight;
+						// Get the context of the new canvas
+						var croppedCtx = croppedCanvas.getContext('2d');
+						// Draw the cropped image onto the new canvas
+						croppedCtx.drawImage(canvas, offsetX, offsetY, newWidth, newHeight, 0, 0, newWidth, newHeight);
+						// Convert the canvas to a JPEG data URL with a quality of 100%
+						var screenshot = croppedCanvas.toDataURL('image/jpeg', 1);
 
-					// Take 5 screenshots per second for 5 seconds
-					var screenshots = [];
-					var screenshotCounter = 0;
-					var screenshotInterval = setInterval(function() {
-						html2canvas(document.querySelector(".screenshotCanvas")).then(function(canvas) {
-							// Get the context of the canvas
-							var ctx = canvas.getContext('2d');
-							// Calculate the aspect ratio of the canvas
-							var aspectRatio = canvas.width / canvas.height;
-							// Calculate the new dimensions for cropping
-							var newWidth, newHeight, offsetX, offsetY;
-							if (aspectRatio > 1) {
-								// Landscape
-								newHeight = canvas.height;
-								newWidth = canvas.height;
-								offsetX = (canvas.width - newWidth) / 2;
-								offsetY = 0;
-							} else {
-								// Portrait or square
-								newWidth = canvas.width;
-								newHeight = canvas.width;
-								offsetX = 0;
-								offsetY = (canvas.height - newHeight) / 2;
-							}
-							// Create a new canvas with the cropped dimensions
-							var croppedCanvas = document.createElement('canvas');
-							croppedCanvas.width = newWidth;
-							croppedCanvas.height = newHeight;
-							// Get the context of the new canvas
-							var croppedCtx = croppedCanvas.getContext('2d');
-							// Draw the cropped image onto the new canvas
-							croppedCtx.drawImage(canvas, offsetX, offsetY, newWidth, newHeight, 0, 0, newWidth, newHeight);
-							// Add the cropped image to the screenshots array if it hasn't reached the limit
-							if (screenshots.length < 20) {
-								screenshots.push(croppedCanvas.toDataURL());
-							}
-							screenshotCounter++;
-							document.querySelector(".counter").innerHTML = screenshotCounter;
-						});
-					}, 200); // take 5 screenshots per second (1000ms/5 = 200ms)
-
-					setTimeout(function() {
-						clearInterval(screenshotInterval);
-						// Send the screenshots to Flask app.py using fetch
-						fetch('/save_screenshots', {
+						// Send the screenshot to Flask app.py using fetch
+						fetch('/save_screenshot', {
 							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json'
-							},
-							body: JSON.stringify({
-								screenshots: screenshots
-							})
+							headers: {'Content-Type': 'application/json'},
+							body: JSON.stringify({screenshot: screenshot})
 						}).then(function(response) {
-							// Send a GET request to /process_screenshots route
+							// Send a GET request to /process_screenshot route
 							fetch('/process_screenshots').then(response => response.json()).then(data => {
 								console.log(data.message)// response data
 								// Send a GET request to /predict route
@@ -105,12 +84,17 @@
 									document.getElementById("result-div").style.display = "inline";
 								});
 							})
-							.catch(error => console.error(error));
-						});
-					}, 5000); // take screenshots for 5 seconds
+						}).catch(error => console.error(error));
+					});
 				}
-			}, 1000);
+			}, 100);
 		}
+
+		document.addEventListener("keydown", function(event) {
+		if (event.code === "Space" && cameraStarted) {
+			takeScreenshot();
+		}
+		});
 	</script>
   </head>
   <body>
@@ -118,46 +102,70 @@
 		<!-- Background Image -->
       	<div class="bg">
 
-			<!-- Text -->
-			<div class="Text">
-				<h1 class="font-family: myFont;">
-				vs
-				</h1>
-			</div>
+			<!-- Leftside Text and Image -->
+			<div class="TextImage">
 
-			<!-- Image -->
-			<div class="Imgdiv">
-				<img src="../static/assets/dataset_icons/letters/13.JPG" alt="Letter13" class="image">
+				<!-- Text -->
+				<div class="Text">
+					<h1 class="font-family: myFont;">vs</h1>
+				</div>
+
+				<!-- Image -->
+				<div class="Imgdiv">
+					<img src="../static/assets/dataset_icons/letters/13.JPG" alt="Letter13" class="image">
+				</div>
 			</div>
 
 			<!-- Camera -->
 			<div class="Camera">
-				<button class="camButton" id="start-camera" onclick="startCamera()">Start Camera</button>
-				<div class="countdown" id="count-blur">
-					<div class="countdown-text" id="count-down"></div>
-				</div>
+				<button class="camButton" id="start-camera" onclick="startCamera()">
+					<div class="camButtonText" style="font-family: myFont;">mgka.kak</div>
+				</button>
+
 				<div class="container" id="showHands" style= "display: none;">
-					<div class="dataCollection" id="dataCollection"></div>
-					<video class="input_video" style="display: none;"></video>
+					<div id="timer-div">
+						<div class="timer-text" id="timer-text">
+						</div>
+					</div>
+
+					<div id="info-div">
+						<div id="info-text"style="font-family: myFont;">leurdjg w; fmkajkak</div>
+					</div>
+
+					<video class="input_video" id="liveVideo" style="display: none;" muted></video>
+					<canvas class="screenshotCanvas" id="screenshotCanvas" ></canvas>
 					<canvas class="output_canvas" width="100%" height="100%"></canvas>
 					<div class="control-panel" style="display: none;"></div>
+				</div>
+
+				<button class="takeScreenshot" id="takeSS" onclick="takeScreenshot()" style="display: none;">
+					<div class="takeScreenshotText">></div>
+				</button>
+
+				<div class="countdown" id="count-blur" style="display: none;">
+					<div class="countdown-text" id="count-down"></div>
+				</div>
+
+				<div id="result-div" style="display: none;">
+					<div id="results"></div>
 				</div>
 			</div>
 
 			<!-- Back Arrow -->
-			<a href="{{ url_for(letter12)}}">	
+			<a href="{{ url_for('letter12') }}">
 				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
 			</a>
 
 			<!-- Home Icon -->
-			<a href="{{ url_for(home) }}">
+			<a href="{{ url_for('home') }}">
 				<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
 			</a>
 				
 			<!-- Next -->
-			<a href="{{ url_for(letter14) }}">
+			<a href="{{ url_for('letter14') }}">
 				<div class="button4" style="background-image: url(../static/assets/next.png);"></div>
 			</a>
+
 		</div>
     </div>
   </body>
