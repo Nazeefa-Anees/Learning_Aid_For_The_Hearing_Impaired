@@ -75,7 +75,7 @@
 							// Draw the cropped image onto the new canvas
 							croppedCtx.drawImage(canvas, offsetX, offsetY, newWidth, newHeight, 0, 0, newWidth, newHeight);
 							// Add the cropped image to the screenshots array if it hasn't reached the limit
-							if (screenshots.length < 10) {
+							if (screenshots.length < 1) {
 								// Convert the canvas to a JPEG data URL with a quality of 80%
 								screenshots.push(croppedCanvas.toDataURL('image/jpeg', 1));
 							}

@@ -1,15 +1,17 @@
-from flask import Flask, jsonify, redirect, url_for, render_template, Response, request
-import os
-import cv2
 import base64
+import cv2
+import datetime
 import json
-import numpy as np
 import mediapipe as mp
+import numpy as np
+import os
+import shutil
 import tensorflow as tf
-import tensorflowjs as tfjs 
+import tensorflowjs as tfjs
+from flask import Flask, jsonify, redirect, render_template, request, Response, url_for
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from tensorflow.keras.layers import Dense, Flatten
 from tensorflow.keras.models import Model
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 app = Flask(__name__)
 
@@ -19,133 +21,18 @@ def save_screenshots():
     screenshots = request.json['screenshots']
     directory = 'backend/Flask/screenshots'
 
-    # get page
-    page_name = request.referrer
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
-    # Define input directories based on page
-    if page_name == "http://127.0.0.1:5000/letter1":
-        sub_dir = "1"
-        
-    elif page_name == "http://127.0.0.1:5000/letter2":
-        sub_dir = "2"
-        
-    elif page_name == "http://127.0.0.1:5000/letter3":
-        sub_dir = "3"
-        
-    elif page_name == "http://127.0.0.1:5000/letter4":
-        sub_dir = "4"
-        
-    elif page_name == "http://127.0.0.1:5000/letter5":
-        sub_dir = "5"
-        
-    elif page_name == "http://127.0.0.1:5000/letter6":
-        sub_dir = "6"
-        
-    elif page_name == "http://127.0.0.1:5000/letter7":
-        sub_dir = "7"
-        
-    elif page_name == "http://127.0.0.1:5000/letter8":
-        sub_dir = "8"
-        
-    elif page_name == "http://127.0.0.1:5000/letter9":
-        sub_dir = "9"
-        
-    elif page_name == "http://127.0.0.1:5000/letter10":
-        sub_dir = "10"
-        
-    elif page_name == "http://127.0.0.1:5000/letter11":
-        sub_dir = "11"
-        
-    elif page_name == "http://127.0.0.1:5000/letter12":
-        sub_dir = "12"
-        
-    elif page_name == "http://127.0.0.1:5000/letter13":
-        sub_dir = "13"
-        
-    elif page_name == "http://127.0.0.1:5000/letter14":
-        sub_dir = "14"
-        
-    elif page_name == "http://127.0.0.1:5000/letter15":
-        sub_dir = "15"
-        
-    elif page_name == "http://127.0.0.1:5000/letter16":
-        sub_dir = "16"
-        
-    elif page_name == "http://127.0.0.1:5000/letter17":
-        sub_dir = "17"
-        
-    elif page_name == "http://127.0.0.1:5000/letter18":
-        sub_dir = "18"
-        
-    elif page_name == "http://127.0.0.1:5000/letter19":
-        sub_dir = "19"
-        
-    elif page_name == "http://127.0.0.1:5000/letter20":
-        sub_dir = "20"
-        
-    elif page_name == "http://127.0.0.1:5000/letter21":
-        sub_dir = "21"
-        
-    elif page_name == "http://127.0.0.1:5000/letter22":
-        sub_dir = "22"
-        
-    elif page_name == "http://127.0.0.1:5000/letter23":
-        sub_dir = "23"
-        
-    elif page_name == "http://127.0.0.1:5000/letter24":
-        sub_dir = "24"
-        
-    elif page_name == "http://127.0.0.1:5000/letter25":
-        sub_dir = "25"
-        
-    elif page_name == "http://127.0.0.1:5000/letter26":
-        sub_dir = "26"
-        
-    elif page_name == "http://127.0.0.1:5000/letter27":
-        sub_dir = "27"
-        
-    elif page_name == "http://127.0.0.1:5000/number0":
-        sub_dir = "num0"
-        
-    elif page_name == "http://127.0.0.1:5000/number1":
-        sub_dir = "num1"
-        
-    elif page_name == "http://127.0.0.1:5000/number2":
-        sub_dir = "num2"
-        
-    elif page_name == "http://127.0.0.1:5000/number3":
-        sub_dir = "num3"
-        
-    elif page_name == "http://127.0.0.1:5000/number4":
-        sub_dir = "num4"
-        
-    elif page_name == "http://127.0.0.1:5000/number5":
-        sub_dir = "num5"
-        
-    elif page_name == "http://127.0.0.1:5000/number6":
-        sub_dir = "num6"
-        
-    elif page_name == "http://127.0.0.1:5000/number7":
-        sub_dir = "num7"
-        
-    elif page_name == "http://127.0.0.1:5000/number8":
-        sub_dir = "num8"
-        
-    elif page_name == "http://127.0.0.1:5000/number9":
-        sub_dir = "num9"
-        
-    else:
-        print(f"Invalid page: {page_name}")
-        exit()
+    for screenshot in screenshots:
+        # Generate a unique file name using current timestamp
+        current_time = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+        file_name = f"{directory}/screenshot_at_{current_time}.jpg"
 
-    # subdirectories path
-    subdir_path = os.path.join(directory, sub_dir)
-
-    if not os.path.exists(subdir_path):
-        os.makedirs(subdir_path)
-    for i, screenshot in enumerate(screenshots):
-        with open(f'{subdir_path}/screenshot_{i}.jpg', 'wb') as f:
+        # Write the screenshot to file
+        with open(file_name, 'wb') as f:
             f.write(base64.b64decode(screenshot.split(',')[1]))
+
     return jsonify({"message": "Screenshots saved successfully."})
 
 
@@ -166,133 +53,26 @@ def process_screenshots():
     # Initialize empty lists to store landmarks and labels
     landmarks = []
 
-    # get page
-    page_name = request.referrer
-
-    # Define input directories based on page
-    if page_name == "http://127.0.0.1:5000/letter1":
-        sub_dir = "1"
-        
-    elif page_name == "http://127.0.0.1:5000/letter2":
-        sub_dir = "2"
-        
-    elif page_name == "http://127.0.0.1:5000/letter3":
-        sub_dir = "3"
-        
-    elif page_name == "http://127.0.0.1:5000/letter4":
-        sub_dir = "4"
-        
-    elif page_name == "http://127.0.0.1:5000/letter5":
-        sub_dir = "5"
-        
-    elif page_name == "http://127.0.0.1:5000/letter6":
-        sub_dir = "6"
-        
-    elif page_name == "http://127.0.0.1:5000/letter7":
-        sub_dir = "7"
-        
-    elif page_name == "http://127.0.0.1:5000/letter8":
-        sub_dir = "8"
-        
-    elif page_name == "http://127.0.0.1:5000/letter9":
-        sub_dir = "9"
-        
-    elif page_name == "http://127.0.0.1:5000/letter10":
-        sub_dir = "10"
-        
-    elif page_name == "http://127.0.0.1:5000/letter11":
-        sub_dir = "11"
-        
-    elif page_name == "http://127.0.0.1:5000/letter12":
-        sub_dir = "12"
-        
-    elif page_name == "http://127.0.0.1:5000/letter13":
-        sub_dir = "13"
-        
-    elif page_name == "http://127.0.0.1:5000/letter14":
-        sub_dir = "14"
-        
-    elif page_name == "http://127.0.0.1:5000/letter15":
-        sub_dir = "15"
-        
-    elif page_name == "http://127.0.0.1:5000/letter16":
-        sub_dir = "16"
-        
-    elif page_name == "http://127.0.0.1:5000/letter17":
-        sub_dir = "17"
-        
-    elif page_name == "http://127.0.0.1:5000/letter18":
-        sub_dir = "18"
-        
-    elif page_name == "http://127.0.0.1:5000/letter19":
-        sub_dir = "19"
-        
-    elif page_name == "http://127.0.0.1:5000/letter20":
-        sub_dir = "20"
-        
-    elif page_name == "http://127.0.0.1:5000/letter21":
-        sub_dir = "21"
-        
-    elif page_name == "http://127.0.0.1:5000/letter22":
-        sub_dir = "22"
-        
-    elif page_name == "http://127.0.0.1:5000/letter23":
-        sub_dir = "23"
-        
-    elif page_name == "http://127.0.0.1:5000/letter24":
-        sub_dir = "24"
-        
-    elif page_name == "http://127.0.0.1:5000/letter25":
-        sub_dir = "25"
-        
-    elif page_name == "http://127.0.0.1:5000/letter26":
-        sub_dir = "26"
-        
-    elif page_name == "http://127.0.0.1:5000/letter27":
-        sub_dir = "27"
-        
-    elif page_name == "http://127.0.0.1:5000/number0":
-        sub_dir = "num0"
-        
-    elif page_name == "http://127.0.0.1:5000/number1":
-        sub_dir = "num1"
-        
-    elif page_name == "http://127.0.0.1:5000/number2":
-        sub_dir = "num2"
-        
-    elif page_name == "http://127.0.0.1:5000/number3":
-        sub_dir = "num3"
-        
-    elif page_name == "http://127.0.0.1:5000/number4":
-        sub_dir = "num4"
-        
-    elif page_name == "http://127.0.0.1:5000/number5":
-        sub_dir = "num5"
-        
-    elif page_name == "http://127.0.0.1:5000/number6":
-        sub_dir = "num6"
-        
-    elif page_name == "http://127.0.0.1:5000/number7":
-        sub_dir = "num7"
-        
-    elif page_name == "http://127.0.0.1:5000/number8":
-        sub_dir = "num8"
-        
-    elif page_name == "http://127.0.0.1:5000/number9":
-        sub_dir = "num9"
-        
-    else:
-        print(f"Invalid page: {page_name}")
-        exit()
-    
-    # subdirectories path
-    subdir_path = os.path.join(input_dir, sub_dir)
-
-    # Check if subdirectory is valid and has images
-    if os.path.isdir(subdir_path):
-        image_files = [os.path.join(subdir_path, f) for f in os.listdir(subdir_path) if os.path.isfile(os.path.join(subdir_path, f))]
+    # Check if directory is valid and has images
+    if os.path.isdir(input_dir):
+        image_files = [os.path.join(input_dir, f) for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
         if not image_files:
-            print("no image_files")
+            #print("no image_files")
+            return jsonify({"message": "no image_files"})
+        
+        # Create a folder with the current time as name for processed images
+        current_time = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        processed_dir = os.path.join(output_dir, current_time)
+        if os.path.exists(processed_dir):
+            i = 1
+            while True:
+                processed_dir = os.path.join(output_dir, current_time + '_' + str(i))
+                if not os.path.exists(processed_dir):
+                    os.makedirs(processed_dir)
+                    break
+                i += 1
+        else:
+            os.makedirs(processed_dir)
 
         # Loop through images in subdirectory
         for image_path in image_files:
@@ -329,9 +109,12 @@ def process_screenshots():
                     landmarks.append(landmarks_norm.flatten())
 
                     # Save output image
-                    output_path = os.path.join(output_dir, sub_dir, os.path.basename(image_path))
-                    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+                    output_filename = "processed_" + os.path.basename(image_path)
+                    output_path = os.path.join(processed_dir, output_filename)
                     cv2.imwrite(output_path, image_draw)
+
+            # Move input image to output directory
+            shutil.move(image_path, processed_dir)
 
     # Clean up
     hands.close()
@@ -340,6 +123,7 @@ def process_screenshots():
     landmarks = np.array(landmarks)
 
     np.save("backend/Flask/live_hand_landmarks.npy", landmarks)
+    np.save(os.path.join(processed_dir, "live_hand_landmarks.npy"), landmarks)
     #print("Store the extracted live_hand_landmarks.npy Done")
 
     return jsonify({"message": "Screenshots processed successfully."})
@@ -657,7 +441,8 @@ def predict():
     # Create a string with the results
     result_str = ""
     for item, count in sorted_count_dict.items():
-        result_str += ('Variable "{}" appears {} times out of {} ({:.2f}%)\n'.format(item.strip(), count, len(predicted_labels_str), count/len(predicted_labels_str)*100))
+        result_str += ('Variable "{}" detected {} times out of {} ({:.2f}%)\n'.format(item.strip(), count, len(predicted_labels_str), 
+        count/len(predicted_labels_str)*100))
 
     # Return the results
     return jsonify({"result_str": result_str})
