@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Quiz Page 8</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../static/css/question.css">
+	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d@0.3/control_utils_3d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js" crossorigin="anonymous"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	<script type="module" src="../static/js/showHands.js"></script>
+	<script type="module" src="../static/js/videoOnCanvas.js"></script>
+	<script type="module" src="../static/js/takeScreenshots.js"></script>
+
+	  <script>
+		let cameraStarted = false;
+
+		function startCamera() {
+			// Hide the button
+			document.getElementById("start-camera").style.display = "none";
+			document.getElementById("showHands").style.display = "inline";
+			document.getElementById("takeSS").style.display = "inline";
+			cameraStarted = true;
+		}
+
+		function takeScreenshot() {
+			document.getElementById("takeSS").style.display = "none";
+			document.getElementById("count-blur").style.display = "inline";
+
+			// Start a timer for 3 seconds
+			var secondsRemaining = 1;
+			var countDownInterval = setInterval(function() {
+				secondsRemaining--;
+				if (secondsRemaining < 0) {
+					document.getElementById("count-blur").style.display = "none";
+					document.getElementById("takeSS").style.display = "inline";
+					clearInterval(countDownInterval);
+					html2canvas(document.querySelector(".screenshotCanvas")).then(function(canvas) {
+						// Get the context of the canvas
+						var ctx = canvas.getContext('2d');
+						// Calculate the aspect ratio of the canvas
+						var aspectRatio = canvas.width / canvas.height;
+						// Calculate the new dimensions for cropping
+						var newWidth, newHeight, offsetX, offsetY;
+						if (aspectRatio > 1) {
+							// Landscape
+							newHeight = canvas.height;
+							newWidth = canvas.height;
+							offsetX = (canvas.width - newWidth) / 2;
+							offsetY = 0;
+						} else {
+							// Portrait or square
+							newWidth = canvas.width;
+							newHeight = canvas.width;
+							offsetX = 0;
+							offsetY = (canvas.height - newHeight) / 2;
+						}
+						// Create a new canvas with the cropped dimensions
+						var croppedCanvas = document.createElement('canvas');
+						croppedCanvas.width = newWidth;
+						croppedCanvas.height = newHeight;
+						// Get the context of the new canvas
+						var croppedCtx = croppedCanvas.getContext('2d');
+						// Draw the cropped image onto the new canvas
+						croppedCtx.drawImage(canvas, offsetX, offsetY, newWidth, newHeight, 0, 0, newWidth, newHeight);
+						// Convert the canvas to a JPEG data URL with a quality of 100%
+						var screenshot = croppedCanvas.toDataURL('image/jpeg', 1);
+
+						// Send the screenshot to Flask app.py using fetch
+						fetch('/save_screenshot', {
+							method: 'POST',
+							headers: {'Content-Type': 'application/json'},
+							body: JSON.stringify({screenshot: screenshot})
+						}).then(function(response) {
+							// Send a GET request to /process_screenshot route
+							fetch('/process_screenshots').then(response => response.json()).then(data => {
+								console.log(data.message)// response data
+								// Send a GET request to /predict route
+								fetch('/predict').then(response => response.json()).then(data => {
+									const resultDiv = document.getElementById("results");
+									resultDiv.innerHTML = data.result_str;
+									document.getElementById("result-div").style.display = "inline";
+								});
+							})
+						}).catch(error => console.error(error));
+					});
+				}
+			}, 100);
+		}
+
+		document.addEventListener("keydown", function(event) {
+		if (event.code === "Space" && cameraStarted) {
+			takeScreenshot();
+		}
+		});
+	</script>
+
+  </head>
+  <body>
+    <div class="page-container">
+		<!-- Background Image -->
+      	<div class="bg">
+
+			<!-- Text -->
+			<div class="Text">
+				<h1 style="font-family: myFont;">3 <br/>fmkajkak</h1>
+			</div>
+
+			<!-- Camera -->
+			<div class="Camera">
+				<button class="camButton" id="start-camera" onclick="startCamera()">
+					<div class="camButtonText" style="font-family: myFont;">mgka.kak</div>
+				</button>
+
+				<div class="container" id="showHands" style= "display: none;">
+					<div id="timer-div">
+						<div class="timer-text" id="timer-text">
+						</div>
+					</div>
+
+					<div id="info-div">
+						<div id="info-text"style="font-family: myFont;">keurdjg w; fmkajkak</div>
+					</div>
+
+					<video class="input_video" id="liveVideo" style="display: none;" muted></video>
+					<canvas class="screenshotCanvas" id="screenshotCanvas" ></canvas>
+					<canvas class="output_canvas" width="100%" height="100%"></canvas>
+					<div class="control-panel" style="display: none;"></div>
+				</div>
+
+				<button class="takeScreenshot" id="takeSS" onclick="takeScreenshot()" style="display: none;">
+					<div class="takeScreenshotText">></div>
+				</button>
+
+				<div class="countdown" id="count-blur" style="display: none;">
+					<div class="countdown-text" id="count-down"></div>
+				</div>
+
+				<div id="result-div" style="display: none;">
+					<div id="results"></div>
+				</div>
+			</div>
+
+
+
+			<!-- Next Button -->
+			<div class="next-button-container">
+        <a href="{{ url_for('question1') }}" class="next-button"><img src="../static/assets/next.png" alt="Next"></a>
+      </div>
+		
+		</div>
+    </div>
+  </body>
+</html>
