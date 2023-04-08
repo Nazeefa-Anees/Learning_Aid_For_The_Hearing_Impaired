@@ -1,152 +1,39 @@
-from flask import Flask, jsonify, redirect, url_for, render_template, Response, request
-import os
-import cv2
 import base64
+import cv2
+import datetime
 import json
-import numpy as np
 import mediapipe as mp
+import numpy as np
+import os
+import shutil
 import tensorflow as tf
-import tensorflowjs as tfjs 
+import tensorflowjs as tfjs
+from flask import Flask, jsonify, redirect, render_template, request, Response, url_for
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from tensorflow.keras.layers import Dense, Flatten
 from tensorflow.keras.models import Model
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 app = Flask(__name__)
 
 
-@app.route('/save_screenshots', methods=['POST'])
-def save_screenshots():
-    screenshots = request.json['screenshots']
+@app.route('/save_screenshot', methods=['POST'])
+def save_screenshot():
+    screenshot = request.json['screenshot']
     directory = 'backend/Flask/screenshots'
 
-    # get page
-    page_name = request.referrer
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
-    # Define input directories based on page
-    if page_name == "http://127.0.0.1:5000/letter1":
-        sub_dir = "1"
-        
-    elif page_name == "http://127.0.0.1:5000/letter2":
-        sub_dir = "2"
-        
-    elif page_name == "http://127.0.0.1:5000/letter3":
-        sub_dir = "3"
-        
-    elif page_name == "http://127.0.0.1:5000/letter4":
-        sub_dir = "4"
-        
-    elif page_name == "http://127.0.0.1:5000/letter5":
-        sub_dir = "5"
-        
-    elif page_name == "http://127.0.0.1:5000/letter6":
-        sub_dir = "6"
-        
-    elif page_name == "http://127.0.0.1:5000/letter7":
-        sub_dir = "7"
-        
-    elif page_name == "http://127.0.0.1:5000/letter8":
-        sub_dir = "8"
-        
-    elif page_name == "http://127.0.0.1:5000/letter9":
-        sub_dir = "9"
-        
-    elif page_name == "http://127.0.0.1:5000/letter10":
-        sub_dir = "10"
-        
-    elif page_name == "http://127.0.0.1:5000/letter11":
-        sub_dir = "11"
-        
-    elif page_name == "http://127.0.0.1:5000/letter12":
-        sub_dir = "12"
-        
-    elif page_name == "http://127.0.0.1:5000/letter13":
-        sub_dir = "13"
-        
-    elif page_name == "http://127.0.0.1:5000/letter14":
-        sub_dir = "14"
-        
-    elif page_name == "http://127.0.0.1:5000/letter15":
-        sub_dir = "15"
-        
-    elif page_name == "http://127.0.0.1:5000/letter16":
-        sub_dir = "16"
-        
-    elif page_name == "http://127.0.0.1:5000/letter17":
-        sub_dir = "17"
-        
-    elif page_name == "http://127.0.0.1:5000/letter18":
-        sub_dir = "18"
-        
-    elif page_name == "http://127.0.0.1:5000/letter19":
-        sub_dir = "19"
-        
-    elif page_name == "http://127.0.0.1:5000/letter20":
-        sub_dir = "20"
-        
-    elif page_name == "http://127.0.0.1:5000/letter21":
-        sub_dir = "21"
-        
-    elif page_name == "http://127.0.0.1:5000/letter22":
-        sub_dir = "22"
-        
-    elif page_name == "http://127.0.0.1:5000/letter23":
-        sub_dir = "23"
-        
-    elif page_name == "http://127.0.0.1:5000/letter24":
-        sub_dir = "24"
-        
-    elif page_name == "http://127.0.0.1:5000/letter25":
-        sub_dir = "25"
-        
-    elif page_name == "http://127.0.0.1:5000/letter26":
-        sub_dir = "26"
-        
-    elif page_name == "http://127.0.0.1:5000/letter27":
-        sub_dir = "27"
-        
-    elif page_name == "http://127.0.0.1:5000/number0":
-        sub_dir = "num0"
-        
-    elif page_name == "http://127.0.0.1:5000/number1":
-        sub_dir = "num1"
-        
-    elif page_name == "http://127.0.0.1:5000/number2":
-        sub_dir = "num2"
-        
-    elif page_name == "http://127.0.0.1:5000/number3":
-        sub_dir = "num3"
-        
-    elif page_name == "http://127.0.0.1:5000/number4":
-        sub_dir = "num4"
-        
-    elif page_name == "http://127.0.0.1:5000/number5":
-        sub_dir = "num5"
-        
-    elif page_name == "http://127.0.0.1:5000/number6":
-        sub_dir = "num6"
-        
-    elif page_name == "http://127.0.0.1:5000/number7":
-        sub_dir = "num7"
-        
-    elif page_name == "http://127.0.0.1:5000/number8":
-        sub_dir = "num8"
-        
-    elif page_name == "http://127.0.0.1:5000/number9":
-        sub_dir = "num9"
-        
-    else:
-        print(f"Invalid page: {page_name}")
-        exit()
+    # Generate a unique file name using current timestamp
+    current_time = datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+    file_name = f"{directory}/screenshot_at_{current_time}.jpg"
 
-    # subdirectories path
-    subdir_path = os.path.join(directory, sub_dir)
+    # Write the screenshot to file
+    with open(file_name, 'wb') as f:
+        f.write(base64.b64decode(screenshot.split(',')[1]))
 
-    if not os.path.exists(subdir_path):
-        os.makedirs(subdir_path)
-    for i, screenshot in enumerate(screenshots):
-        with open(f'{subdir_path}/screenshot_{i}.jpg', 'wb') as f:
-            f.write(base64.b64decode(screenshot.split(',')[1]))
-    return jsonify({"message": "Screenshots saved successfully."})
+    return jsonify({"message": "Screenshot saved successfully."})
+
 
 
 @app.route('/process_screenshots')
@@ -166,133 +53,26 @@ def process_screenshots():
     # Initialize empty lists to store landmarks and labels
     landmarks = []
 
-    # get page
-    page_name = request.referrer
-
-    # Define input directories based on page
-    if page_name == "http://127.0.0.1:5000/letter1":
-        sub_dir = "1"
-        
-    elif page_name == "http://127.0.0.1:5000/letter2":
-        sub_dir = "2"
-        
-    elif page_name == "http://127.0.0.1:5000/letter3":
-        sub_dir = "3"
-        
-    elif page_name == "http://127.0.0.1:5000/letter4":
-        sub_dir = "4"
-        
-    elif page_name == "http://127.0.0.1:5000/letter5":
-        sub_dir = "5"
-        
-    elif page_name == "http://127.0.0.1:5000/letter6":
-        sub_dir = "6"
-        
-    elif page_name == "http://127.0.0.1:5000/letter7":
-        sub_dir = "7"
-        
-    elif page_name == "http://127.0.0.1:5000/letter8":
-        sub_dir = "8"
-        
-    elif page_name == "http://127.0.0.1:5000/letter9":
-        sub_dir = "9"
-        
-    elif page_name == "http://127.0.0.1:5000/letter10":
-        sub_dir = "10"
-        
-    elif page_name == "http://127.0.0.1:5000/letter11":
-        sub_dir = "11"
-        
-    elif page_name == "http://127.0.0.1:5000/letter12":
-        sub_dir = "12"
-        
-    elif page_name == "http://127.0.0.1:5000/letter13":
-        sub_dir = "13"
-        
-    elif page_name == "http://127.0.0.1:5000/letter14":
-        sub_dir = "14"
-        
-    elif page_name == "http://127.0.0.1:5000/letter15":
-        sub_dir = "15"
-        
-    elif page_name == "http://127.0.0.1:5000/letter16":
-        sub_dir = "16"
-        
-    elif page_name == "http://127.0.0.1:5000/letter17":
-        sub_dir = "17"
-        
-    elif page_name == "http://127.0.0.1:5000/letter18":
-        sub_dir = "18"
-        
-    elif page_name == "http://127.0.0.1:5000/letter19":
-        sub_dir = "19"
-        
-    elif page_name == "http://127.0.0.1:5000/letter20":
-        sub_dir = "20"
-        
-    elif page_name == "http://127.0.0.1:5000/letter21":
-        sub_dir = "21"
-        
-    elif page_name == "http://127.0.0.1:5000/letter22":
-        sub_dir = "22"
-        
-    elif page_name == "http://127.0.0.1:5000/letter23":
-        sub_dir = "23"
-        
-    elif page_name == "http://127.0.0.1:5000/letter24":
-        sub_dir = "24"
-        
-    elif page_name == "http://127.0.0.1:5000/letter25":
-        sub_dir = "25"
-        
-    elif page_name == "http://127.0.0.1:5000/letter26":
-        sub_dir = "26"
-        
-    elif page_name == "http://127.0.0.1:5000/letter27":
-        sub_dir = "27"
-        
-    elif page_name == "http://127.0.0.1:5000/number0":
-        sub_dir = "num0"
-        
-    elif page_name == "http://127.0.0.1:5000/number1":
-        sub_dir = "num1"
-        
-    elif page_name == "http://127.0.0.1:5000/number2":
-        sub_dir = "num2"
-        
-    elif page_name == "http://127.0.0.1:5000/number3":
-        sub_dir = "num3"
-        
-    elif page_name == "http://127.0.0.1:5000/number4":
-        sub_dir = "num4"
-        
-    elif page_name == "http://127.0.0.1:5000/number5":
-        sub_dir = "num5"
-        
-    elif page_name == "http://127.0.0.1:5000/number6":
-        sub_dir = "num6"
-        
-    elif page_name == "http://127.0.0.1:5000/number7":
-        sub_dir = "num7"
-        
-    elif page_name == "http://127.0.0.1:5000/number8":
-        sub_dir = "num8"
-        
-    elif page_name == "http://127.0.0.1:5000/number9":
-        sub_dir = "num9"
-        
-    else:
-        print(f"Invalid page: {page_name}")
-        exit()
-    
-    # subdirectories path
-    subdir_path = os.path.join(input_dir, sub_dir)
-
-    # Check if subdirectory is valid and has images
-    if os.path.isdir(subdir_path):
-        image_files = [os.path.join(subdir_path, f) for f in os.listdir(subdir_path) if os.path.isfile(os.path.join(subdir_path, f))]
+    # Check if directory is valid and has images
+    if os.path.isdir(input_dir):
+        image_files = [os.path.join(input_dir, f) for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
         if not image_files:
-            print("no image_files")
+            #print("no image_files")
+            return jsonify({"message": "no image_files"})
+        
+        # Create a folder with the current time as name for processed images
+        current_time = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        processed_dir = os.path.join(output_dir, current_time)
+        if os.path.exists(processed_dir):
+            i = 1
+            while True:
+                processed_dir = os.path.join(output_dir, current_time + '_' + str(i))
+                if not os.path.exists(processed_dir):
+                    os.makedirs(processed_dir)
+                    break
+                i += 1
+        else:
+            os.makedirs(processed_dir)
 
         # Loop through images in subdirectory
         for image_path in image_files:
@@ -300,8 +80,10 @@ def process_screenshots():
             image = cv2.imread(image_path)
             image = cv2.resize(image, (672, 672))  # Replace with your desired size
 
-            # Convert image to RGB format and run hand detection
+            # Convert image to RGB format
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+            # Run hand detection
             results = hands.process(image)
 
             # Check if hand(s) were detected
@@ -329,9 +111,16 @@ def process_screenshots():
                     landmarks.append(landmarks_norm.flatten())
 
                     # Save output image
-                    output_path = os.path.join(output_dir, sub_dir, os.path.basename(image_path))
-                    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+                    output_filename = "processed_" + os.path.basename(image_path)
+                    output_path = os.path.join(processed_dir, output_filename)
                     cv2.imwrite(output_path, image_draw)
+
+            else:
+                # No hand detected, delete input image
+                os.remove(image_path)
+
+            # Move input image to output directory
+            shutil.move(image_path, processed_dir)
 
     # Clean up
     hands.close()
@@ -340,16 +129,14 @@ def process_screenshots():
     landmarks = np.array(landmarks)
 
     np.save("backend/Flask/live_hand_landmarks.npy", landmarks)
-    #print("Store the extracted live_hand_landmarks.npy Done")
+    np.save(os.path.join(processed_dir, "live_hand_landmarks.npy"), landmarks)
+    #print("Stored the extracted live_hand_landmarks.npy")
 
     return jsonify({"message": "Screenshots processed successfully."})
 
 
 @app.route('/predict')
 def predict():
-    # Load the .npy file
-    hand_landmarks = np.load('backend/Flask/live_hand_landmarks.npy')
-
     # get page
     page_name = request.referrer
 
@@ -595,37 +382,40 @@ def predict():
     elif page_name == "http://127.0.0.1:5000/number7":
         sub_dir = "num7"
         # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
         # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
         
     elif page_name == "http://127.0.0.1:5000/number8":
         sub_dir = "num8"
         # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
         # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
         
     elif page_name == "http://127.0.0.1:5000/number9":
         sub_dir = "num9"
         # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
         # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
         
     else:
         print(f"Invalid page: {page_name}")
         exit()
 
+    # Load the .npy file
+    hand_landmarks = np.load('backend/Flask/live_hand_landmarks.npy')
+
     # Normalize the test data using the same mean and std as the training data
-    mean = np.mean(hand_landmarks, axis=0)
-    std = np.std(hand_landmarks, axis=0)
-    landmarks_test_norm = (hand_landmarks - mean) / std
+    #mean = np.mean(hand_landmarks, axis=0)
+    #std = np.std(hand_landmarks, axis=0)
+    #landmarks_test_norm = (hand_landmarks - mean) / std
 
     # Reshape the test data to match the input shape of the model
-    landmarks_test_resized = np.zeros((landmarks_test_norm.shape[0], 112, 112, 3))
-    for i in range(landmarks_test_norm.shape[0]):
-        img = np.stack([landmarks_test_norm[i]] * 3, axis=-1)
+    landmarks_test_resized = np.zeros((hand_landmarks.shape[0], 112, 112, 3))
+    for i in range(hand_landmarks.shape[0]):
+        img = np.stack([hand_landmarks[i]] * 3, axis=-1)
         img = np.expand_dims(img, axis=0)  # add a new axis to img
         img_resized = tf.image.resize(img, (112, 112)).numpy()[0]  # resize and remove the added axis
         landmarks_test_resized[i] = img_resized
@@ -641,23 +431,13 @@ def predict():
     labels_str = label_encoder.fit_transform(hand_labels)
     predicted_labels_str = label_encoder.inverse_transform(predicted_labels)
 
-    # Create a dictionary to store counts of unique variables
-    count_dict = {}
-
-    # Loop through the array and count occurrences of each variable
-    for item in predicted_labels_str:
-        if item in count_dict:
-            count_dict[item] += 1
-        else:
-            count_dict[item] = 1
-
-    # sort dictionary by values
-    sorted_count_dict = dict(sorted(count_dict.items(), key=lambda x: x[1]))
-
     # Create a string with the results
-    result_str = ""
-    for item, count in sorted_count_dict.items():
-        result_str += ('Variable "{}" appears {} times out of {} ({:.2f}%)\n'.format(item.strip(), count, len(predicted_labels_str), count/len(predicted_labels_str)*100))
+    result_str = ('Variable "{}" detected\n'.format(predicted_labels_str[0]))
+
+    # if predicted_labels_str[0] == sub_dir:
+    #     return jsonify({"message": "you showed the correct sign"})
+    # elif predicted_labels_str[0] != sub_dir:
+    #     return jsonify({"message": "you showed the Wrong sign. Try again"})
 
     # Return the results
     return jsonify({"result_str": result_str})
@@ -811,42 +591,42 @@ def letter27():
 def number0():
     return render_template('number0.html')
 
-# @app.route('/number1')
-# def number1():
-#     return render_template('number1.html')
+@app.route('/number1')
+def number1():
+     return render_template('number1.html')
 
 
-# @app.route('/number2')
-# def number2():
-#     return render_template('number2.html')
+@app.route('/number2')
+def number2():
+    return render_template('number2.html')
 
-# @app.route('/number3')
-# def number3():
-#     return render_template('number3.html')
+@app.route('/number3')
+def number3():
+    return render_template('number3.html')
 
-# @app.route('/number4')
-# def number4():
-#     return render_template('number4.html')
+@app.route('/number4')
+def number4():
+    return render_template('number4.html')
 
-# @app.route('/number5')
-# def number5():
-#     return render_template('number5.html')
+@app.route('/number5')
+def number5():
+    return render_template('number5.html')
 
-# @app.route('/number6')
-# def number6():
-#     return render_template('number6.html')
+@app.route('/number6')
+def number6():
+    return render_template('number6.html')
 
-# @app.route('/number7')
-# def number7():
-#     return render_template('number7.html')
+@app.route('/number7')
+def number7():
+    return render_template('number7.html')
 
-# @app.route('/number8')
-# def number8():
-#     return render_template('number8.html')
+@app.route('/number8')
+def number8():
+    return render_template('number8.html')
 
-# @app.route('/number9')
-# def number9():
-#     return render_template('number9.html')
+@app.route('/number9')
+def number9():
+    return render_template('number9.html')
 
 
 @app.route('/quiz')
