@@ -4,7 +4,7 @@
 }
 
 body { 
-    background-image: url('../assets/learning.jpg');
+    background-image: url('../assets/learning.svg');
     overflow: hidden;
 }
 
@@ -23,15 +23,22 @@ body {
     height: 100vh;
 }
 
+.TextImage {
+    position: absolute;
+    height: 80%;
+    width: 40%;
+    left: 9%;
+    top: 10%;
+}
+
 .Text {
     position: absolute;
-    height: 25%;
-    width: 14%;
-    left: 28%;
-    top: 23%;
-    transform: translate(-50%, -50%);
+    height: 23%;
+    width: 23%;
+    left: 37.5%;
+    top: 0%;
     border: 2px solid #000000;
-    border-radius: 0px;
+    border-radius: 10px;
     background-color: rgba(231, 192, 69, 0.75);
     display: flex;
     justify-content: center;
@@ -43,23 +50,22 @@ body {
     font-size: 7rem;
     font-weight: bold;
     text-align: center;
-    transform: translate(0%, -10%);
-  
+    transform: translate(0%, -12.5%);
 }
 
 .Imgdiv {
     position: absolute;
-    height: 50%;
-    width: 30%;
-    left: 28%;
-    top: 65.4%;
-    transform: translate(-50%, -50%);
+    height: 76.5%;
+    width: 100%;
+    left: -0.2%;
+    top: 23.5%;
     border: 2px solid #000000;
-    border-radius: 0px;
+    border-radius: 5px;
     background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: translate(0%, 1.5%);
 }
   
 .Imgdiv img {
@@ -69,16 +75,14 @@ body {
 }
 
 .Camera {
-    position: relative;
+    position: absolute;
     height: 71%;
     width: 40%;
-    left: 67%;
-    top: 55%;
-    transform: translate(-50%, -50%);
+    right: 9%;
+    top: 20%;
     border: 2px solid #000000;
     border-radius: 5px;
     background-color: rgba(199, 186, 125, 0.75);
-   
 }
 
 .camButton {
@@ -101,54 +105,10 @@ body {
     transform: translate(0%, 0%);
 }
 
-.countdown{
-    position: absolute;
-    display: flex;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-    backdrop-filter: blur(10px);
-}
-
-.countdown-text{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 20rem;
-    color: #ffffff;
-    font-weight: bold;
-    text-align: center;
-    text-shadow: 0 0 5px #000000;
-    transform: translate(-50%, -60%);
-}
-
 #showHands {
     top: 0;
     left: 0;
     width: 100%;
-}
-
-#timer-div {
-    position: absolute;
-    left: 93%;
-    width: 7%;
-    height: 8%;
-    border-left: 2px solid #000000;
-    border-right: 1px solid #000000;
-    border-bottom: 2px solid #000000;
-    border-radius: 0px 0px 10px 10px;
-    background-color: rgba(199, 186, 125, 0.5);
-    z-index: 3;
-}
-
-#timer-text {
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    text-shadow: 0 0 5px #ffffff;
 } 
 
 #info-div {
@@ -158,14 +118,14 @@ body {
     border-left: 2px solid #000000;
     border-right: 2px solid #000000;
     border-bottom: 2px solid #000000;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 0px 0px 0px 0px;
     background-color: rgba(199, 186, 125, 0.5);
     transform: translate(-0.2%, 0%);
     z-index: 3;
 }
 
 #info-text {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: myFont;
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
@@ -207,6 +167,52 @@ body {
     z-index: 2;
 }
 
+.takeScreenshot {
+    position: absolute;
+    width: 7%;
+    height: 8.5%;
+    left: 93%;
+    border-left: 2px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 2px solid #000000;
+    border-radius: 0px 0px 0px 0px;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 9;
+}
+
+.takeScreenshotText {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 5px #000000;
+    transform: translate(0%, 0%);
+}
+
+.countdown{
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: rgba(199, 186, 125, 0.97);
+    z-index: 8;
+}
+
+.countdown-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 20rem;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 5px #000000;
+    transform: translate(-50%, -60%);
+}
+
 #result-div {
     position: absolute;
     height: 100%;
@@ -218,7 +224,7 @@ body {
     border-radius: 5px;
     overflow: hidden;
     background-color: rgba(199, 186, 125, 1);
-    z-index: 4;
+    z-index: 7;
 }
 
 #results {
@@ -227,6 +233,19 @@ body {
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 2rem;
+}
+
+.button1 {
+	width: 100px; 
+	height: 100px; 
+	position: absolute; 
+	top: 47%; 
+    left: 3%;
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
 }
 
 .button2 {
@@ -247,7 +266,7 @@ body {
 	height: 80px; 
 	position: absolute; 
 	top: 0%; 
-	left: 94%; 
+    right: 0.2%; 
 	border: none; 
 	background-color: transparent; 
 	cursor: pointer; 
@@ -256,11 +275,11 @@ body {
 }
 
 .button4 {
-	width: 80px; 
-	height: 80px; 
+	width: 100px; 
+	height: 100px; 
 	position: absolute; 
 	top: 47%; 
-	left: 94%; 
+    right: 3%;
 	border: none; 
 	background-color: transparent; 
 	cursor: pointer; 

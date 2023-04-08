@@ -16,24 +16,24 @@ from tensorflow.keras.models import Model
 app = Flask(__name__)
 
 
-@app.route('/save_screenshots', methods=['POST'])
-def save_screenshots():
-    screenshots = request.json['screenshots']
+@app.route('/save_screenshot', methods=['POST'])
+def save_screenshot():
+    screenshot = request.json['screenshot']
     directory = 'backend/Flask/screenshots'
 
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    for screenshot in screenshots:
-        # Generate a unique file name using current timestamp
-        current_time = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
-        file_name = f"{directory}/screenshot_at_{current_time}.jpg"
+    # Generate a unique file name using current timestamp
+    current_time = datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+    file_name = f"{directory}/screenshot_at_{current_time}.jpg"
 
-        # Write the screenshot to file
-        with open(file_name, 'wb') as f:
-            f.write(base64.b64decode(screenshot.split(',')[1]))
+    # Write the screenshot to file
+    with open(file_name, 'wb') as f:
+        f.write(base64.b64decode(screenshot.split(',')[1]))
 
-    return jsonify({"message": "Screenshots saved successfully."})
+    return jsonify({"message": "Screenshot saved successfully."})
+
 
 
 @app.route('/process_screenshots')
@@ -80,8 +80,10 @@ def process_screenshots():
             image = cv2.imread(image_path)
             image = cv2.resize(image, (672, 672))  # Replace with your desired size
 
-            # Convert image to RGB format and run hand detection
+            # Convert image to RGB format
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+            # Run hand detection
             results = hands.process(image)
 
             # Check if hand(s) were detected
@@ -113,6 +115,10 @@ def process_screenshots():
                     output_path = os.path.join(processed_dir, output_filename)
                     cv2.imwrite(output_path, image_draw)
 
+            else:
+                # No hand detected, delete input image
+                os.remove(image_path)
+
             # Move input image to output directory
             shutil.move(image_path, processed_dir)
 
@@ -124,16 +130,13 @@ def process_screenshots():
 
     np.save("backend/Flask/live_hand_landmarks.npy", landmarks)
     np.save(os.path.join(processed_dir, "live_hand_landmarks.npy"), landmarks)
-    #print("Store the extracted live_hand_landmarks.npy Done")
+    #print("Stored the extracted live_hand_landmarks.npy")
 
     return jsonify({"message": "Screenshots processed successfully."})
 
 
 @app.route('/predict')
 def predict():
-    # Load the .npy file
-    hand_landmarks = np.load('backend/Flask/live_hand_landmarks.npy')
-
     # get page
     page_name = request.referrer
 
@@ -379,37 +382,40 @@ def predict():
     elif page_name == "http://127.0.0.1:5000/number7":
         sub_dir = "num7"
         # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
         # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
         
     elif page_name == "http://127.0.0.1:5000/number8":
         sub_dir = "num8"
         # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
         # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
         
     elif page_name == "http://127.0.0.1:5000/number9":
         sub_dir = "num9"
         # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
         # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
         
     else:
         print(f"Invalid page: {page_name}")
         exit()
 
+    # Load the .npy file
+    hand_landmarks = np.load('backend/Flask/live_hand_landmarks.npy')
+
     # Normalize the test data using the same mean and std as the training data
-    mean = np.mean(hand_landmarks, axis=0)
-    std = np.std(hand_landmarks, axis=0)
-    landmarks_test_norm = (hand_landmarks - mean) / std
+    #mean = np.mean(hand_landmarks, axis=0)
+    #std = np.std(hand_landmarks, axis=0)
+    #landmarks_test_norm = (hand_landmarks - mean) / std
 
     # Reshape the test data to match the input shape of the model
-    landmarks_test_resized = np.zeros((landmarks_test_norm.shape[0], 112, 112, 3))
-    for i in range(landmarks_test_norm.shape[0]):
-        img = np.stack([landmarks_test_norm[i]] * 3, axis=-1)
+    landmarks_test_resized = np.zeros((hand_landmarks.shape[0], 112, 112, 3))
+    for i in range(hand_landmarks.shape[0]):
+        img = np.stack([hand_landmarks[i]] * 3, axis=-1)
         img = np.expand_dims(img, axis=0)  # add a new axis to img
         img_resized = tf.image.resize(img, (112, 112)).numpy()[0]  # resize and remove the added axis
         landmarks_test_resized[i] = img_resized
@@ -425,24 +431,13 @@ def predict():
     labels_str = label_encoder.fit_transform(hand_labels)
     predicted_labels_str = label_encoder.inverse_transform(predicted_labels)
 
-    # Create a dictionary to store counts of unique variables
-    count_dict = {}
-
-    # Loop through the array and count occurrences of each variable
-    for item in predicted_labels_str:
-        if item in count_dict:
-            count_dict[item] += 1
-        else:
-            count_dict[item] = 1
-
-    # sort dictionary by values
-    sorted_count_dict = dict(sorted(count_dict.items(), key=lambda x: x[1]))
-
     # Create a string with the results
-    result_str = ""
-    for item, count in sorted_count_dict.items():
-        result_str += ('Variable "{}" detected {} times out of {} ({:.2f}%)\n'.format(item.strip(), count, len(predicted_labels_str), 
-        count/len(predicted_labels_str)*100))
+    result_str = ('Variable "{}" detected\n'.format(predicted_labels_str[0]))
+
+    # if predicted_labels_str[0] == sub_dir:
+    #     return jsonify({"message": "you showed the correct sign"})
+    # elif predicted_labels_str[0] != sub_dir:
+    #     return jsonify({"message": "you showed the Wrong sign. Try again"})
 
     # Return the results
     return jsonify({"result_str": result_str})
@@ -596,42 +591,42 @@ def letter27():
 def number0():
     return render_template('number0.html')
 
-# @app.route('/number1')
-# def number1():
-#     return render_template('number1.html')
+@app.route('/number1')
+def number1():
+     return render_template('number1.html')
 
 
-# @app.route('/number2')
-# def number2():
-#     return render_template('number2.html')
+@app.route('/number2')
+def number2():
+    return render_template('number2.html')
 
-# @app.route('/number3')
-# def number3():
-#     return render_template('number3.html')
+@app.route('/number3')
+def number3():
+    return render_template('number3.html')
 
-# @app.route('/number4')
-# def number4():
-#     return render_template('number4.html')
+@app.route('/number4')
+def number4():
+    return render_template('number4.html')
 
-# @app.route('/number5')
-# def number5():
-#     return render_template('number5.html')
+@app.route('/number5')
+def number5():
+    return render_template('number5.html')
 
-# @app.route('/number6')
-# def number6():
-#     return render_template('number6.html')
+@app.route('/number6')
+def number6():
+    return render_template('number6.html')
 
-# @app.route('/number7')
-# def number7():
-#     return render_template('number7.html')
+@app.route('/number7')
+def number7():
+    return render_template('number7.html')
 
-# @app.route('/number8')
-# def number8():
-#     return render_template('number8.html')
+@app.route('/number8')
+def number8():
+    return render_template('number8.html')
 
-# @app.route('/number9')
-# def number9():
-#     return render_template('number9.html')
+@app.route('/number9')
+def number9():
+    return render_template('number9.html')
 
 
 @app.route('/quiz')
