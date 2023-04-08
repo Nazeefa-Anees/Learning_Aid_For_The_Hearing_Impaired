@@ -3,13 +3,17 @@
     src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
 }
 
+body {
+  overflow: hidden;
+}
+
 .page-container {
     position: relative;
     margin: -0.5%;
     height: 100vh;
     font-family: 'myFont';
     src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
-}
+  }
 
 .bg {
     background-image: url('../assets/quiz.jpg');

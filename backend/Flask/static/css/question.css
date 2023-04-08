@@ -1,6 +1,7 @@
 body {
   background-image: url('../assets/quiz.jpg');
   background-size: cover;
+  overflow: hidden;
 
 }
 .page-container {
