@@ -1,38 +1,44 @@
-body { 
-    background-image: url('../assets/learning.svg');
-    overflow: hidden;
-}
-
 @font-face {
   font-family: "myFont";
   src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
+body { 
+  background-image: url('../assets/learning.svg');
+  overflow: hidden;
 }
 
 .page-container {
   position: relative;
   margin: -0.5%;
   height: 100vh;
-  font-family: 'Sinhala';
+  font-family: 'myFont';
   src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
-  
 }
 
 .bg {
-    
-    background-size: cover;
-    background-position: center center;
-    height: 100vh;
+  background-image: url('../assets/learning.svg');
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+}
+
+.TextImage {
+  position: absolute;
+  height: 80%;
+  width: 40%;
+  left: 9%;
+  top: 10%;
 }
 
 .Text {
   position: absolute;
-  height: 25%;
-  width: 14%;
-  left: 28%;
-  top: 23%;
-  transform: translate(-50%, -50%);
+  height: 23%;
+  width: 23%;
+  left: 37.5%;
+  top: 0%;
   border: 2px solid #000000;
-  border-radius: 0px;
+  border-radius: 10px;
   background-color: rgba(231, 192, 69, 0.75);
   display: flex;
   justify-content: center;
@@ -40,37 +46,26 @@ body {
 }
 
 .Text h1 {
-    font-family: "myFont", sans-serif;
-    font-size: 7rem;
-    font-weight: bold;
-    text-align: center;
-  
-}
-
-.Camera {
-  position: relative;
-  height: 80%;
-  width: 40%;
-  left: 67%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 0px;
-  background-color: rgb(200, 200, 200);
+  font-family: "myFont", sans-serif;
+  font-size: 7rem;
+  font-weight: bold;
+  text-align: center;
+  transform: translate(0%, -2.5%);
 }
 
 .Imgdiv {
   position: absolute;
-  height: 50%;
-  width: 30%;
-  left: 28%;
-  top: 65.4%;
-  transform: translate(-50%, -50%);
+  height: 76.5%;
+  width: 100%;
+  left: -0.2%;
+  top: 23.5%;
   border: 2px solid #000000;
-  border-radius: 0px;
+  border-radius: 5px;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translate(0%, 1.5%);
 }
 
 .Imgdiv img {
@@ -79,123 +74,214 @@ body {
   object-fit: cover;
 }
 
-.video {
+.Camera {
   position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-.canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  height: 71%;
+  width: 40%;
+  right: 9%;
+  top: 20%;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  background-color: rgba(199, 186, 125, 0.75);
 }
 
 .camButton {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    font-size: 40px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(200, 200, 200);
-    font-weight: bold;
-    text-shadow: 0 0 5px #000000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid #000000;
+  border-radius: 5px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  z-index: 4;
 }
 
+.camButtonText {
+  font-family: "myFont", sans-serif;
+  font-size: 7rem;
+  text-shadow: 0 0 5px #000000;
+  text-align: center;
+  transform: translate(0%, -10%);
+}
 
-.blurback {
-  position: absolute;
-  display: flex;
-  border: 1px solid #000000;
+#showHands {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px);
-  z-index: 1;
-}
+} 
 
-.countdown-text{
-  font-size: 150px;
-  color: #ffffff;
-  font-weight: bold;
-  text-shadow: 0 0 5px #000000;
+.input_video {
   position: absolute;
+  width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border: 2px solid #000000;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.screenshotCanvas{
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  top: 54.2%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}  
+
+.output_canvas {
+  position: absolute;
+  width: 100%;
+  top: 54.2%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #000000;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.takeScreenshot {
+  position: absolute;
+  width: 100%;
+  height: 8.5%;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  background-color: rgba(0, 0, 0, 0.75);
+  transform: translate(0%, 0%);
+  cursor: pointer;
+  z-index: 9;
+}
+
+.takeScreenshotText {
+  font-family: "myFont";
+  font-size: 2.5em;
+  font-weight: normal;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 5px #000000;
+  transform: translate(0%, -10%);
 }
 
 .countdown{
   position: absolute;
   display: flex;
-  border: 1px solid #000000;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(10px);
+  border-radius: 5px;
+  background-color: rgba(199, 186, 125, 0.97);
+  z-index: 8;
 }
 
+.resultDiv {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: rgba(199, 186, 125, 0.75);
+  z-index: 7;
+}
+
+.results {
+  margin-top: 27.5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
+  font-family:"myFont";
+  font-size: 4em;
+}
+
+.tryAgain {
+  position: absolute;
+  width: 60%;
+  top: 50%;
+  left: 20%;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.75);
+  transform: translate(0%, 0%);
+  cursor: pointer;
+}
+
+.tryAgainText {
+  font-family: "myFont";
+  font-size: 2.5em;
+  font-weight:normal;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 5px #000000;
+  transform: translate(0%, -10%);
+}
+
+.button1 {
+width: 100px; 
+height: 100px; 
+position: absolute; 
+top: 47%; 
+  left: 3%;
+border: none; 
+background-color: transparent; 
+cursor: pointer; 
+outline: none; 
+background-size: 100% 100%
+}
 
 .button2 {
-	width: 80px; 
-	height: 80px; 
-	position: absolute; 
-	left: 0.2%; 
-	top: 0%;
-	border: none; 
-	background-color: transparent; 
-	cursor: pointer; 
-	outline: none; 
-	background-size: 100% 100%
+width: 80px; 
+height: 80px; 
+position: absolute; 
+left: 0.2%; 
+top: 0%;
+border: none; 
+background-color: transparent; 
+cursor: pointer; 
+outline: none; 
+background-size: 100% 100%
 }
 
 .button3 {
-	width: 80px; 
-	height: 80px; 
-	position: absolute; 
-	top: 0%; 
-	left: 94%; 
-	border: none; 
-	background-color: transparent; 
-	cursor: pointer; 
-	outline: none; 
-	background-size: 100% 100%
+width: 80px; 
+height: 80px; 
+position: absolute; 
+top: 0%; 
+  right: 0.2%; 
+border: none; 
+background-color: transparent; 
+cursor: pointer; 
+outline: none; 
+background-size: 100% 100%
 }
 
 .button4 {
-	width: 80px; 
-	height: 80px; 
-	position: absolute; 
-	top: 47%; 
-	left: 94%; 
-	border: none; 
-	background-color: transparent; 
-	cursor: pointer; 
-	outline: none; 
-	background-size: 100% 100%
+width: 80px; 
+height: 80px; 
+position: absolute; 
+top: 47%; 
+left: 94%; 
+border: none; 
+background-color: transparent; 
+cursor: pointer; 
+outline: none; 
+background-size: 100% 100%
 }
 
 .button5 {
-	width: 80px; 
-	height: 80px; 
-	position: absolute; 
-	top: 47%; 
-	right: 94%; 
-	border: none; 
-	background-color: transparent; 
-	cursor: pointer; 
-	outline: none; 
-	background-size: 100% 100%
+width: 80px; 
+height: 80px; 
+position: absolute; 
+top: 47%; 
+right: 94%; 
+border: none; 
+background-color: transparent; 
+cursor: pointer; 
+outline: none; 
+background-size: 100% 100%
 }

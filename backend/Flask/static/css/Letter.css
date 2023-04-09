@@ -50,7 +50,7 @@ body {
     font-size: 7rem;
     font-weight: bold;
     text-align: center;
-    transform: translate(0%, -12.5%);
+    transform: translate(0%, -2.5%);
 }
 
 .Imgdiv {
@@ -94,16 +94,16 @@ body {
     border: 1px solid #000000;
     border-radius: 5px;
     backdrop-filter: blur(10px);
+    cursor: pointer;
     z-index: 4;
 }
 
 .camButtonText {
     font-family: "myFont", sans-serif;
-    font-size: 5rem;
-    font-weight: bold;
+    font-size: 7rem;
     text-shadow: 0 0 5px #000000;
     text-align: center;
-    transform: translate(0%, 0%);
+    transform: translate(0%, -10%);
 }
 
 #showHands {
@@ -111,30 +111,6 @@ body {
     left: 0;
     width: 100%;
 } 
-
-#info-div {
-    position: absolute;
-    width: 93%;
-    height: 11%;
-    border-left: 2px solid #000000;
-    border-right: 2px solid #000000;
-    border-bottom: 2px solid #000000;
-    border-radius: 0px 0px 0px 0px;
-    background-color: rgba(199, 186, 125, 0.5);
-    transform: translate(-0.2%, 0%);
-    z-index: 3;
-}
-
-#info-text {
-    font-family: "myFont", sans-serif;
-    font-family: myFont;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    text-shadow: 0 0 5px #ffffff;
-    transform: translate(0%, 50%);
-}
 
 .input_video {
     position: absolute;
@@ -171,25 +147,25 @@ body {
 
 .takeScreenshot {
     position: absolute;
-    width: 7%;
-    height: 11.5%;
-    left: 93%;
+    width: 100%;
+    height: 8.5%;
     border-left: 2px solid #000000;
-    border-right: 1px solid #000000;
+    border-right: 2px solid #000000;
     border-bottom: 2px solid #000000;
-    border-radius: 0px 0px 0px 0px;
     background-color: rgba(0, 0, 0, 0.75);
+    transform: translate(0%, 0%);
+    cursor: pointer;
     z-index: 9;
 }
 
 .takeScreenshotText {
-    font-family: "myFont", sans-serif;
-    font-size: 2rem;
-    font-weight: bold;
+    font-family: "myFont";
+    font-size: 2.5em;
+    font-weight: normal;
     text-align: center;
     color: rgb(255, 255, 255);
     text-shadow: 0 0 5px #000000;
-    transform: translate(0%, 0%);
+    transform: translate(0%, -10%);
 }
 
 .countdown{
@@ -204,38 +180,45 @@ body {
     z-index: 8;
 }
 
-.countdown-text{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 20rem;
-    color: #ffffff;
-    font-weight: bold;
-    text-align: center;
-    text-shadow: 0 0 5px #000000;
-    transform: translate(-50%, -60%);
-}
-
-#result-div {
+.resultDiv {
     position: absolute;
     height: 100%;
     width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     border: 2px solid #000000;
     border-radius: 5px;
     overflow: hidden;
-    background-color: rgba(199, 186, 125, 1);
+    background-color: rgba(199, 186, 125, 0.75);
     z-index: 7;
 }
 
-#results {
-    top: 10%;
-    height: 70%;
+.results {
+    margin-top: 27.5%;
+    margin-left: 10%;
+    margin-right: 10%;
     text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 2rem;
+    font-family:"myFont";
+    font-size: 4em;
+}
+
+.tryAgain {
+    position: absolute;
+    width: 60%;
+    top: 50%;
+    left: 20%;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.75);
+    transform: translate(0%, 0%);
+    cursor: pointer;
+}
+
+.tryAgainText {
+    font-family: "myFont";
+    font-size: 2.5em;
+    font-weight:normal;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 5px #000000;
+    transform: translate(0%, -10%);
 }
 
 .button1 {

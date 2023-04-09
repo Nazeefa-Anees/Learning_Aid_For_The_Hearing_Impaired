@@ -493,12 +493,9 @@ def predict():
     result_str = ('Variable "{}" detected\n'.format(predicted_labels_str[0]))
 
     if predicted_labels_str[0] == sub_dir:
-        return jsonify({"message": "you showed the correct sign"})
+        return jsonify({"message": "yrs ix&#123;dj fmkakqj&"})
     elif predicted_labels_str[0] != sub_dir:
-        return jsonify({"message": "you showed the Wrong sign. Try again"})
-
-    # Return the results
-    #return jsonify({"result_str": result_str})
+        return jsonify({"message": "jeros ix&#123;dj fmkakqj&"})
 
 
 # @app.route('/')

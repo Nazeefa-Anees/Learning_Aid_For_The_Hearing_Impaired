@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Letter6</title>
-	<link rel="icon" href="favicon.ico">
+	<link rel="icon" href="../static/assets/logo.ico">
     <link rel="stylesheet" type="text/css" href="../static/css/Letter.css">
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d@0.3/control_utils_3d.js" crossorigin="anonymous"></script>
@@ -80,14 +80,21 @@
 								// Send a GET request to /predict route
 								fetch('/predict').then(response => response.json()).then(data => {
 									const resultDiv = document.getElementById("results");
-									resultDiv.innerHTML = data.result_str;
+									resultDiv.innerHTML = data.message;
 									document.getElementById("result-div").style.display = "inline";
+									document.getElementById("showHands").style.display = "none";
 								});
 							})
 						}).catch(error => console.error(error));
 					});
 				}
 			}, 100);
+		}
+
+		function tryAgain() {
+			document.getElementById("result-div").style.display = "none";
+			document.getElementById("showHands").style.display = "inline";
+			document.getElementById("takeSS").style.display = "inline";
 		}
 
 		document.addEventListener("keydown", function(event) {
@@ -128,30 +135,26 @@
 						</div>
 					</div>
 
-					<div id="info-div">
-						<div id="info-text"style="font-family: myFont;">leurdjg w; fmkajkak</div>
-					</div>
-
 					<video class="input_video" id="liveVideo" style="display: none;" muted></video>
 					<canvas class="screenshotCanvas" id="screenshotCanvas" ></canvas>
 					<canvas class="output_canvas" width="100%" height="100%"></canvas>
 					<div class="control-panel" style="display: none;"></div>
+
+					<button class="takeScreenshot" id="takeSS" onclick="takeScreenshot()" style="display: none;">
+						<div class="takeScreenshotText">leurdjg w; fmkak,& ful ULkak</div>
+					</button>
 				</div>
 
-				<button class="takeScreenshot" id="takeSS" onclick="takeScreenshot()" style="display: none;">
-					<div class="takeScreenshotText">></div>
-				</button>
+				<div class="countdown" id="count-blur" style="display: none;"></div>
 
-				<div class="countdown" id="count-blur" style="display: none;">
-					<div class="countdown-text" id="count-down"></div>
-				</div>
-
-				<div id="result-div" style="display: none;">
-					<div id="results"></div>
+				<div class="resultDiv" id="result-div" style="display: none;">
+					<div class="results" id="results"></div>
+					<button class="tryAgain" id="try" onclick="tryAgain()">
+						<div class="tryAgainText">w&myq W;ai&y lrkak</div>
+					</button>
 				</div>
 			</div>
-
-
+			
 			<!-- Back Arrow -->
 			<a href="{{ url_for('learningselection1') }}">
 				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
