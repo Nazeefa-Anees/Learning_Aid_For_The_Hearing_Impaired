@@ -86,7 +86,6 @@ td {
 	cursor: pointer; 
 	outline: none; 
 	background-size: 100% 100%
-
 }
 
 .button3 {
@@ -94,7 +93,7 @@ td {
 	height: 80px; 
 	position: absolute; 
 	top: 0%; 
-	left: 94%; 
+    right: 0.2%; 
 	border: none; 
 	background-color: transparent; 
 	cursor: pointer; 

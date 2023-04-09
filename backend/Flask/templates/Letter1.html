@@ -80,7 +80,7 @@
 								// Send a GET request to /predict route
 								fetch('/predict').then(response => response.json()).then(data => {
 									const resultDiv = document.getElementById("results");
-									resultDiv.innerHTML = data.result_str;
+									resultDiv.innerHTML = data.message;
 									document.getElementById("result-div").style.display = "inline";
 								});
 							})
@@ -165,7 +165,6 @@
 			<a href="{{ url_for('letter2') }}">
 				<div class="button4" style="background-image: url(../static/assets/next.png);"></div>
 			</a>
-
 
 		</div>
     </div>

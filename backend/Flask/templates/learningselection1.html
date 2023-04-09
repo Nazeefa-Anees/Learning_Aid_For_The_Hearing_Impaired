@@ -1,64 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Letter Selection</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/learningselection.css">
+	<head>
+		<meta charset="UTF-8">
+		<title>Letter Selection</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/learningselection.css">
+	</head>
+	<body>
+		<div class="page-container">
+			<!-- Background Image -->
+			<div class="bg">
+				
+				<!-- Back Arrow -->
+				<a href="{{ url_for('learning') }}">
+					<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
+				</a>
+				
+				<!-- Home Icon -->
+				<a href="{{ url_for('home') }}">
+					<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
+				</a>
 
-
-  </head>
-  <body>
-    <div class="page-container">
-		<!-- Background Image -->
-      	<div class="bg">
-			
-			<!-- Back Arrow -->
-			<a href="{{ url_for('learning') }}">
-				<div class="button2" style="background-image: url(../static/assets/backarrow.png);"></div>
-			 </a>
-			
-			<!-- Home Icon -->
-			<a href="{{ url_for('home') }}">
-				<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
-			</a>
-						
-
-			<table class="center">
-			<tr>
-				<td><a href="{{ url_for('letter1') }}"><h1 class="font-family: myFont;">w</h1></a></td>
-			    <td><a href="{{ url_for('letter2') }}"><h1 class="font-family: myFont;">wd</h1></a></td>
-			    <td><a href="{{ url_for('letter3') }}"><h1 class="font-family: myFont;">we</h1></a></td>
-			    <td><a href="{{ url_for('letter4') }}"><h1 class="font-family: myFont;">b</h1></a></td>
-			    <td><a href="{{ url_for('letter5') }}"><h1 class="font-family: myFont;">W</h1></a></td>
-			    <td><a href="{{ url_for('letter6') }}"><h1 class="font-family: myFont;">t</h1></a></td>
-			    <td><a href="{{ url_for('letter7') }}"><h1 class="font-family: myFont;">ta</h1></a></td>
-			    <td><a href="{{ url_for('letter8') }}"><h1 class="font-family: myFont;">la</h1></a></td>
-			    <td><a href="{{ url_for('letter9') }}"><h1 class="font-family: myFont;">.a</h1></a></td>
-			</tr>
-			<tr>
-				<td><a href="{{ url_for('letter10') }}"><h1 class="font-family: myFont;">gs</h1></a></td>
-			    <td><a href="{{ url_for('letter11') }}"><h1 class="font-family: myFont;">oA</h1></a></td>
-			    <td><a href="{{ url_for('letter12') }}"><h1 class="font-family: myFont;">;a</h1></a></td>
-			    <td><a href="{{ url_for('letter13') }}"><h1 class="font-family: myFont;">vs</h1></a></td>
-			    <td><a href="{{ url_for('letter14') }}"><h1 class="font-family: myFont;">ka</h1></a></td>
-			    <td><a href="{{ url_for('letter15') }}"><h1 class="font-family: myFont;">ma</h1></a></td>
-				<td><a href="{{ url_for('letter16') }}"><h1 class="font-family: myFont;">ns</h1></a></td>
-				<td><a href="{{ url_for('letter17') }}"><h1 class="font-family: myFont;">us</h1></a></td>
-				<td><a href="{{ url_for('letter18') }}"><h1 class="font-family: myFont;">ha</h1></a></td>
-			</tr>
-			<tr>
-				<td><a href="{{ url_for('letter19') }}"><h1 class="font-family: myFont;">*</h1></a></td>
-				<td><a href="{{ url_for('letter20') }}"><h1 class="font-family: myFont;">rA</h1></a></td>
-				<td><a href="{{ url_for('letter21') }}"><h1 class="font-family: myFont;">,a</h1></a></td>
-				<td><a href="{{ url_for('letter22') }}"><h1 class="font-family: myFont;">js</h1></a></td>
-				<td><a href="{{ url_for('letter23') }}"><h1 class="font-family: myFont;">ia</h1></a></td>
-				<td><a href="{{ url_for('letter24') }}"><h1 class="font-family: myFont;">ya</h1></a></td>
-				<td><a href="{{ url_for('letter25') }}"><h1 class="font-family: myFont;">ps</h1></a></td>
-				<td><a href="{{ url_for('letter26') }}"><h1 class="font-family: myFont;">!</h1></a></td>
-				<td><a href="{{ url_for('letter27') }}"><h1 class="font-family: myFont;">x</h1></a></td>
-			</tr>
-			</table>	
+				<table class="center">
+					<tr>
+						<td><a href="{{ url_for('letter1') }}"><h1 class="font-family: myFont;">w</h1></a></td>
+						<td><a href="{{ url_for('letter2') }}"><h1 class="font-family: myFont;">wd</h1></a></td>
+						<td><a href="{{ url_for('letter3') }}"><h1 class="font-family: myFont;">we</h1></a></td>
+						<td><a href="{{ url_for('letter4') }}"><h1 class="font-family: myFont;">b</h1></a></td>
+						<td><a href="{{ url_for('letter5') }}"><h1 class="font-family: myFont;">W</h1></a></td>
+						<td><a href="{{ url_for('letter6') }}"><h1 class="font-family: myFont;">t</h1></a></td>
+						<td><a href="{{ url_for('letter7') }}"><h1 class="font-family: myFont;">ta</h1></a></td>
+						<td><a href="{{ url_for('letter8') }}"><h1 class="font-family: myFont;">la</h1></a></td>
+						<td><a href="{{ url_for('letter9') }}"><h1 class="font-family: myFont;">.a</h1></a></td>
+					</tr>
+					<tr>
+						<td><a href="{{ url_for('letter10') }}"><h1 class="font-family: myFont;">gs</h1></a></td>
+						<td><a href="{{ url_for('letter11') }}"><h1 class="font-family: myFont;">oA</h1></a></td>
+						<td><a href="{{ url_for('letter12') }}"><h1 class="font-family: myFont;">;a</h1></a></td>
+						<td><a href="{{ url_for('letter13') }}"><h1 class="font-family: myFont;">vs</h1></a></td>
+						<td><a href="{{ url_for('letter14') }}"><h1 class="font-family: myFont;">ka</h1></a></td>
+						<td><a href="{{ url_for('letter15') }}"><h1 class="font-family: myFont;">ma</h1></a></td>
+						<td><a href="{{ url_for('letter16') }}"><h1 class="font-family: myFont;">ns</h1></a></td>
+						<td><a href="{{ url_for('letter17') }}"><h1 class="font-family: myFont;">us</h1></a></td>
+						<td><a href="{{ url_for('letter18') }}"><h1 class="font-family: myFont;">ha</h1></a></td>
+					</tr>
+					<tr>
+						<td><a href="{{ url_for('letter19') }}"><h1 class="font-family: myFont;">*</h1></a></td>
+						<td><a href="{{ url_for('letter20') }}"><h1 class="font-family: myFont;">rA</h1></a></td>
+						<td><a href="{{ url_for('letter21') }}"><h1 class="font-family: myFont;">,a</h1></a></td>
+						<td><a href="{{ url_for('letter22') }}"><h1 class="font-family: myFont;">js</h1></a></td>
+						<td><a href="{{ url_for('letter23') }}"><h1 class="font-family: myFont;">ia</h1></a></td>
+						<td><a href="{{ url_for('letter24') }}"><h1 class="font-family: myFont;">ya</h1></a></td>
+						<td><a href="{{ url_for('letter25') }}"><h1 class="font-family: myFont;">ps</h1></a></td>
+						<td><a href="{{ url_for('letter26') }}"><h1 class="font-family: myFont;">!</h1></a></td>
+						<td><a href="{{ url_for('letter27') }}"><h1 class="font-family: myFont;">x</h1></a></td>
+					</tr>
+				</table>	
+			</div>
 		</div>
-    </div>
-</body>
+	</body>
 </html>
