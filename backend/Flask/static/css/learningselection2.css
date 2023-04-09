@@ -1,10 +1,11 @@
-body{
-	overflow: hidden;
-}
-
 @font-face {
   font-family: "myFont";
   src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
+body{
+	background-image: url('../assets/learning.svg');
+	overflow: hidden;
 }
 
 .page-container {
@@ -31,29 +32,31 @@ body{
     height: 16%;
     background-color: rgba(231, 192, 69, 0.75);
     border: 2px solid #000000;
-  }
+}
 
 .box:hover {
     background-color: rgba(231, 192, 69, 0.9);
     transition: background-color 0.5s ease-in-out;
-  }
-  
-
-table {
-	border-spacing: 175px;
-	border-width: 2px;
-	margin: 0;
-	position: absolute;
-	top: 50%;
-	-ms-transform: translateY(-50%);
-	transform: translateY(-50%);
 }
 
 .center {
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: auto;
+	margin-top: -1%;
 	margin-bottom: auto;
+}
+
+.center h1 {
+    font-family: "myFont", sans-serif;
+    font-size: 55px;
+    font-weight: bold;
+    text-align: center;
+}
+
+table {
+	border-spacing: 175px;
+	border-width: 2px;
+	padding-top: 3%;
 }
 
 td {
@@ -64,16 +67,7 @@ td {
 	padding-top: 0px;
 	padding-left: 35px;
 	padding-right: 35px;
-
-}   
-
-.center h1 {
-    font-family: "myFont", sans-serif;
-    font-size: 55px;
-    font-weight: bold;
-    text-align: center;
-	
-}
+} 
 
 .button2 {
 	width: 80px; 
