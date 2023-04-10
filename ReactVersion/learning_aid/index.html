@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>learningaid</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- TensorFlow.js library script -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+    <!-- MediaPipe Hands script -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.1/hands.js"></script>
+    <!-- custom script for loading the model and making predictions -->
+    <script src="src\pages\load_predict.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+.questionbox{
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        opacity:0.9;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        font-size: 30px;
+        line-height: 1.4;
+        color: #333;
+        position: relative;
+        width: 30%;
+        height: 70%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 5%);
+        
+}
+
+
+  
+      
