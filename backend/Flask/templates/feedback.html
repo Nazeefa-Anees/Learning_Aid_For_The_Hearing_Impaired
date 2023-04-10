@@ -20,7 +20,7 @@
         <div class="bg">
 
 		    <!-- Home Icon -->
-		    <a href="home.html">
+		    <a href="{{ url_for('home') }}">
     			<div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
 		    </a>
 
@@ -35,7 +35,7 @@
                 <div id="feedbackResult">
                 </div>
                 <button class="tryQuiz" id="tryQ" onclick="tryQuiz()">
-                    <div class="tryQuizText">w&myq W;ai&y lrkak</div>
+                    <div class="tryQuizText"><a href="{{ url_for('quiz') }}">w&myq W;ai&y lrkak</a></div>
                 </button>
             </div>
 
