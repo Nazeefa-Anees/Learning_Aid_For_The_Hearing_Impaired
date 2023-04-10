@@ -72,12 +72,8 @@ body {
     text-align: center;
 }
 
-#quizResults{
-    position: absolute; 
-    width: 80%;
-    height: 80%;
-    left: 10%;
-
+.quizResults{
+    position: absolute;
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.75);
 }
