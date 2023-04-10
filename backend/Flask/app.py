@@ -435,6 +435,8 @@ def predict():
         return jsonify({"message": "jeros ix&#123;dj fmkakqj&"})
 
 
+anws_list = []
+
 @app.route('/questionfeedback')
 def questionfeedback():
     # get page
@@ -537,8 +539,6 @@ def questionfeedback():
     labels_str = label_encoder.fit_transform(hand_labels)
     predicted_labels_str = label_encoder.inverse_transform(predicted_labels)
 
-    anws_list = []
-
     if page_name in ["http://127.0.0.1:5000/question1", "http://127.0.0.1:5000/question2", "http://127.0.0.1:5000/question3", "http://127.0.0.1:5000/question4", "http://127.0.0.1:5000/question5"]:
         if predicted_labels_str[0] == sub_dir:
             correct_anws += 1
@@ -556,7 +556,6 @@ def questionfeedback():
 
     if page_name == "http://127.0.0.1:5000/feedback":
         return jsonify({"anwsers": anws_list})
-
 
 
 # @app.route('/')
