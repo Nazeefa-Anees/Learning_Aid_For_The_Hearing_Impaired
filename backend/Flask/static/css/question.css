@@ -1,79 +1,56 @@
+@font-face {
+  font-family: "myFont";
+  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+}
+
 body {
   background-image: url('../assets/quiz.svg');
   background-size: cover;
   overflow: hidden;
-
 }
+
 .page-container {
   position: relative;
   margin: -0.5%;
   height: 100vh;
   font-family: 'myFont';
   src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype'); 
-  
 }
 
 .bg {
-    
-    background-size: cover;
-    background-position: center center;
-    height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
 }
-
-@font-face {
-  font-family: "myFont";
-  src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
-}
-
-
 
 .Text {
   position: absolute;
-  height: 25%;
-  width: 14%;
-  left: 18%;
-  top: 23%;
-  transform: translate(-50%, -50%);
-  
-}
-
-.Text h1 {
-    font-family: "myFont", sans-serif;
-    font-size: 7rem;
-    font-weight: bold;
-    text-align: center;
-  
-}
-
-.next-button {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  outline: none;
-}
-
-.next-button img {
-  width: 20%; 
-  height: 20%; 
-  margin-left: 170%;
-  margin-top: 65%;
-}
-
-.Camera {
-  position: relative;
   height: 71%;
   width: 40%;
-  left: 67%;
-  top: 55%;
-  transform: translate(-50%, -50%);
+  left: 9%;
+  top: 20%;
   border: 2px solid #000000;
   border-radius: 5px;
   background-color: rgba(199, 186, 125, 0.75);
- 
+}
+
+.Text h1 {
+  font-family: "myFont";
+  font-size: 8rem;
+  font-weight: normal;
+  text-align: center;
+  text-shadow: 0 0 5px #ffffff;
+}
+
+.Camera {
+  position: absolute;
+  height: 71%;
+  width: 40%;
+  right: 9%;
+  top: 20%;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  background-color: rgba(199, 186, 125, 0.75);
 }
 
 .camButton {
@@ -85,89 +62,23 @@ body {
   border: 1px solid #000000;
   border-radius: 5px;
   backdrop-filter: blur(10px);
+  cursor: pointer;
   z-index: 4;
 }
 
 .camButtonText {
-  font-size: 5rem;
-  font-weight: bold;
+  font-family: "myFont", sans-serif;
+  font-size: 7rem;
   text-shadow: 0 0 5px #000000;
   text-align: center;
-  transform: translate(0%, 0%);
-}
-
-.countdown{
-  position: absolute;
-  display: flex;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  backdrop-filter: blur(10px);
-}
-
-.countdown-text{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 20rem;
-  color: #ffffff;
-  font-weight: bold;
-  text-align: center;
-  text-shadow: 0 0 5px #000000;
-  transform: translate(-50%, -60%);
+  transform: translate(0%, -10%);
 }
 
 #showHands {
   top: 0;
   left: 0;
   width: 100%;
-}
-
-#timer-div {
-  position: absolute;
-  left: 93%;
-  width: 7%;
-  height: 8%;
-  border-left: 2px solid #000000;
-  border-right: 1px solid #000000;
-  border-bottom: 2px solid #000000;
-  border-radius: 0px 0px 10px 10px;
-  background-color: rgba(199, 186, 125, 0.5);
-  z-index: 3;
-}
-
-#timer-text {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  color: rgb(0, 0, 0);
-  text-shadow: 0 0 5px #ffffff;
 } 
-
-#info-div {
-  position: absolute;
-  width: 93%;
-  height: 8%;
-  border-left: 2px solid #000000;
-  border-right: 2px solid #000000;
-  border-bottom: 2px solid #000000;
-  border-radius: 0px 0px 10px 10px;
-  background-color: rgba(199, 186, 125, 0.5);
-  transform: translate(-0.2%, 0%);
-  z-index: 3;
-}
-
-#info-text {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  color: rgb(0, 0, 0);
-  text-shadow: 0 0 5px #ffffff;
-  transform: translate(0%, 50%);
-}
 
 .input_video {
   position: absolute;
@@ -202,36 +113,80 @@ body {
   z-index: 2;
 }
 
-#result-div {
+.takeScreenshot {
+  position: absolute;
+  width: 100%;
+  height: 8.5%;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  background-color: rgba(0, 0, 0, 0.75);
+  transform: translate(0%, 0%);
+  cursor: pointer;
+  z-index: 9;
+}
+
+.takeScreenshotText {
+  font-family: "myFont";
+  font-size: 2.5em;
+  font-weight: normal;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 5px #000000;
+  transform: translate(0%, -10%);
+}
+
+.countdown{
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: rgba(199, 186, 125, 0.97);
+  z-index: 8;
+}
+
+.resultDiv {
   position: absolute;
   height: 100%;
   width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   border: 2px solid #000000;
   border-radius: 5px;
   overflow: hidden;
-  background-color: rgba(199, 186, 125, 1);
-  z-index: 4;
+  background-color: rgba(199, 186, 125, 0.75);
+  z-index: 7;
 }
 
-#results {
-  top: 10%;
-  height: 70%;
+.results {
+  margin-top: 27.5%;
+  margin-left: 10%;
+  margin-right: 10%;
   text-align: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 2rem;
+  font-family:"myFont";
+  font-size: 4em;
 }
-
 
 a{
   color: inherit;
   text-decoration: none;
 }
 
+.button2 {
+	width: 80px; 
+	height: 80px; 
+	position: absolute; 
+	left: 0.2%; 
+	top: 0%;
+	border: none; 
+	background-color: transparent; 
+	cursor: pointer; 
+	outline: none; 
+	background-size: 100% 100%
+}
 
-.next-button {
+.button4 {
 	width: 80px; 
 	height: 80px; 
 	position: absolute; 
@@ -243,5 +198,3 @@ a{
 	outline: none; 
 	background-size: 100% 100%
 }
-
-

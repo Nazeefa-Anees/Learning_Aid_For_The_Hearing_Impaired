@@ -399,70 +399,7 @@ def predict():
         hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_0_9_hand_labels.npy')
         # Load the trained model
         model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/numbers_0_9_tfjs_model/model.json")
-    
-    elif page_name == "http://127.0.0.1:5000/question1":
-        sub_dir = "1"
-        # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
-        # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
-
-    elif page_name == "http://127.0.0.1:5000/question2":
-        sub_dir = "6"
-        # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
-        # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
-    
-    elif page_name == "http://127.0.0.1:5000/question3":
-        sub_dir = "9"
-        # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
-        # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
-
-    elif page_name == "http://127.0.0.1:5000/question4":
-        sub_dir = "23"
-        # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
-        # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
-
-    elif page_name == "http://127.0.0.1:5000/question5":
-        sub_dir = "5"
-        # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_hand_labels.npy')
-        # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/tfjs_model/model.json")
-
-    elif page_name == "http://127.0.0.1:5000/question7":
-        sub_dir = "num7"
-        # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
-        # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
-    
-    elif page_name == "http://127.0.0.1:5000/question8":
-        sub_dir = "num3"
-        # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
-        # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
-    
-    elif page_name == "http://127.0.0.1:5000/question9":
-        sub_dir = "num1"
-        # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
-        # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
-
-    elif page_name == "http://127.0.0.1:5000/question10":
-        sub_dir = "num5"
-        # Load the .npy file
-        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/letters_hand_labels.npy')
-        # Load the trained model
-        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/tfjs_model/model.json")
-        
+     
     else:
         print(f"Invalid page: {page_name}")
         exit()
@@ -496,6 +433,130 @@ def predict():
         return jsonify({"message": "yrs ix&#123;dj fmkakqj&"})
     elif predicted_labels_str[0] != sub_dir:
         return jsonify({"message": "jeros ix&#123;dj fmkakqj&"})
+
+
+@app.route('/questionfeedback')
+def questionfeedback():
+    # get page
+    page_name = request.referrer
+
+    # Define input directories based on page
+    if page_name == "http://127.0.0.1:5000/question1":
+        sub_dir = "1"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_1_9_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/letters_1_9_tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question2":
+        sub_dir = "6"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_1_9_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/letters_1_9_tfjs_model/model.json")
+    
+    elif page_name == "http://127.0.0.1:5000/question3":
+        sub_dir = "9"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_1_9_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/letters_1_9_tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question4":
+        sub_dir = "23"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_19_27_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/letters_19_27_tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question5":
+        sub_dir = "5"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Letters/letters_1_9_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Letters/letters_1_9_tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question6":
+        sub_dir = "num8"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_0_9_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/numbers_0_9_tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question7":
+        sub_dir = "num7"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_0_9_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/numbers_0_9_tfjs_model/model.json")
+    
+    elif page_name == "http://127.0.0.1:5000/question8":
+        sub_dir = "num3"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_0_9_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/numbers_0_9_tfjs_model/model.json")
+    
+    elif page_name == "http://127.0.0.1:5000/question9":
+        sub_dir = "num1"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_0_9_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/numbers_0_9_tfjs_model/model.json")
+
+    elif page_name == "http://127.0.0.1:5000/question10":
+        sub_dir = "num5"
+        # Load the .npy file
+        hand_labels = np.load('backend/Flask/static/assets/models/model_Numbers/numbers_0_9_hand_labels.npy')
+        # Load the trained model
+        model = tfjs.converters.load_keras_model("backend/Flask/static/assets/models/model_Numbers/numbers_0_9_tfjs_model/model.json")
+        
+    else:
+        print(f"Invalid page: {page_name}")
+        exit()
+
+    # Load the .npy file
+    hand_landmarks = np.load('backend/Flask/learning_hand_landmarks.npy')
+
+    # Reshape the test data to match the input shape of the model
+    landmarks_test_resized = np.zeros((hand_landmarks.shape[0], 112, 112, 3))
+    for i in range(hand_landmarks.shape[0]):
+        img = np.stack([hand_landmarks[i]] * 3, axis=-1)
+        img = np.expand_dims(img, axis=0)  # add a new axis to img
+        img_resized = tf.image.resize(img, (112, 112)).numpy()[0]  # resize and remove the added axis
+        landmarks_test_resized[i] = img_resized
+
+    # Get the predicted probabilities for each class
+    preds = model.predict(landmarks_test_resized)
+
+    # Convert the predicted probabilities to class labels using argmax
+    predicted_labels = np.argmax(preds, axis=1)
+
+    # Convert the class labels back to original label strings using inverse_transform
+    label_encoder = LabelEncoder()  # Define label_encoder
+    labels_str = label_encoder.fit_transform(hand_labels)
+    predicted_labels_str = label_encoder.inverse_transform(predicted_labels)
+
+    anws_list = []
+
+    if page_name in ["http://127.0.0.1:5000/question1", "http://127.0.0.1:5000/question2", "http://127.0.0.1:5000/question3", "http://127.0.0.1:5000/question4", "http://127.0.0.1:5000/question5"]:
+        if predicted_labels_str[0] == sub_dir:
+            correct_anws += 1
+            anws_list.append(predicted_labels_str[0] + ": Correct")
+        else:
+            wrong_anws += 1
+            anws_list.append(predicted_labels_str[0] + ": Wrong")
+    elif page_name in ["http://127.0.0.1:5000/question6", "http://127.0.0.1:5000/question7", "http://127.0.0.1:5000/question8", "http://127.0.0.1:5000/question9", "http://127.0.0.1:5000/question10"]:
+        if predicted_labels_str[0] == sub_dir:
+            correct_anws += 1
+            anws_list.append(predicted_labels_str[0] + ": Correct")
+        else:
+            wrong_anws += 1
+            anws_list.append(predicted_labels_str[0] + ": Wrong")
+
+    if page_name == "http://127.0.0.1:5000/feedback":
+        return jsonify({"anwsers": anws_list})
+
 
 
 # @app.route('/')

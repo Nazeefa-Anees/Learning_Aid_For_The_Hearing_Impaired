@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <title>Quiz Page 9</title>
-    <link rel="icon" href="favicon.ico">
+	<link rel="icon" href="../static/assets/logo.ico">
     <link rel="stylesheet" type="text/css" href="../static/css/question.css">
-	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d@0.3/control_utils_3d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
@@ -13,9 +13,8 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 	<script type="module" src="../static/js/showHands.js"></script>
 	<script type="module" src="../static/js/videoOnCanvas.js"></script>
-	<script type="module" src="../static/js/takeScreenshots.js"></script>
 
-	  <script>
+	<script>
 		let cameraStarted = false;
 
 		function startCamera() {
@@ -79,10 +78,9 @@
 							fetch('/process_screenshots').then(response => response.json()).then(data => {
 								console.log(data.message)// response data
 								// Send a GET request to /predict route
-								fetch('/predict').then(response => response.json()).then(data => {
-									const resultDiv = document.getElementById("results");
-									resultDiv.innerHTML = data.result_str;
-									document.getElementById("result-div").style.display = "inline";
+								fetch('/questionfeedback').then(response => response.json()).then(data => {
+									// use the data returned from Flask here
+									console.log(data);
 								});
 							})
 						}).catch(error => console.error(error));
@@ -91,13 +89,18 @@
 			}, 100);
 		}
 
+		function tryAgain() {
+			document.getElementById("result-div").style.display = "none";
+			document.getElementById("showHands").style.display = "inline";
+			document.getElementById("takeSS").style.display = "inline";
+		}
+
 		document.addEventListener("keydown", function(event) {
 		if (event.code === "Space" && cameraStarted) {
 			takeScreenshot();
 		}
 		});
 	</script>
-
   </head>
   <body>
     <div class="page-container">
@@ -141,10 +144,10 @@
 				</div>
 			</div>
 
-			<!-- Next Button -->
-			<div class="next-button-container">
-        <a href="{{ url_for('question10') }}" class="next-button"><img src="../static/assets/next.png" alt="Next"></a>
-      </div>
+			<!-- Next -->
+			<a href="{{ url_for('question10') }}">
+				<div class="button4" style="background-image: url(../static/assets/next.png);"></div>
+			</a>
 		
 		</div>
     </div>
