@@ -539,23 +539,31 @@ def questionfeedback():
     labels_str = label_encoder.fit_transform(hand_labels)
     predicted_labels_str = label_encoder.inverse_transform(predicted_labels)
 
-    if page_name in ["http://127.0.0.1:5000/question1", "http://127.0.0.1:5000/question2", "http://127.0.0.1:5000/question3", "http://127.0.0.1:5000/question4", "http://127.0.0.1:5000/question5"]:
-        if predicted_labels_str[0] == sub_dir:
-            correct_anws += 1
-            anws_list.append(predicted_labels_str[0] + ": Correct")
-        else:
-            wrong_anws += 1
-            anws_list.append(predicted_labels_str[0] + ": Wrong")
-    elif page_name in ["http://127.0.0.1:5000/question6", "http://127.0.0.1:5000/question7", "http://127.0.0.1:5000/question8", "http://127.0.0.1:5000/question9", "http://127.0.0.1:5000/question10"]:
-        if predicted_labels_str[0] == sub_dir:
-            correct_anws += 1
-            anws_list.append(predicted_labels_str[0] + ": Correct")
-        else:
-            wrong_anws += 1
-            anws_list.append(predicted_labels_str[0] + ": Wrong")
+    # Create a string with the results
+    result_str = ('Variable "{}" detected\n'.format(predicted_labels_str[0]))
 
-    if page_name == "http://127.0.0.1:5000/feedback":
-        return jsonify({"anwsers": anws_list})
+    if predicted_labels_str[0] == sub_dir:
+        return jsonify({"message": "yrs ix&#123;dj fmkakqj&"})
+    elif predicted_labels_str[0] != sub_dir:
+        return jsonify({"message": "jeros ix&#123;dj fmkakqj&"})
+
+    # if page_name in ["http://127.0.0.1:5000/question1", "http://127.0.0.1:5000/question2", "http://127.0.0.1:5000/question3", "http://127.0.0.1:5000/question4", "http://127.0.0.1:5000/question5"]:
+    #     if predicted_labels_str[0] == sub_dir:
+    #         correct_anws += 1
+    #         anws_list.append(predicted_labels_str[0] + ": Correct")
+    #     else:
+    #         wrong_anws += 1
+    #         anws_list.append(predicted_labels_str[0] + ": Wrong")
+    # elif page_name in ["http://127.0.0.1:5000/question6", "http://127.0.0.1:5000/question7", "http://127.0.0.1:5000/question8", "http://127.0.0.1:5000/question9", "http://127.0.0.1:5000/question10"]:
+    #     if predicted_labels_str[0] == sub_dir:
+    #         correct_anws += 1
+    #         anws_list.append(predicted_labels_str[0] + ": Correct")
+    #     else:
+    #         wrong_anws += 1
+    #         anws_list.append(predicted_labels_str[0] + ": Wrong")
+
+    # if page_name == "http://127.0.0.1:5000/feedback":
+    #     return jsonify({"anwsers": anws_list})
 
 
 # @app.route('/')

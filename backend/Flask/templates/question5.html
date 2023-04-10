@@ -79,20 +79,16 @@
 								console.log(data.message)// response data
 								// Send a GET request to /predict route
 								fetch('/questionfeedback').then(response => response.json()).then(data => {
-									// use the data returned from Flask here
-									console.log(data);
+									const resultDiv = document.getElementById("results");
+									resultDiv.innerHTML = data.message;
+									document.getElementById("result-div").style.display = "inline";
+									document.getElementById("showHands").style.display = "none";;
 								});
 							})
 						}).catch(error => console.error(error));
 					});
 				}
 			}, 100);
-		}
-
-		function tryAgain() {
-			document.getElementById("result-div").style.display = "none";
-			document.getElementById("showHands").style.display = "inline";
-			document.getElementById("takeSS").style.display = "inline";
 		}
 
 		document.addEventListener("keydown", function(event) {
@@ -138,8 +134,10 @@
 
 				<div class="resultDiv" id="result-div" style="display: none;">
 					<div class="results" id="results"></div>
-					<button class="tryAgain" id="try" onclick="tryAgain()">
-						<div class="tryAgainText">w&myq W;ai&y lrkak</div>
+					<button class="tryAgain" id="try">
+						<a href="{{ url_for('feedback') }}"></a>
+							<div class="tryAgainText">B&#x3c;&#xd5;  m%Yakh</div>
+						</a>
 					</button>
 				</div>
 			</div>
