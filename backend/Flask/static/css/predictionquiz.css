@@ -1,0 +1,134 @@
+@font-face {
+    font-family: "myFont";
+    src: url('../assets/2\ Astro11\ sinhala\ font\ by\ Aluth.com.TTF') format('truetype');
+  }
+  
+  * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background-image: url('../assets/rainbow.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+    }
+
+    .app{
+        background-color: rgba(255, 255, 255, 0.7);
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        margin: 30px auto 0;
+        border-radius: 10px;
+        padding: 30px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    
+
+    .image {
+        height: 150px;
+        
+        
+        
+      }
+
+      .quiz{
+        padding: 20px 0;
+      }
+
+      .quiz h2{
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .btn{
+        background-color: white;
+        color: black;
+        font-weight: bold;
+        font-size: large;
+        width: 100%;
+        border: 1px solid ;
+        padding: 10px;
+        margin: 10px 0;
+        text-align: center;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-family: myfont;
+        
+    }
+
+    .btn:hover:not([disabled]){
+        background-color: #F7C51F;
+        color: white;
+    }
+
+    .btn:disabled{
+        cursor: no-drop;
+    }
+
+    #next-btn{
+        background-color: #F7C51F;
+        color: white;
+        font-weight: 500;
+        width: 150px;
+        border: 0;
+        padding: 10px;
+        margin: 20px auto 0;
+        cursor: pointer;
+        display: block;
+    }
+
+    #learning-btn{
+        background-color: #F7C51F;
+        color: white;
+        font-weight: 500;
+        font-size: x-large;
+        width: 150px;
+        border: 0;
+        padding: 10px;
+        margin: 20px auto 0;
+        cursor: pointer;
+        display: none;
+    }
+
+    #quiz-btn{
+        background-color: #F7C51F;
+        color: white;
+        font-weight: 500;
+        font-size: x-large;
+        width: 150px;
+        border: 0;
+        padding: 10px;
+        margin: 20px auto 0;
+        cursor: pointer;
+        display: none;
+    }
+
+    .correct{
+        background: #9aeabc;
+    }
+
+    .incorrect{
+        background: #ff9393;
+    }
+
+    .button3 {
+        width: 80px; 
+        height: 80px; 
+        position: absolute; 
+        top: 0%; 
+      right: 0.2%; 
+        border: none; 
+        background-color: transparent; 
+        cursor: pointer; 
+        outline: none; 
+        background-size: 100% 100%
+    }

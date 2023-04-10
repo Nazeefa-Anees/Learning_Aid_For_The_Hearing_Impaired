@@ -573,8 +573,15 @@ def questionfeedback():
 # def predresult():
 #     return render_template('predresult.html')
 
-
 @app.route('/')
+def splash():
+    return render_template('splash.html')
+
+@app.route('/predictionquiz')
+def predictionquiz():
+    return render_template('predictionquiz.html')
+
+@app.route('/home')
 def home():
     return render_template('home.html')
 

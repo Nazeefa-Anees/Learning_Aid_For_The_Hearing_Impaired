@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Questionnaire</title>
+  <link rel="stylesheet" href="../static/css/predictionquiz.css">
+  
+</head>
+<body>
+<div class="app">
+    <!-- Home Icon -->
+	<a href="{{ url_for('home') }}">
+        <div class="button3" style="background-image: url(../static/assets/homeicon.png);"></div>
+	</a>
+    <div class="quiz">
+        <h2 id="question" style="font-family: myFont;">Question</h2>
+        <h2 id="score" style="display: none;">score</h2>
+        <img id="image" class="image" src="" alt="sign language gesture">
+        <div id="answer-button">
+            <button class="btn" style="font-family: myFont;">Answer 1</button>
+            <button class="btn" style="font-family: myFont;">Answer 2</button>
+            <button class="btn"style="font-family: myFont;">Answer 3</button>
+            <button class="btn" style="font-family: myFont;">Answer 4</button>
+        </div>
+        <button id="next-btn" style="font-family: myFont;">yrs</button>
+        <a href="{{ url_for('learning') }}">
+            <button id="learning-btn" style="font-family: myFont;">mdvus</button>
+        </a>
+        <a href="{{ url_for('quiz') }}">
+        <button id="quiz-btn" style="font-family: myFont;">>m%Yak</button>
+        </a>
+    </div>
+</div>
+<script src="../static/js/predictionquiz.js"></script>
+</body>
+</html>
