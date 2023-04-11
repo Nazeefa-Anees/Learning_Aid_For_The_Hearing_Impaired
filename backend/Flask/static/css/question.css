@@ -168,6 +168,27 @@ body {
   font-size: 4em;
 }
 
+.tryAgain {
+  position: absolute;
+  width: 60%;
+  top: 50%;
+  left: 20%;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.75);
+  transform: translate(0%, 0%);
+  cursor: pointer;
+}
+
+.tryAgainText {
+  font-family: "myFont";
+  font-size: 2.5em;
+  font-weight:normal;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 5px #000000;
+  transform: translate(0%, -10%);
+}
+
 a{
   color: inherit;
   text-decoration: none;
